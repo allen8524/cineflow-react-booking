@@ -873,8 +873,13 @@ img { max-width: 100%; }
 .home-rank-board {
   position: relative;
   overflow: hidden;
-  min-height: 100%;
-  padding: 22px;
+  align-self: start;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  height: fit-content;
+  min-height: 0;
+  padding: 18px;
   border-radius: 24px;
   background:
     radial-gradient(circle at 100% 0%, rgba(199, 184, 255, 0.26), transparent 34%),
@@ -886,7 +891,7 @@ img { max-width: 100%; }
 .home-rank-board__head {
   display: grid;
   gap: 5px;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .home-rank-board__head h3 {
@@ -902,7 +907,7 @@ img { max-width: 100%; }
 
 .home-rank-board__list {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 10px;
 }
 
 .home-rank-board__list li {
@@ -910,12 +915,12 @@ img { max-width: 100%; }
 }
 
 .home-rank-board__list li a {
-  min-height: 132px;
+  min-height: 108px;
   display: grid;
   grid-template-columns: 1fr;
   align-content: space-between;
-  gap: 10px;
-  padding: 17px 16px;
+  gap: 8px;
+  padding: 14px;
   border-radius: 18px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.68));
@@ -973,11 +978,12 @@ img { max-width: 100%; }
   .home-showcase-layout {
     grid-template-columns: minmax(0, 1fr) minmax(320px, 0.38fr);
     gap: 22px;
-    align-items: stretch;
+    align-items: start;
   }
 
   .home-showcase-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
   }
 }
 
@@ -1196,6 +1202,43 @@ body {
   border-color: var(--cf-line);
   background: var(--cf-card);
   box-shadow: var(--cf-shadow-card);
+}
+
+.home-booking-feature {
+  gap: 16px;
+  padding: 22px 24px;
+}
+
+.home-booking-feature__head h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.home-booking-feature__content {
+  align-items: center;
+  gap: 18px;
+}
+
+.home-booking-feature__copy {
+  gap: 10px;
+}
+
+.home-booking-feature__copy h3 {
+  margin-top: 0;
+}
+
+.home-booking-feature__meta {
+  margin-top: 4px;
+}
+
+.home-booking-feature__action-panel {
+  align-self: center;
+  min-height: 0;
+  padding: 16px;
+}
+
+.home-booking-feature__actions {
+  margin-top: 0;
 }
 
 .home-quick-card,

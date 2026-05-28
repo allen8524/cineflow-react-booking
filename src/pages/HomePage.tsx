@@ -50,16 +50,11 @@ const HomePage = () => {
           <div className="home-booking-dock__grid">
             <article className="home-booking-feature">
               <div className="home-booking-feature__head">
-                <span className="section-chip">빠른예매</span>
                 <h2>지금 바로 예매 흐름으로 이동</h2>
                 <p>영화 선택부터 예매내역 확인까지 필요한 메뉴를 빠르게 이용할 수 있습니다.</p>
               </div>
               <div className="home-booking-feature__content">
                 <div className="home-booking-feature__copy">
-                  <div className="home-booking-feature__eyebrow-row">
-                    <span className="home-booking-feature__label">추천 작품</span>
-                    <span className="home-booking-feature__status">예매 가능</span>
-                  </div>
                   <h3>{featuredMovie.title}</h3>
                   <p>{featuredMovie.shortDescription}</p>
                   <ul className="home-booking-feature__meta">
@@ -70,9 +65,6 @@ const HomePage = () => {
                   </ul>
                 </div>
                 <div className="home-booking-feature__action-panel">
-                  <span>예매 안내</span>
-                  <strong>바로 예매 가능</strong>
-                  <p>상영관과 시간을 선택해 좌석 단계로 이동하세요.</p>
                   <div className="home-booking-feature__actions">
                     <Link to={`/booking?movieId=${featuredMovie.id}`} className="hero-btn primary">바로 예매</Link>
                     <Link to={`/movies/${featuredMovie.id}`} className="hero-btn secondary">영화 상세</Link>
@@ -83,7 +75,6 @@ const HomePage = () => {
 
             <div className="home-booking-actions">
               <Link to="/booking" className="home-quick-card">
-                <span>빠른예매</span>
                 <strong>영화/극장/날짜를 한 번에 선택</strong>
                 <em>예매 시작</em>
               </Link>
