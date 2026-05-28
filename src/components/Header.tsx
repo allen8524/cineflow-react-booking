@@ -13,9 +13,6 @@ const Header = () => {
           <div className="storefront-header__utility-inner">
             <p className="storefront-header__utility-copy">영화 탐색부터 예매 완료까지 한 흐름으로 이어지는 CineFlow 시네마 서비스</p>
             <div className="storefront-header__utility-links">
-              <Link to="/movies">현재 상영작</Link>
-              <Link to="/booking">빠른예매</Link>
-              <Link to="/support">고객센터</Link>
             </div>
           </div>
         </div>
@@ -53,28 +50,7 @@ const Header = () => {
         </nav>
       </div>
 
-      <div className="storefront-header__shortcut">
-        <div className="container">
-          <div className="storefront-shortcut-grid">
-            <Link to="/booking" className="storefront-shortcut-card">
-              <span>빠른예매</span>
-              <strong>영화, 극장, 날짜를 바로 선택</strong>
-            </Link>
-            <Link to="/movies" className="storefront-shortcut-card">
-              <span>상영작 탐색</span>
-              <strong>지금 보고 싶은 영화 찾기</strong>
-            </Link>
-            <Link to="/history" className="storefront-shortcut-card">
-              <span>예매내역</span>
-              <strong>예매번호와 관람 일정 확인</strong>
-            </Link>
-            <Link to="/support" className="storefront-shortcut-card">
-              <span>고객센터</span>
-              <strong>취소, 환불, FAQ 바로가기</strong>
-            </Link>
-          </div>
-        </div>
-      </div>
+
     </header>
   );
 };

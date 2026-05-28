@@ -25,7 +25,6 @@ const BookingPage = () => {
         <div className="container">
           <div className="booking-hero__intro">
             <div>
-              <span className="section-chip">QUICK BOOKING</span>
               <h1>빠른예매</h1>
               <p>영화와 상영 시간을 선택한 뒤 관람 인원과 좌석을 지정합니다.</p>
             </div>

@@ -25,7 +25,6 @@ const MovieListPage = () => {
         <div className="container">
           <div className="catalog-hero__content">
             <div className="catalog-hero__copy">
-              <span className="section-chip">MOVIE</span>
               <h1>영화 목록</h1>
               <p>상영중인 작품과 개봉 예정작을 검색하고 예매율, 평점, 개봉일 기준으로 살펴보세요.</p>
             </div>

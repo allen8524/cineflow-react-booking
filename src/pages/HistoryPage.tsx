@@ -28,7 +28,6 @@ const HistoryPage = () => {
         <div className="container">
           <div className="booking-hero__intro">
             <div>
-              <span className="section-chip">BOOKING HISTORY</span>
               <h1>예매내역 조회</h1>
               <p>예매번호, 영화명, 예매자 정보로 조회하고 예매 상태를 확인합니다.</p>
             </div>

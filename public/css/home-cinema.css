@@ -5328,19 +5328,6 @@ a {
     scroll-margin-top: 120px;
 }
 
-.section-chip {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 28px;
-    padding: 0 12px;
-    border-radius: 999px;
-    background: rgba(199, 184, 255, 0.12);
-    color: var(--cf-accent);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-}
 
 .storefront-header {
     top: 0;
@@ -6072,14 +6059,6 @@ a {
     min-width: 0;
 }
 
-.catalog-hero .section-chip {
-    min-height: 26px;
-    padding: 0 11px;
-    background: rgba(199, 184, 255, 0.09);
-    border: 1px solid rgba(199, 184, 255, 0.18);
-    color: #d9ed63;
-    font-size: 11px;
-}
 
 .catalog-hero h1 {
     margin: 10px 0 10px;
@@ -7568,15 +7547,6 @@ a {
     line-height: 1.25;
 }
 
-.detail-section-header .section-chip {
-    min-height: 24px;
-    padding: 0 10px;
-    background: rgba(255, 255, 255, 0.055);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #9fb1d7;
-    font-size: 10px;
-    letter-spacing: 0.4px;
-}
 
 .detail-section-header .detail-link {
     min-height: 34px;
@@ -7849,14 +7819,6 @@ a {
     min-width: 0;
 }
 
-.booking-history-page .history-hero .section-chip {
-    min-height: 26px;
-    padding: 0 11px;
-    background: rgba(199, 184, 255, 0.08);
-    border: 1px solid rgba(199, 184, 255, 0.18);
-    color: #d9ed63;
-    font-size: 11px;
-}
 
 .booking-history-page .history-hero h1 {
     margin: 10px 0 10px;
@@ -8969,9 +8931,6 @@ a {
     color: var(--cf-text-muted);
 }
 
-.section-chip,
-.catalog-hero .section-chip,
-.booking-history-page .history-hero .section-chip,
 .history-mode-chip,
 .summary-chip,
 .success-state-badge,
@@ -9185,7 +9144,6 @@ a {
     color: #5c6680;
 }
 
-.section-chip,
 .status-badge,
 .status-badge.upcoming,
 .faq-chip,
@@ -9283,9 +9241,6 @@ a {
     padding: 8px 10px 8px 2px;
 }
 
-.home-guide-intro .section-chip {
-    align-self: flex-start;
-}
 
 .home-guide-intro h2 {
     max-width: 420px;
@@ -10550,14 +10505,6 @@ a {
     align-items: end;
 }
 
-.booking-history-page .history-hero .section-chip {
-    min-height: 28px;
-    padding: 0 12px;
-    border: 0;
-    background: var(--history-accent-soft);
-    color: var(--history-accent);
-    letter-spacing: 0;
-}
 
 .booking-history-page .history-hero h1 {
     margin: 12px 0 10px;

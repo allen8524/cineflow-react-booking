@@ -34,19 +34,16 @@ const SupportPage = () => {
         <div className="container">
           <div className="support-quick-grid">
             <Link to="/booking" className="support-quick-card is-primary">
-              <b>예매 안내</b>
               <strong>영화 선택부터 결제 완료까지</strong>
               <span>원하는 상영 시간과 좌석을 고르고 바로 예매할 수 있습니다.</span>
               <em>빠른예매 이동</em>
             </Link>
             <a href="#cancel-policy" className="support-quick-card">
-              <b>취소 정책</b>
               <strong>예매 취소와 환불 기준</strong>
               <span>상영 전 취소 절차와 취소 사유 기록 방법을 확인하세요.</span>
               <em>정책 보기</em>
             </a>
             <Link to="/history" className="support-quick-card">
-              <b>예매내역</b>
               <strong>예매번호와 관람 일정 조회</strong>
               <span>예매 상태, 좌석, 취소 결과를 한 화면에서 확인할 수 있습니다.</span>
               <em>내역 확인</em>
@@ -55,7 +52,6 @@ const SupportPage = () => {
 
           <section className="support-section-card" id="cancel-policy">
             <div className="section-headline">
-              <span className="section-chip">POLICY</span>
               <h2>취소 · 환불 안내</h2>
               <p>상영 시작 전 예매내역에서 취소를 접수하고 상태를 확인할 수 있습니다.</p>
             </div>
@@ -68,7 +64,6 @@ const SupportPage = () => {
 
           <section className="support-section-card" id="faq">
             <div className="section-headline">
-              <span className="section-chip">FAQ</span>
               <h2>자주 묻는 질문</h2>
               <p>예매 전후에 자주 확인하는 내용을 모았습니다.</p>
             </div>

@@ -41,7 +41,6 @@ const PaymentPage = () => {
         <div className="container">
           <div className="booking-hero__intro">
             <div>
-              <span className="section-chip">PAYMENT</span>
               <h1>결제 정보 입력</h1>
               <p>선택한 영화, 상영 시간, 좌석 정보를 확인하고 결제 수단을 선택합니다.</p>
             </div>

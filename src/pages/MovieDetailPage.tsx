@@ -78,7 +78,6 @@ const MovieDetailPage = () => {
         <div className="container">
           <div className="detail-block detail-block--story">
             <div className="detail-section-header">
-              <span className="section-chip">SCHEDULE</span>
               <h2>상영 시간표</h2>
               <p>원하는 상영 시간을 선택하면 좌석 선택 단계로 이어집니다.</p>
             </div>

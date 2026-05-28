@@ -23,7 +23,6 @@ const AdminPage = () => {
     <main className="admin-page cinema-page">
       <section className="cinema-page-hero admin-hero">
         <div className="container">
-          <span className="section-chip">ADMIN</span>
           <h1>관리자 대시보드</h1>
           <p>영화, 시간표, 예매 현황을 한곳에서 확인할 수 있습니다.</p>
         </div>

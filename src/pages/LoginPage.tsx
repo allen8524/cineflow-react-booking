@@ -24,7 +24,6 @@ const LoginPage = () => {
     <main className="cinema-page booking-page">
       <section className="cinema-page-hero booking-hero">
         <div className="container">
-          <span className="section-chip">LOGIN</span>
           <h1>로그인</h1>
           <p>관리자와 예매자 정보를 확인한 뒤 서비스를 이용할 수 있습니다. ID: admin, PW: 1234</p>
         </div>

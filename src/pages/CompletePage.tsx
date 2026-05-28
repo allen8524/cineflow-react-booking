@@ -23,7 +23,6 @@ const CompletePage = () => {
         <div className="container">
           <div className="booking-hero__intro">
             <div>
-              <span className="section-chip">BOOKING COMPLETE</span>
               <h1>예매가 완료되었습니다.</h1>
               <p>예매번호와 관람 정보를 확인하세요.</p>
             </div>
