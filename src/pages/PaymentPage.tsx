@@ -51,15 +51,15 @@ const PaymentPage = () => {
       <section className="cinema-page-body">
         <div className="container">
           <ol className="booking-stepper">
-            <li className="is-active"><span>1</span><strong>영화/시간</strong></li>
-            <li className="is-active"><span>2</span><strong>인원/좌석</strong></li>
+            <li className="is-complete"><span>1</span><strong>영화/시간</strong></li>
+            <li className="is-complete"><span>2</span><strong>인원/좌석</strong></li>
             <li className="is-active"><span>3</span><strong>결제</strong></li>
             <li><span>4</span><strong>완료</strong></li>
           </ol>
 
           <div className="booking-layout payment-layout">
             <form id="payment-form" className="booking-panel payment-form" onSubmit={handleSubmit}>
-              <div className="panel-head"><h2>예매자 정보</h2><span className="panel-step">Customer</span></div>
+              <div className="panel-head"><h2>예매자 정보</h2></div>
               <div className="inline-field-grid form-grid">
                 <label className="inline-field">
                   <span>이름</span>

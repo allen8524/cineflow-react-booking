@@ -13,14 +13,14 @@ const ScheduleCard = ({ schedule, selected, onSelect }: ScheduleCardProps) => {
   const theater = theaters.find((item) => item.id === screen?.theaterId);
 
   return (
-    <li className={selected ? 'is-selected' : ''}>
+    <li className={`schedule-card ${selected ? 'is-selected' : ''}`}>
       <button type="button" onClick={() => onSelect(schedule.id)}>
-        <span className="time-primary">
-          <span>{formatDateTime(schedule.startTime)}</span>
-          <strong>{theater?.name} {screen?.name}</strong>
+        <span className="schedule-card__datetime">
+          <strong>{formatDateTime(schedule.startTime)}</strong>
         </span>
-        {selected ? <span className="timeslot-selected-mark">선택됨</span> : null}
-        <span className="time-meta">{screen?.screenType} · 잔여 {schedule.availableSeats}석 · {formatCurrency(schedule.price)}</span>
+        <span className="schedule-card__theater">{theater?.name} {screen?.name}</span>
+        {selected ? <span className="schedule-card__selected">선택됨</span> : null}
+        <span className="schedule-card__meta">{screen?.screenType} · 잔여 {schedule.availableSeats}석 · {formatCurrency(schedule.price)}</span>
       </button>
     </li>
   );

@@ -33,6 +33,12 @@ const MovieDetailPage = () => {
     navigate('/booking');
   };
 
+  const handleScheduleSelect = (scheduleId: number) => {
+    setMovie(movie.id);
+    setSchedule(scheduleId);
+    navigate('/booking');
+  };
+
   return (
     <main className="storefront-detail-page cinema-page">
       <section className="cinema-page-hero movie-detail-top">
@@ -84,7 +90,7 @@ const MovieDetailPage = () => {
             {movieSchedules.length > 0 ? (
               <ul className="timeslot-list detail-schedule-list">
                 {movieSchedules.map((schedule) => (
-                  <ScheduleCard schedule={schedule} selected={draft.scheduleId === schedule.id} onSelect={setSchedule} key={schedule.id} />
+                  <ScheduleCard schedule={schedule} selected={draft.scheduleId === schedule.id} onSelect={handleScheduleSelect} key={schedule.id} />
                 ))}
               </ul>
             ) : (

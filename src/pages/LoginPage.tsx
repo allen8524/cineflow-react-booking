@@ -31,7 +31,7 @@ const LoginPage = () => {
       <section className="cinema-page-body">
         <div className="container auth-page-container">
           <form className="booking-panel auth-form" onSubmit={handleSubmit}>
-            <div className="panel-head"><h2>계정 확인</h2><span className="panel-step">Auth</span></div>
+            <div className="panel-head"><h2>계정 확인</h2></div>
             <label className="inline-field"><span>아이디</span><input value={id} onChange={(event) => setId(event.target.value)} /></label>
             <label className="inline-field"><span>비밀번호</span><input type="password" value={password} onChange={(event) => setPassword(event.target.value)} /></label>
             <label className="inline-field"><span>예매자 이름</span><input value={name} onChange={(event) => setName(event.target.value)} /></label>

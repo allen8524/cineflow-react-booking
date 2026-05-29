@@ -58,13 +58,15 @@ const BookingSummary = ({ showAction = true }: BookingSummaryProps) => {
         <strong>{formatCurrency(selectedSeatsTotal)}</strong>
       </div>
       {showAction ? (
-        <Link
-          to="/payment"
-          className={`hero-btn primary summary-submit ${canMoveToPayment ? '' : 'disabled'}`}
-          aria-disabled={!canMoveToPayment}
-        >
-          결제 단계로 이동
-        </Link>
+        canMoveToPayment ? (
+          <Link to="/payment" className="hero-btn primary summary-submit">
+            결제 단계로 이동
+          </Link>
+        ) : (
+          <button type="button" className="hero-btn primary summary-submit" disabled>
+            결제 단계로 이동
+          </button>
+        )
       ) : null}
     </aside>
   );

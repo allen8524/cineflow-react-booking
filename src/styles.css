@@ -39,18 +39,39 @@ img { max-width: 100%; }
 .movie-selection-list button span,
 .selection-list button span { display: block; color: #65728d; font-size: 13px; }
 .timeslot-list button { display: grid; gap: 6px; }
-.time-primary strong { display: block; margin-top: 3px; }
-.time-meta { color: #65728d; font-size: 13px; }
-.panel-step {
-  display: inline-flex;
-  align-items: center;
-  min-height: 26px;
-  padding: 0 10px;
+.schedule-card__datetime,
+.schedule-card__theater,
+.schedule-card__meta {
+  min-width: 0;
+}
+.schedule-card__datetime,
+.schedule-card__theater {
+  grid-column: 1;
+}
+.schedule-card__datetime strong {
+  display: block;
+}
+.schedule-card__theater,
+.schedule-card__meta {
+  color: #65728d;
+  font-size: 13px;
+}
+.schedule-card__selected {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  justify-self: end;
+  align-self: start;
+  padding: 5px 8px;
+  border: 1px solid rgba(248, 95, 143, 0.22);
   border-radius: 999px;
-  background: rgba(199, 184, 255, 0.18);
-  color: #6655a8;
-  font-size: 12px;
-  font-weight: 700;
+  background: rgba(255, 255, 255, 0.72);
+  color: #8d3153;
+  font-size: 11px;
+  font-weight: 850;
+  line-height: 1;
+}
+.schedule-card__meta {
+  grid-column: 1 / -1;
 }
 
 .booking-stepper {
@@ -539,6 +560,23 @@ img { max-width: 100%; }
   color: #31265f;
 }
 
+.booking-page .booking-stepper li.is-complete {
+  border-color: rgba(95, 178, 143, 0.34);
+  background:
+    linear-gradient(135deg, rgba(236, 253, 245, 0.9), rgba(238, 245, 255, 0.82));
+  box-shadow: 0 10px 20px rgba(95, 178, 143, 0.1);
+}
+
+.booking-page .booking-stepper li.is-complete span {
+  background: linear-gradient(135deg, #58bf93, #9edbd7);
+  border-color: transparent;
+  color: #fff;
+}
+
+.booking-page .booking-stepper li.is-complete strong {
+  color: #27644d;
+}
+
 .booking-page .selection-list,
 .booking-page .timeslot-list,
 .booking-page .people-picker-list {
@@ -599,14 +637,14 @@ img { max-width: 100%; }
 
 .booking-page .movie-selection-list button strong,
 .booking-page .selection-list button strong,
-.booking-page .time-primary strong {
+.booking-page .schedule-card__datetime strong {
   color: #1f2a44;
 }
 
 .booking-page .movie-selection-list button span,
 .booking-page .selection-list button span,
-.booking-page .time-primary span,
-.booking-page .time-meta,
+.booking-page .schedule-card__theater,
+.booking-page .schedule-card__meta,
 .booking-page .seat-panel-meta,
 .booking-page .people-type span,
 .booking-page .people-picker-note,
@@ -752,12 +790,6 @@ img { max-width: 100%; }
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(248, 245, 255, 0.42));
   padding: 14px 10px 12px;
-}
-
-.booking-page .panel-step {
-  background: rgba(199, 184, 255, 0.18);
-  border: 1px solid rgba(199, 184, 255, 0.34);
-  color: #6655a8;
 }
 
 .booking-page .summary-movie-group,
@@ -1377,7 +1409,6 @@ button:disabled {
   transform: none !important;
 }
 
-.panel-step,
 .history-state-chip,
 .faq-chip,
 .notice-chip {
@@ -1793,8 +1824,8 @@ button:disabled,
 .home-booking-feature__meta li span,
 .movie-meta-list li,
 .movie-meta-chip,
-.time-meta,
-.time-primary span,
+.schedule-card__meta,
+.schedule-card__theater,
 .people-type span,
 .people-picker-note,
 .seat-panel-meta,
@@ -1808,7 +1839,6 @@ button:disabled,
   color: #64748b !important;
 }
 
-.panel-step,
 .faq-chip,
 .notice-chip,
 .history-mode-chip,
@@ -1872,7 +1902,7 @@ button:disabled {
 .booking-page .selection-list button strong,
 .booking-page .selection-list a strong,
 .booking-page .movie-selection-list button strong,
-.booking-page .time-primary strong,
+.booking-page .schedule-card__datetime strong,
 .booking-page .people-type strong,
 .booking-page .people-counter span,
 .booking-page .seat,
@@ -1886,8 +1916,8 @@ button:disabled {
 .booking-page .selection-list button span,
 .booking-page .selection-list a span,
 .booking-page .movie-selection-list button span,
-.booking-page .time-primary span,
-.booking-page .time-meta,
+.booking-page .schedule-card__theater,
+.booking-page .schedule-card__meta,
 .booking-page .people-type span,
 .booking-page .people-picker-note,
 .booking-page .seat-panel-meta,
@@ -2261,24 +2291,19 @@ button:disabled {
   box-shadow: 0 14px 28px rgba(125, 134, 179, 0.14);
 }
 
-.storefront-detail-page .detail-schedule-list .time-primary {
+.storefront-detail-page .detail-schedule-list .schedule-card__datetime {
   display: grid;
   gap: 5px;
 }
 
-.storefront-detail-page .detail-schedule-list .time-primary span {
-  color: #64748b !important;
-  font-size: 12px;
-  font-weight: 900;
-}
-
-.storefront-detail-page .detail-schedule-list .time-primary strong {
+.storefront-detail-page .detail-schedule-list .schedule-card__datetime strong {
   color: #1f2a44 !important;
   font-size: 17px;
   line-height: 1.35;
 }
 
-.storefront-detail-page .detail-schedule-list .time-meta {
+.storefront-detail-page .detail-schedule-list .schedule-card__theater,
+.storefront-detail-page .detail-schedule-list .schedule-card__meta {
   color: #4b5563 !important;
   font-size: 13px;
   line-height: 1.5;
@@ -2521,16 +2546,16 @@ button:disabled {
   box-shadow: 0 10px 20px rgba(125, 134, 179, 0.13);
 }
 
-.storefront-detail-page .detail-schedule-list .time-primary {
+.storefront-detail-page .detail-schedule-list .schedule-card__datetime {
   gap: 3px;
 }
 
-.storefront-detail-page .detail-schedule-list .time-primary strong {
+.storefront-detail-page .detail-schedule-list .schedule-card__datetime strong {
   font-size: 15px;
 }
 
-.storefront-detail-page .detail-schedule-list .time-primary span,
-.storefront-detail-page .detail-schedule-list .time-meta {
+.storefront-detail-page .detail-schedule-list .schedule-card__theater,
+.storefront-detail-page .detail-schedule-list .schedule-card__meta {
   font-size: 12px;
 }
 
@@ -2738,6 +2763,14 @@ button:disabled {
   border-color: rgba(248, 95, 143, 0.36) !important;
   color: var(--cf-text-strong) !important;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.72), 0 12px 24px rgba(248, 95, 143, 0.12);
+}
+
+.booking-stepper li.is-complete {
+  background:
+    linear-gradient(135deg, rgba(236, 253, 245, 0.94), rgba(238, 245, 255, 0.9)) !important;
+  border-color: rgba(95, 178, 143, 0.34) !important;
+  color: #27644d !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.68), 0 10px 20px rgba(95, 178, 143, 0.1);
 }
 
 .date-list li.is-selected button,
@@ -3217,8 +3250,25 @@ textarea:focus,
   box-shadow: 0 12px 22px rgba(248, 95, 143, 0.12);
 }
 
+.booking-page .booking-stepper li.is-complete {
+  border-color: rgba(95, 178, 143, 0.34) !important;
+  background:
+    linear-gradient(135deg, rgba(236, 253, 245, 0.94), rgba(238, 245, 255, 0.9)) !important;
+  box-shadow: 0 10px 20px rgba(95, 178, 143, 0.1);
+}
+
+.booking-page .booking-stepper li.is-complete span {
+  background: linear-gradient(135deg, #58bf93, #9edbd7);
+  border-color: transparent;
+  color: #fff;
+}
+
 .booking-page .booking-stepper li.is-active strong {
   color: #31265f;
+}
+
+.booking-page .booking-stepper li.is-complete strong {
+  color: #27644d;
 }
 
 @media (min-width: 1100px) {
@@ -3296,28 +3346,27 @@ textarea:focus,
   padding: 13px 15px 13px 17px;
 }
 
-.booking-page .time-primary {
+.booking-page .schedule-card__datetime {
   display: grid;
   gap: 4px;
   min-width: 0;
 }
 
-.booking-page .time-primary span {
+.booking-page .schedule-card__datetime strong {
   color: #1f2a44;
   font-size: 16px;
   font-weight: 900;
   line-height: 1.25;
 }
 
-.booking-page .time-primary strong {
-  margin-top: 0;
+.booking-page .schedule-card__theater {
   color: #6b7280;
   font-size: 13px;
   font-weight: 750;
   line-height: 1.3;
 }
 
-.booking-page .time-meta {
+.booking-page .schedule-card__meta {
   grid-column: 1 / -1;
   color: #4b5563;
   font-size: 13px;
@@ -3325,7 +3374,7 @@ textarea:focus,
   line-height: 1.35;
 }
 
-.booking-page .timeslot-selected-mark {
+.booking-page .schedule-card__selected {
   justify-self: end;
   align-self: start;
   padding: 5px 8px;
@@ -3494,7 +3543,15 @@ textarea:focus,
     grid-template-columns: 1fr;
   }
 
-  .booking-page .timeslot-selected-mark {
+  .booking-page .selection-list li.is-selected button::after {
+    position: static;
+    justify-self: start;
+    margin-top: 4px;
+  }
+
+  .booking-page .schedule-card__selected {
+    grid-column: 1;
+    grid-row: auto;
     justify-self: start;
   }
 
