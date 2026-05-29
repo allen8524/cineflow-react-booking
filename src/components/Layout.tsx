@@ -17,10 +17,12 @@ const Layout = () => {
               <Link to="/" className="storefront-footer__logo">
                 <img className="logo" src="/images/logo1.png" alt="CineFlow" />
               </Link>
-              <p className="storefront-footer__headline">CineFlow CINEMA</p>
-              <p>서울 강남구 시네마로 100, 4층</p>
-              <p>대표번호 1544-0000</p>
-              <p>help@cineflow.co.kr</p>
+              <div className="storefront-footer__brand-copy">
+                <p className="storefront-footer__headline">CineFlow CINEMA</p>
+                <p>서울 강남구 시네마로 100, 4층</p>
+                <p>대표번호 1544-0000</p>
+                <p>help@cineflow.co.kr</p>
+              </div>
             </div>
 
             <div className="storefront-footer__menu">
