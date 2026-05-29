@@ -754,7 +754,6 @@ img { max-width: 100%; }
   padding: 14px 10px 12px;
 }
 
-.booking-page .summary-chip,
 .booking-page .panel-step {
   background: rgba(199, 184, 255, 0.18);
   border: 1px solid rgba(199, 184, 255, 0.34);
@@ -777,11 +776,6 @@ img { max-width: 100%; }
 .booking-page .summary-submit:focus {
   transform: translateY(-1px);
   box-shadow: 0 18px 32px rgba(248, 95, 143, 0.24);
-}
-
-.booking-page .seat-summary-links a {
-  color: #6655a8;
-  font-weight: 800;
 }
 
 @media (max-width: 640px) {
@@ -1123,7 +1117,7 @@ img { max-width: 100%; }
   .history-booking-card { grid-template-columns: 1fr; }
 }
 
-/* Final UI consistency pass */
+/* Design tokens and shared UI */
 :root {
   --cf-page-max: 1180px;
   --cf-text-strong: #1f2a44;
@@ -1312,7 +1306,6 @@ body {
 .home-guide-card,
 .catalog-card,
 .support-quick-card,
-.history-booking-card,
 .booking-page .selection-list button,
 .booking-page .timeslot-list button {
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
@@ -1323,17 +1316,14 @@ body {
 .home-upcoming-card:hover,
 .home-guide-card:hover,
 .catalog-card:hover,
-.support-quick-card:hover,
-.history-booking-card:hover {
+.support-quick-card:hover {
   transform: translateY(-3px);
   box-shadow: var(--cf-shadow-hover);
   border-color: rgba(199, 184, 255, 0.36);
 }
 
 .hero-btn,
-.book-btn,
-button.hero-btn,
-a.hero-btn {
+.book-btn {
   min-height: 44px;
   border-radius: 999px;
   padding: 0 18px;
@@ -1344,9 +1334,7 @@ a.hero-btn {
 }
 
 .hero-btn.primary,
-.book-btn,
-button.hero-btn.primary,
-a.hero-btn.primary {
+.book-btn {
   border: 0;
   background: linear-gradient(135deg, var(--cf-pink), #d7b3ff);
   color: #fff;
@@ -1354,9 +1342,7 @@ a.hero-btn.primary {
 }
 
 .hero-btn.primary:hover,
-.book-btn:hover,
-button.hero-btn.primary:hover,
-a.hero-btn.primary:hover {
+.book-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 18px 34px rgba(248, 95, 143, 0.26);
   color: #fff;
@@ -1364,9 +1350,7 @@ a.hero-btn.primary:hover {
 
 .hero-btn.secondary,
 .detail-link,
-a.detail-link,
-button.hero-btn.secondary,
-a.hero-btn.secondary {
+a.detail-link {
   border: 1px solid var(--cf-line);
   background: rgba(255, 255, 255, 0.78);
   color: var(--cf-text-strong) !important;
@@ -1375,8 +1359,7 @@ a.hero-btn.secondary {
 
 .hero-btn.secondary:hover,
 .detail-link:hover,
-button.hero-btn.secondary:hover,
-a.hero-btn.secondary:hover {
+a.detail-link:hover {
   transform: translateY(-1px);
   border-color: rgba(199, 184, 255, 0.46);
   background: rgba(238, 231, 255, 0.66);
@@ -1395,7 +1378,6 @@ button:disabled {
 }
 
 .panel-step,
-.summary-chip,
 .history-state-chip,
 .faq-chip,
 .notice-chip {
@@ -1510,12 +1492,6 @@ button:disabled {
 .booking-page .selection-list button,
 .booking-page .timeslot-list button {
   border-radius: 16px;
-}
-
-.booking-page .selection-list li.is-selected button,
-.booking-page .timeslot-list li.is-selected button {
-  border-color: rgba(248, 95, 143, 0.42);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.78), 0 14px 28px rgba(248, 95, 143, 0.14);
 }
 
 .booking-page .people-picker-list li {
@@ -1662,14 +1638,6 @@ button:disabled {
 }
 
 @media (max-width: 640px) {
-  .hero-btn,
-  .book-btn,
-  button.hero-btn,
-  a.hero-btn {
-    width: 100%;
-    min-width: 0;
-  }
-
   .hero-actions,
   .booking-hero__actions,
   .catalog-hero__actions,
@@ -1677,6 +1645,14 @@ button:disabled {
     display: grid;
     grid-template-columns: 1fr;
     width: 100%;
+  }
+
+  .hero-actions .hero-btn,
+  .booking-hero__actions .hero-btn,
+  .catalog-hero__actions .hero-btn,
+  .complete-actions .hero-btn {
+    width: 100%;
+    min-width: 0;
   }
 
   .booking-page .booking-panel,
@@ -1698,7 +1674,7 @@ button:disabled {
   }
 }
 
-/* Readability contrast pass */
+/* Text contrast */
 button:disabled,
 .disabled {
   opacity: 0.72;
@@ -1816,13 +1792,13 @@ button:disabled,
 
 .home-booking-feature__meta li span,
 .movie-meta-list li,
+.movie-meta-chip,
 .time-meta,
 .time-primary span,
 .people-type span,
 .people-picker-note,
 .seat-panel-meta,
 .legend-item strong,
-.seat-summary-links a,
 .ticket-time,
 .meta-line,
 .admin-table th,
@@ -1833,11 +1809,9 @@ button:disabled,
 }
 
 .panel-step,
-.summary-chip,
 .faq-chip,
 .notice-chip,
 .history-mode-chip,
-.summary-chip,
 .success-state-badge,
 .home-booking-feature__label,
 .home-booking-feature__status,
@@ -1868,8 +1842,6 @@ button:disabled,
 .hero-btn.primary,
 .book-btn,
 .summary-submit,
-button.hero-btn.primary,
-a.hero-btn.primary,
 .rank-badge {
   color: #fff !important;
 }
@@ -1996,7 +1968,6 @@ button:disabled {
 .support-quick-card b,
 .faq-meta a,
 .detail-section-header .detail-link,
-.seat-summary-links a,
 .admin-page .admin-table a,
 .admin-page .admin-dashboard-table a {
   color: #5b4a91 !important;
@@ -2615,32 +2586,14 @@ button:disabled {
   }
 }
 
-/* Pastel color system cleanup */
-:root {
-  --color-bg: #f8f5ff;
-  --color-bg-rose: #fff7fb;
-  --color-surface: rgba(255, 255, 255, 0.88);
-  --color-surface-strong: #ffffff;
-  --color-surface-soft: #f1ecff;
-  --color-primary: #f85f8f;
-  --color-primary-soft: #ffedf5;
-  --color-violet: #8b5cf6;
-  --color-violet-soft: #eee7ff;
-  --color-blue-soft: #eef6ff;
-  --color-text: #1f2a44;
-  --color-body: #374151;
-  --color-muted: #6b7280;
-  --color-border: #eadff8;
-  --color-border-cool: #e6e9f5;
-}
-
+/* Pastel color alignment */
 .cinema-header,
 .storefront-header,
 .topbar-cinema {
   background:
     radial-gradient(circle at 12% 0%, rgba(255, 237, 245, 0.88), transparent 30%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(248, 245, 255, 0.9));
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid rgba(234, 223, 248, 0.82);
   box-shadow: 0 12px 26px rgba(125, 134, 179, 0.12);
 }
 
@@ -2654,12 +2607,12 @@ button:disabled {
 .storefront-header__utility-links a,
 .storefront-navbar .menu-right .menu-link,
 .storefront-navbar .menu-right .auth-inline-button {
-  color: var(--color-body) !important;
+  color: var(--cf-text-body) !important;
 }
 
 .menu-left .lv1,
 .storefront-primary-nav > li > a {
-  color: var(--color-text) !important;
+  color: var(--cf-text-strong) !important;
   background: transparent;
 }
 
@@ -2682,7 +2635,7 @@ button:disabled {
 
 .menu-cta,
 .storefront-navbar .menu-right .menu-cta {
-  background: linear-gradient(135deg, var(--color-primary), #d7b3ff);
+  background: linear-gradient(135deg, var(--cf-pink), #d7b3ff);
   color: #fff !important;
   box-shadow: 0 12px 22px rgba(248, 95, 143, 0.18);
 }
@@ -2703,21 +2656,21 @@ button:disabled {
 .complete-amount-breakdown .payment-meta-list li,
 .admin-page .admin-subnav button,
 .admin-page .admin-subnav a {
-  background: var(--color-surface) !important;
-  border-color: var(--color-border-cool) !important;
-  color: var(--color-text) !important;
+  background: var(--cf-card) !important;
+  border-color: var(--cf-line) !important;
+  color: var(--cf-text-strong) !important;
 }
 
 .payment-form,
 .payment-block,
 .booking-page .payment-form {
-  color: var(--color-body);
+  color: var(--cf-text-body);
 }
 
 .payment-block h3,
 .amount-breakdown h3,
 .payment-form .panel-head h2 {
-  color: var(--color-text) !important;
+  color: var(--cf-text-strong) !important;
 }
 
 .method-grid,
@@ -2731,8 +2684,8 @@ button:disabled {
   border-radius: 16px;
   padding: 14px;
   background: rgba(255, 255, 255, 0.86) !important;
-  border: 1px solid var(--color-border-cool) !important;
-  color: var(--color-text) !important;
+  border: 1px solid var(--cf-line) !important;
+  color: var(--cf-text-strong) !important;
   box-shadow: none;
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
 }
@@ -2740,11 +2693,11 @@ button:disabled {
 .method-card span,
 .method-card strong,
 .payment-method-grid .method-card span {
-  color: var(--color-text) !important;
+  color: var(--cf-text-strong) !important;
 }
 
 .method-card input {
-  accent-color: var(--color-primary);
+  accent-color: var(--cf-pink);
 }
 
 .method-card:hover,
@@ -2756,12 +2709,37 @@ button:disabled {
 }
 
 .method-card.is-active,
-.method-card-option input:checked + .method-card,
+.method-card-option input:checked + .method-card {
+  background:
+    linear-gradient(135deg, rgba(255, 237, 245, 0.96), rgba(238, 231, 255, 0.94)) !important;
+  border-color: rgba(248, 95, 143, 0.36) !important;
+  color: var(--cf-text-strong) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.72), 0 12px 24px rgba(248, 95, 143, 0.12);
+}
+
+.method-card.is-active span,
+.method-card-option input:checked + .method-card span {
+  color: #5b4a91 !important;
+}
+
 .admin-page .admin-subnav button.is-active,
 .admin-page .admin-subnav a.is-active,
 .history-tab.is-active,
-.faq-category-chip.is-active,
-.booking-stepper li.is-active,
+.faq-category-chip.is-active {
+  background: rgba(238, 231, 255, 0.86) !important;
+  border-color: rgba(199, 184, 255, 0.42) !important;
+  color: #5b4a91 !important;
+  box-shadow: 0 10px 20px rgba(125, 134, 179, 0.12);
+}
+
+.booking-stepper li.is-active {
+  background:
+    linear-gradient(135deg, rgba(255, 237, 245, 0.96), rgba(238, 231, 255, 0.94)) !important;
+  border-color: rgba(248, 95, 143, 0.36) !important;
+  color: var(--cf-text-strong) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.72), 0 12px 24px rgba(248, 95, 143, 0.12);
+}
+
 .date-list li.is-selected button,
 .date-list li.is-selected a,
 .timeslot-list li.is-selected button,
@@ -2771,17 +2749,8 @@ button:disabled {
   background:
     linear-gradient(135deg, rgba(255, 237, 245, 0.96), rgba(238, 231, 255, 0.94)) !important;
   border-color: rgba(248, 95, 143, 0.36) !important;
-  color: var(--color-text) !important;
+  color: var(--cf-text-strong) !important;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.72), 0 12px 24px rgba(248, 95, 143, 0.12);
-}
-
-.method-card.is-active span,
-.method-card-option input:checked + .method-card span,
-.admin-page .admin-subnav button.is-active,
-.admin-page .admin-subnav a.is-active,
-.history-tab.is-active,
-.faq-category-chip.is-active {
-  color: #5b4a91 !important;
 }
 
 .booking-mode-tabs button,
@@ -2797,8 +2766,8 @@ button:disabled {
 .faq-category-chip,
 .admin-subnav button {
   background: rgba(255, 255, 255, 0.86) !important;
-  border-color: var(--color-border-cool) !important;
-  color: var(--color-text) !important;
+  border-color: var(--cf-line) !important;
+  color: var(--cf-text-strong) !important;
 }
 
 .booking-mode-chip,
@@ -2807,8 +2776,8 @@ button:disabled {
 .summary-format em,
 .history-card-tags em,
 .booking-history-page .history-card-tags em {
-  background: var(--color-violet-soft) !important;
-  border-color: var(--color-border) !important;
+  background: var(--cf-lavender) !important;
+  border-color: rgba(234, 223, 248, 0.82) !important;
   color: #5b4a91 !important;
 }
 
@@ -2826,8 +2795,8 @@ textarea,
 .admin-page .admin-form-field select,
 .admin-page .admin-form-field textarea {
   background: rgba(255, 255, 255, 0.88) !important;
-  border-color: var(--color-border-cool) !important;
-  color: var(--color-text) !important;
+  border-color: var(--cf-line) !important;
+  color: var(--cf-text-strong) !important;
 }
 
 input:focus,
@@ -2849,7 +2818,7 @@ textarea:focus,
 .seat-summary-panel,
 .booking-summary {
   background: rgba(255, 255, 255, 0.86) !important;
-  border-color: var(--color-border-cool) !important;
+  border-color: var(--cf-line) !important;
 }
 
 .amount-total strong,
@@ -2869,20 +2838,20 @@ textarea:focus,
 .history-quick-actions,
 .booking-history-page .history-action-grid a,
 .support-operating-grid div {
-  background: var(--color-surface) !important;
-  border-color: var(--color-border-cool) !important;
-  color: var(--color-body) !important;
+  background: var(--cf-card) !important;
+  border-color: var(--cf-line) !important;
+  color: var(--cf-text-body) !important;
 }
 
 .seat,
 .seat-sample.available {
   background: #eaf3ff !important;
-  color: var(--color-text) !important;
+  color: var(--cf-text-strong) !important;
 }
 
 .seat.selected,
 .seat-sample.selected {
-  background: linear-gradient(135deg, var(--color-primary), #a78bfa) !important;
+  background: linear-gradient(135deg, var(--cf-pink), #a78bfa) !important;
   color: #fff !important;
 }
 
@@ -2891,7 +2860,7 @@ textarea:focus,
 .seat.disabled-seat,
 .seat-sample.disabled-seat {
   background: #e9ecf4 !important;
-  color: var(--color-muted) !important;
+  color: var(--cf-text-soft) !important;
 }
 
 /* Support page polish */
@@ -3218,7 +3187,7 @@ textarea:focus,
   }
 }
 
-/* Booking page refinement */
+/* Booking page scoped refinements */
 .booking-page .booking-stepper {
   gap: 10px;
   margin-bottom: 18px;
@@ -3301,7 +3270,7 @@ textarea:focus,
 }
 
 .booking-page .selection-list li.is-selected button::after {
-  content: "선택됨";
+  content: "\C120\D0DD\B428";
   position: absolute;
   top: 12px;
   right: 14px;
