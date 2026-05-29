@@ -2,6 +2,10 @@ import { Link, Outlet } from 'react-router-dom';
 import Header from './Header';
 
 const Layout = () => {
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <>
       <Header />
@@ -52,7 +56,14 @@ const Layout = () => {
 
           <div className="storefront-footer__bottom">
             <p>© 2026 CineFlow. All rights reserved.</p>
-            <Link to="/">맨 위로</Link>
+            <button
+              type="button"
+              className="storefront-footer__top-button"
+              onClick={handleScrollToTop}
+              aria-label="페이지 맨 위로 이동"
+            >
+              맨 위로
+            </button>
           </div>
 
           <div className="cinema-footer-attribution">

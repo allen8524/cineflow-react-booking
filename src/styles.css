@@ -1776,6 +1776,7 @@ button:disabled {
 .storefront-footer__menu a,
 .storefront-footer__bottom p,
 .storefront-footer__bottom a,
+.storefront-footer__top-button,
 .cinema-footer-attribution p {
   color: #4b5563;
 }
@@ -1789,6 +1790,20 @@ button:disabled {
   margin-top: 24px;
   padding-top: 16px;
   border-top-color: var(--cf-line);
+}
+
+.storefront-footer__top-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.storefront-footer__top-button:focus-visible {
+  outline: 2px solid rgba(102, 85, 168, 0.38);
+  outline-offset: 3px;
+  border-radius: 6px;
 }
 
 .cinema-footer-attribution {
@@ -1996,6 +2011,7 @@ button:disabled,
 .storefront-footer__menu a,
 .storefront-footer__bottom p,
 .storefront-footer__bottom a,
+.storefront-footer__top-button,
 .cinema-footer-attribution p {
   color: #4b5563 !important;
 }
@@ -2160,8 +2176,11 @@ button:disabled {
 }
 
 .storefront-footer__menu a:hover,
-.storefront-footer__bottom a:hover {
+.storefront-footer__bottom a:hover,
+.storefront-footer__top-button:hover,
+.storefront-footer__top-button:focus {
   color: #5b4a91 !important;
+  text-decoration: underline;
 }
 
 .admin-page .admin-table th,
