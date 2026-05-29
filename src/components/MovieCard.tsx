@@ -10,6 +10,27 @@ interface MovieCardProps {
 
 const MovieCard = ({ movie, rank, variant = 'catalog' }: MovieCardProps) => {
   const stateLabel = movie.status === 'NOW_SHOWING' ? '상영중' : '상영예정';
+  const normalizedAgeRating = movie.ageRating.trim().toLowerCase();
+  const ageClass = (() => {
+    if (normalizedAgeRating === 'all' || normalizedAgeRating.includes('전체')) {
+      return 'age-all all';
+    }
+
+    if (normalizedAgeRating.includes('12')) {
+      return 'age-12';
+    }
+
+    if (normalizedAgeRating.includes('15')) {
+      return 'age-15';
+    }
+
+    if (normalizedAgeRating.includes('19') || normalizedAgeRating.includes('청소년')) {
+      return 'age-19';
+    }
+
+    return `age-${normalizedAgeRating.replace(/[^a-z0-9-]/g, '')}`;
+  })();
+  const statusClass = movie.status === 'NOW_SHOWING' ? 'status-now' : 'status-upcoming upcoming';
 
   const cardClass = variant === 'upcoming'
     ? 'home-upcoming-card'
@@ -47,12 +68,12 @@ const MovieCard = ({ movie, rank, variant = 'catalog' }: MovieCardProps) => {
       <Link to={`/movies/${movie.id}`} className={posterClass} aria-label={`${movie.title} 상세 보기`}>
         {rank ? <span className="rank-badge">{rank}</span> : null}
         <img src={movie.posterUrl} alt={`${movie.title} 포스터`} />
-        <span className={`status-badge ${movie.status === 'COMING_SOON' ? 'upcoming' : ''}`}>{stateLabel}</span>
+        <span className={`status-badge ${statusClass}`}>{stateLabel}</span>
       </Link>
       <div className={bodyClass}>
         <div className={headClass}>
           <h3><Link to={`/movies/${movie.id}`}>{movie.title}</Link></h3>
-          <span className={`age-badge age-${movie.ageRating}`}>{movie.ageRating}</span>
+          <span className={`age-badge ${ageClass}`}>{movie.ageRating}</span>
         </div>
         <ul className={metaClass}>
           <li className="movie-meta-chip">예매율 {movie.bookingRate}%</li>
