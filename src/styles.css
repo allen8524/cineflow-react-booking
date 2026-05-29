@@ -3176,3 +3176,327 @@ textarea:focus,
     grid-template-columns: 1fr;
   }
 }
+
+/* Booking page refinement */
+.booking-page .booking-stepper {
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.booking-page .booking-stepper li {
+  min-height: 50px;
+  padding: 10px 13px;
+  color: #4b5563;
+  opacity: 1;
+}
+
+.booking-page .booking-stepper li span {
+  width: 30px;
+  height: 30px;
+  color: #6655a8;
+  font-size: 13px;
+}
+
+.booking-page .booking-stepper li strong {
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.booking-page .booking-stepper li.is-active {
+  border-color: rgba(248, 95, 143, 0.42) !important;
+  box-shadow: 0 12px 22px rgba(248, 95, 143, 0.12);
+}
+
+.booking-page .booking-stepper li.is-active strong {
+  color: #31265f;
+}
+
+@media (min-width: 1100px) {
+  .booking-page .booking-seat-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 340px);
+    gap: 20px;
+    align-items: start;
+  }
+}
+
+@media (max-width: 1099px) {
+  .booking-page .booking-seat-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.booking-page .booking-seat-main {
+  gap: 16px;
+}
+
+.booking-page .booking-panel,
+.booking-page .booking-summary {
+  padding: 20px;
+}
+
+.booking-page .selection-list button,
+.booking-page .timeslot-list button {
+  position: relative;
+  overflow: hidden;
+}
+
+.booking-page .selection-list li.is-selected button,
+.booking-page .timeslot-list li.is-selected button {
+  border-color: rgba(248, 95, 143, 0.48) !important;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(255, 227, 239, 0.72), transparent 40%),
+    linear-gradient(135deg, rgba(255, 247, 251, 0.98), rgba(238, 231, 255, 0.88)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.78), 0 14px 28px rgba(248, 95, 143, 0.16);
+}
+
+.booking-page .selection-list li.is-selected button::before,
+.booking-page .timeslot-list li.is-selected button::before {
+  content: "";
+  position: absolute;
+  inset: 12px auto 12px 0;
+  width: 4px;
+  border-radius: 0 999px 999px 0;
+  background: linear-gradient(180deg, #f85f8f, #c7b8ff);
+}
+
+.booking-page .selection-list li.is-selected button::after {
+  content: "선택됨";
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(248, 95, 143, 0.22);
+  color: #8d3153;
+  font-size: 11px;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.booking-page .selection-list li:hover button,
+.booking-page .timeslot-list li:hover button {
+  border-color: rgba(248, 95, 143, 0.34) !important;
+}
+
+.booking-page .timeslot-list button {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  min-height: 76px;
+  padding: 13px 15px 13px 17px;
+}
+
+.booking-page .time-primary {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.booking-page .time-primary span {
+  color: #1f2a44;
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.booking-page .time-primary strong {
+  margin-top: 0;
+  color: #6b7280;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.3;
+}
+
+.booking-page .time-meta {
+  grid-column: 1 / -1;
+  color: #4b5563;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.booking-page .timeslot-selected-mark {
+  justify-self: end;
+  align-self: start;
+  padding: 5px 8px;
+  border: 1px solid rgba(248, 95, 143, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: #8d3153;
+  font-size: 11px;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.booking-page .people-picker-list li {
+  min-height: 62px;
+  padding: 12px 14px;
+}
+
+.booking-page .people-type {
+  gap: 3px;
+}
+
+.booking-page .people-counter {
+  min-width: 112px;
+  gap: 8px;
+}
+
+.booking-page .people-counter button {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+}
+
+.booking-page .people-counter span {
+  min-width: 24px;
+  font-size: 16px;
+}
+
+.booking-page .seat-select-panel {
+  padding: 18px 18px 20px;
+  overflow: hidden;
+}
+
+.booking-page .seat-select-panel .panel-head {
+  margin-bottom: 12px;
+}
+
+.booking-page .seat-legend {
+  gap: 8px 12px;
+  margin-bottom: 12px;
+  padding: 9px 11px;
+}
+
+.booking-page .legend-item {
+  gap: 7px;
+  color: #374151;
+  font-size: 13px;
+}
+
+.booking-page .legend-item strong {
+  color: #374151;
+  font-size: 13px;
+}
+
+.booking-page .seat-sample {
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+}
+
+.booking-page .screen-badge {
+  min-height: 28px;
+  margin-bottom: 12px;
+  padding: 7px 12px;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.booking-page .seat-map-scroll {
+  padding: 12px 9px 10px;
+}
+
+.booking-page .seat-map {
+  min-width: 670px;
+  gap: 7px;
+}
+
+.booking-page .seat-row {
+  gap: 5px;
+}
+
+.booking-page .seat {
+  min-height: 31px;
+  border-radius: 9px;
+  font-size: 12px;
+}
+
+.booking-page .row-label {
+  font-size: 12px;
+  line-height: 31px;
+}
+
+.booking-page .booking-summary {
+  gap: 12px;
+  padding: 18px;
+}
+
+.booking-page .booking-summary .screening-summary-title,
+.booking-page .booking-summary .summary-poster-row {
+  margin-bottom: 10px;
+}
+
+.booking-page .summary-info-block {
+  padding: 11px 12px;
+}
+
+.booking-page .summary-progress-note {
+  display: grid;
+  gap: 5px;
+  padding: 11px 12px;
+  border: 1px solid rgba(199, 184, 255, 0.2);
+  border-radius: 14px;
+  background: rgba(248, 245, 255, 0.64);
+}
+
+.booking-page .summary-progress-note strong {
+  color: #31265f;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.booking-page .summary-progress-note span {
+  color: #6b7280;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.booking-page .summary-total {
+  margin-top: 10px;
+  padding: 13px 12px 0;
+}
+
+.booking-page .summary-total strong {
+  font-size: 24px;
+}
+
+.booking-page .summary-submit {
+  margin-top: 12px;
+}
+
+@media (max-width: 640px) {
+  .booking-page .booking-stepper {
+    gap: 8px;
+  }
+
+  .booking-page .booking-stepper li {
+    min-height: 46px;
+    padding: 9px 10px;
+  }
+
+  .booking-page .booking-panel,
+  .booking-page .booking-summary {
+    padding: 18px;
+  }
+
+  .booking-page .timeslot-list button {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-page .timeslot-selected-mark {
+    justify-self: start;
+  }
+
+  .booking-page .people-picker-list li {
+    min-height: 0;
+  }
+
+  .booking-page .people-counter {
+    min-width: 0;
+  }
+
+  .booking-page .seat-map {
+    min-width: 660px;
+  }
+}

@@ -19,6 +19,7 @@ const ScheduleCard = ({ schedule, selected, onSelect }: ScheduleCardProps) => {
           <span>{formatDateTime(schedule.startTime)}</span>
           <strong>{theater?.name} {screen?.name}</strong>
         </span>
+        {selected ? <span className="timeslot-selected-mark">선택됨</span> : null}
         <span className="time-meta">{screen?.screenType} · 잔여 {schedule.availableSeats}석 · {formatCurrency(schedule.price)}</span>
       </button>
     </li>

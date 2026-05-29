@@ -40,7 +40,7 @@ const BookingPage = () => {
         <div className="container">
           <ol className="booking-stepper">
             <li className="is-active"><span>1</span><strong>영화/시간</strong></li>
-            <li className="is-active"><span>2</span><strong>인원/좌석</strong></li>
+            <li><span>2</span><strong>인원/좌석</strong></li>
             <li><span>3</span><strong>결제</strong></li>
             <li><span>4</span><strong>완료</strong></li>
           </ol>
@@ -50,7 +50,6 @@ const BookingPage = () => {
               <section className="booking-panel">
                 <div className="panel-head">
                   <h2>1. 영화 선택</h2>
-                  <span className="panel-step">Movie</span>
                 </div>
                 <ul className="selection-list movie-selection-list">
                   {movies.map((movie) => (
@@ -67,7 +66,6 @@ const BookingPage = () => {
               <section className="booking-panel">
                 <div className="panel-head">
                   <h2>2. 상영 시간 선택</h2>
-                  <span className="panel-step">Schedule</span>
                 </div>
                 <ul className="timeslot-list">
                   {movieSchedules.map((schedule) => (
@@ -94,11 +92,6 @@ const BookingPage = () => {
             </div>
 
             <BookingSummary />
-          </div>
-
-          <div className="seat-summary-links">
-            <Link to="/support#cancel-policy">예매 취소 규정 보기</Link>
-            <Link to="/history">예매내역 조회</Link>
           </div>
         </div>
       </section>
