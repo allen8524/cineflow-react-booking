@@ -34,8 +34,8 @@ const Layout = () => {
               <ul>
                 <li><Link to="/support#faq">자주 묻는 질문</Link></li>
                 <li><Link to="/support#cancel-policy">취소 · 환불 안내</Link></li>
-                <li><Link to="/support#inquiry">1:1 문의</Link></li>
-                <li><Link to="/support#group">단체 · 대관 문의</Link></li>
+                <li><Link to="/support">고객센터 홈</Link></li>
+                <li><Link to="/history">예매 조회 안내</Link></li>
               </ul>
             </div>
 
@@ -45,7 +45,7 @@ const Layout = () => {
                 <li><Link to="/booking">빠른예매</Link></li>
                 <li><Link to="/movies">현재 상영작</Link></li>
                 <li><Link to="/admin">관리자 대시보드</Link></li>
-                <li><Link to="/support">고객지원</Link></li>
+                <li><Link to="/support">고객센터</Link></li>
               </ul>
             </div>
           </div>

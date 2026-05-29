@@ -52,21 +52,103 @@ const AdminPage = () => {
           {tab === 'movies' ? (
             <section className="admin-section">
               <div className="panel-head"><h2>영화 관리</h2></div>
-              <div className="admin-table-wrap"><table className="admin-table"><thead><tr><th>영화명</th><th>장르</th><th>등급</th><th>예매율</th><th>상태</th></tr></thead><tbody>{movies.map((movie) => <tr key={movie.id}><td>{movie.title}</td><td>{movie.genre}</td><td>{movie.ageRating}</td><td>{movie.bookingRate}%</td><td>{movie.status === 'NOW_SHOWING' ? '상영중' : '상영예정'}</td></tr>)}</tbody></table></div>
+              <div className="admin-table-wrap">
+                <table className="admin-table">
+                  <thead>
+                    <tr>
+                      <th>영화명</th>
+                      <th>장르</th>
+                      <th>등급</th>
+                      <th>예매율</th>
+                      <th>상태</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {movies.map((movie) => (
+                      <tr key={movie.id}>
+                        <td>{movie.title}</td>
+                        <td>{movie.genre}</td>
+                        <td>{movie.ageRating}</td>
+                        <td>{movie.bookingRate}%</td>
+                        <td>{movie.status === 'NOW_SHOWING' ? '상영중' : '상영예정'}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </section>
           ) : null}
 
           {tab === 'schedules' ? (
             <section className="admin-section">
               <div className="panel-head"><h2>시간표 관리</h2></div>
-              <div className="admin-table-wrap"><table className="admin-table"><thead><tr><th>영화</th><th>극장</th><th>상영관</th><th>시작 시간</th><th>잔여석</th><th>가격</th></tr></thead><tbody>{schedules.map((schedule) => { const movie = movies.find((item) => item.id === schedule.movieId); const screen = screens.find((item) => item.id === schedule.screenId); const theater = theaters.find((item) => item.id === screen?.theaterId); return <tr key={schedule.id}><td>{movie?.title}</td><td>{theater?.name}</td><td>{screen?.name} {screen?.screenType}</td><td>{formatDateTime(schedule.startTime)}</td><td>{schedule.availableSeats}</td><td>{formatCurrency(schedule.price)}</td></tr>; })}</tbody></table></div>
+              <div className="admin-table-wrap">
+                <table className="admin-table">
+                  <thead>
+                    <tr>
+                      <th>영화</th>
+                      <th>극장</th>
+                      <th>상영관</th>
+                      <th>시작 시간</th>
+                      <th>잔여석</th>
+                      <th>가격</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {schedules.map((schedule) => {
+                      const movie = movies.find((item) => item.id === schedule.movieId);
+                      const screen = screens.find((item) => item.id === schedule.screenId);
+                      const theater = theaters.find((item) => item.id === screen?.theaterId);
+
+                      return (
+                        <tr key={schedule.id}>
+                          <td>{movie?.title}</td>
+                          <td>{theater?.name}</td>
+                          <td>{screen?.name} {screen?.screenType}</td>
+                          <td>{formatDateTime(schedule.startTime)}</td>
+                          <td>{schedule.availableSeats}</td>
+                          <td>{formatCurrency(schedule.price)}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </section>
           ) : null}
 
           {tab === 'bookings' ? (
             <section className="admin-section">
               <div className="panel-head"><h2>예매 관리</h2></div>
-              <div className="admin-table-wrap"><table className="admin-table"><thead><tr><th>예매번호</th><th>영화</th><th>예매자</th><th>좌석</th><th>금액</th><th>상태</th></tr></thead><tbody>{bookings.map((booking) => <tr key={booking.id}><td>{booking.bookingCode}</td><td>{booking.movieTitle}</td><td>{booking.customerName}</td><td>{booking.seatNames}</td><td>{formatCurrency(booking.totalPrice)}</td><td><StatusBadge status={booking.status} /> <span className="sr-only">{bookingStatusLabel(booking.status)}</span></td></tr>)}</tbody></table></div>
+              <div className="admin-table-wrap">
+                <table className="admin-table">
+                  <thead>
+                    <tr>
+                      <th>예매번호</th>
+                      <th>영화</th>
+                      <th>예매자</th>
+                      <th>좌석</th>
+                      <th>금액</th>
+                      <th>상태</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {bookings.map((booking) => (
+                      <tr key={booking.id}>
+                        <td>{booking.bookingCode}</td>
+                        <td>{booking.movieTitle}</td>
+                        <td>{booking.customerName}</td>
+                        <td>{booking.seatNames}</td>
+                        <td>{formatCurrency(booking.totalPrice)}</td>
+                        <td>
+                          <StatusBadge status={booking.status} />
+                          <span className="sr-only">{bookingStatusLabel(booking.status)}</span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </section>
           ) : null}
         </div>

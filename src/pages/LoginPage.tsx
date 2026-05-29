@@ -25,13 +25,17 @@ const LoginPage = () => {
       <section className="cinema-page-hero booking-hero">
         <div className="container">
           <h1>로그인</h1>
-          <p>관리자와 예매자 정보를 확인한 뒤 서비스를 이용할 수 있습니다. ID: admin, PW: 1234</p>
+          <p>관리자와 예매자 정보를 확인한 뒤 서비스를 이용할 수 있습니다.</p>
         </div>
       </section>
       <section className="cinema-page-body">
         <div className="container auth-page-container">
           <form className="booking-panel auth-form" onSubmit={handleSubmit}>
             <div className="panel-head"><h2>계정 확인</h2></div>
+            <div className="demo-account-note">
+              <strong>데모 계정</strong>
+              <span>admin / 1234</span>
+            </div>
             <label className="inline-field"><span>아이디</span><input value={id} onChange={(event) => setId(event.target.value)} /></label>
             <label className="inline-field"><span>비밀번호</span><input type="password" value={password} onChange={(event) => setPassword(event.target.value)} /></label>
             <label className="inline-field"><span>예매자 이름</span><input value={name} onChange={(event) => setName(event.target.value)} /></label>
