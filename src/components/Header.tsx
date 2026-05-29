@@ -8,14 +8,6 @@ const Header = () => {
 
   return (
     <header className="ht-header full-width-hd cinema-header storefront-header">
-      <div className="storefront-header__utility">
-        <div className="container">
-          <div className="storefront-header__utility-inner">
-            <p className="storefront-header__utility-copy">영화 탐색부터 예매 완료까지 한 흐름으로 이어지는 CineFlow 시네마 서비스</p>
-          </div>
-        </div>
-      </div>
-
       <div className="container">
         <nav id="mainNav" className="storefront-navbar" aria-label="주요 메뉴">
           <div className="storefront-brand-shell">
