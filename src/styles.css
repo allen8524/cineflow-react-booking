@@ -1042,9 +1042,27 @@ img { max-width: 100%; }
 }
 
 .home-guide-panel {
-  grid-template-columns: minmax(0, 0.95fr) minmax(390px, 0.78fr);
-  gap: 24px;
+  grid-template-columns: minmax(420px, 1fr) minmax(390px, 0.9fr);
+  gap: 28px;
   align-items: center;
+}
+
+.home-guide-intro {
+  min-width: 0;
+}
+
+.home-guide-intro h2 {
+  max-width: 560px;
+  line-height: 1.18;
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.home-guide-intro p {
+  max-width: 540px;
+  line-height: 1.65;
+  word-break: keep-all;
+  overflow-wrap: normal;
 }
 
 .home-guide-list {
@@ -1192,6 +1210,11 @@ img { max-width: 100%; }
   .home-guide-panel {
     grid-template-columns: 1fr;
     align-items: stretch;
+  }
+
+  .home-guide-intro h2,
+  .home-guide-intro p {
+    max-width: none;
   }
 
   .home-guide-list {
