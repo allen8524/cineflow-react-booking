@@ -63,19 +63,13 @@ const MovieDetailPage = () => {
                 <li>{movie.ageRating}세 이상 관람가</li>
                 <li>개봉 {formatDate(movie.releaseDate)}</li>
               </ul>
-              <div className="hero-actions detail-actions">
+              <div className="hero-actions detail-actions detail-actions--inline">
                 <button type="button" className="hero-btn primary" disabled={!movie.bookingOpen} onClick={handleBooking}>
                   {movie.bookingOpen ? '예매하기' : '상영예정'}
                 </button>
                 <Link to="/movies" className="hero-btn secondary">다른 영화 보기</Link>
               </div>
             </div>
-            <aside className="detail-booking-sticky detail-hero-booking">
-              <span>예매 안내</span>
-              <h3>{movie.bookingOpen ? '상영시간표 선택 가능' : '상영시간표 준비 중'}</h3>
-              <p>{movie.bookingOpen ? '원하는 시간을 선택한 후 좌석 단계로 이동하세요.' : '개봉 일정이 확정되면 예매 버튼이 활성화됩니다.'}</p>
-              <button type="button" className="book-btn" onClick={handleBooking} disabled={!movie.bookingOpen}>빠른예매</button>
-            </aside>
           </div>
         </div>
       </section>
