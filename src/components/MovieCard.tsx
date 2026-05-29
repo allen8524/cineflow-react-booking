@@ -11,31 +11,36 @@ interface MovieCardProps {
 const MovieCard = ({ movie, rank, variant = 'catalog' }: MovieCardProps) => {
   const stateLabel = movie.status === 'NOW_SHOWING' ? '상영중' : '상영예정';
 
-  if (variant === 'upcoming') {
-    return (
-      <article className="home-upcoming-card">
-        <Link to={`/movies/${movie.id}`} className="home-upcoming-card__poster" aria-label={`${movie.title} 상세 보기`}>
-          <img src={movie.posterUrl} alt={`${movie.title} 포스터`} />
-          <span className="status-badge upcoming">{stateLabel}</span>
-        </Link>
-        <div className="home-upcoming-card__body">
-          <h3><Link to={`/movies/${movie.id}`}>{movie.title}</Link></h3>
-          <ul className="home-upcoming-card__meta movie-meta-list">
-            <li className="movie-meta-chip">{movie.genre}</li>
-            <li className="movie-meta-chip">{movie.runningTime}분</li>
-          </ul>
-          <p>{movie.shortDescription}</p>
-        </div>
-      </article>
-    );
-  }
-
-  const cardClass = variant === 'home' ? 'home-showcase-card' : 'catalog-card cinema-movie-card';
-  const posterClass = variant === 'home' ? 'home-showcase-card__poster' : 'catalog-card__poster poster-wrap';
-  const bodyClass = variant === 'home' ? 'home-showcase-card__body' : 'catalog-card__body movie-card-body';
-  const headClass = variant === 'home' ? 'home-showcase-card__head movie-card-head' : 'catalog-card__head movie-card-head';
-  const metaClass = variant === 'home' ? 'home-showcase-card__meta movie-meta-list' : 'catalog-card__meta movie-meta-mini movie-meta-list';
-  const actionsClass = variant === 'home' ? 'home-showcase-card__actions' : 'catalog-card__actions movie-card-actions';
+  const cardClass = variant === 'upcoming'
+    ? 'home-upcoming-card'
+    : variant === 'home'
+      ? 'home-showcase-card'
+      : 'catalog-card cinema-movie-card';
+  const posterClass = variant === 'upcoming'
+    ? 'home-upcoming-card__poster'
+    : variant === 'home'
+      ? 'home-showcase-card__poster'
+      : 'catalog-card__poster poster-wrap';
+  const bodyClass = variant === 'upcoming'
+    ? 'home-upcoming-card__body'
+    : variant === 'home'
+      ? 'home-showcase-card__body'
+      : 'catalog-card__body movie-card-body';
+  const headClass = variant === 'upcoming'
+    ? 'home-upcoming-card__head movie-card-head'
+    : variant === 'home'
+      ? 'home-showcase-card__head movie-card-head'
+      : 'catalog-card__head movie-card-head';
+  const metaClass = variant === 'upcoming'
+    ? 'home-upcoming-card__meta movie-meta-list'
+    : variant === 'home'
+      ? 'home-showcase-card__meta movie-meta-list'
+      : 'catalog-card__meta movie-meta-mini movie-meta-list';
+  const actionsClass = variant === 'upcoming'
+    ? 'home-upcoming-card__actions'
+    : variant === 'home'
+      ? 'home-showcase-card__actions'
+      : 'catalog-card__actions movie-card-actions';
 
   return (
     <article className={cardClass}>
@@ -56,7 +61,7 @@ const MovieCard = ({ movie, rank, variant = 'catalog' }: MovieCardProps) => {
         </ul>
         <p className="movie-card-summary">{movie.shortDescription}</p>
         <div className={actionsClass}>
-          {movie.bookingOpen ? <Link to={`/booking?movieId=${movie.id}`} className="book-btn">예매하기</Link> : <span className="book-btn disabled">준비 중</span>}
+          {movie.bookingOpen ? <Link to={`/booking?movieId=${movie.id}`} className="book-btn">예매하기</Link> : <span className="book-btn disabled" aria-disabled="true">준비 중</span>}
           <Link to={`/movies/${movie.id}`} className="detail-link">상세보기</Link>
         </div>
       </div>
