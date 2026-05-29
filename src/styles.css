@@ -859,20 +859,44 @@ img { max-width: 100%; }
 
 .home-showcase-card__body,
 .home-upcoming-card__body {
-  min-height: 226px;
+  min-height: 208px;
 }
 
 .home-upcoming-card__body {
-  gap: 12px;
+  align-content: start;
+  gap: 8px;
 }
 
 .home-upcoming-card__body h3 {
-  min-height: 2.55em;
+  min-height: 0;
+  margin: 0;
   line-height: 1.28;
 }
 
-.home-upcoming-card__body ul {
-  min-height: 32px;
+.movie-meta-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.movie-meta-list li {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 0 11px;
+  border: 1px solid rgba(104, 114, 156, 0.14);
+  border-radius: 999px;
+  background: rgba(239, 247, 255, 0.82);
+  color: #4c5973;
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .home-rank-board {
@@ -1771,10 +1795,7 @@ button:disabled,
 }
 
 .home-booking-feature__meta li span,
-.home-showcase-card__meta li,
-.home-upcoming-card__body li,
-.catalog-card__meta li,
-.movie-meta-mini li,
+.movie-meta-list li,
 .time-meta,
 .time-primary span,
 .people-type span,
@@ -3499,26 +3520,4 @@ textarea:focus,
   .booking-page .seat-map {
     min-width: 660px;
   }
-}
-
-/* Upcoming movie pill alignment */
-.home-upcoming-card__body ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  min-height: 0;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.home-upcoming-card__body ul li {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 34px;
-  padding: 0 13px;
-  border-radius: 999px;
-  line-height: 1;
-  white-space: nowrap;
 }

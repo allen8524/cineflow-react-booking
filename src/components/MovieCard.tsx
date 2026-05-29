@@ -14,7 +14,7 @@ const MovieCard = ({ movie, rank, variant = 'catalog' }: MovieCardProps) => {
   const posterClass = variant === 'home' ? 'home-showcase-card__poster' : 'catalog-card__poster poster-wrap';
   const bodyClass = variant === 'home' ? 'home-showcase-card__body' : 'catalog-card__body movie-card-body';
   const headClass = variant === 'home' ? 'home-showcase-card__head movie-card-head' : 'catalog-card__head movie-card-head';
-  const metaClass = variant === 'home' ? 'home-showcase-card__meta' : 'catalog-card__meta movie-meta-mini';
+  const metaClass = variant === 'home' ? 'home-showcase-card__meta movie-meta-list' : 'catalog-card__meta movie-meta-mini movie-meta-list';
   const actionsClass = variant === 'home' ? 'home-showcase-card__actions' : 'catalog-card__actions movie-card-actions';
 
   return (

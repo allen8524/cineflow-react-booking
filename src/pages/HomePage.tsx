@@ -89,7 +89,7 @@ const HomePage = () => {
                 </Link>
                 <div className="home-upcoming-card__body">
                   <h3><Link to={`/movies/${movie.id}`}>{movie.title}</Link></h3>
-                  <ul><li>{movie.genre}</li><li>{movie.runningTime}분</li></ul>
+                  <ul className="home-upcoming-card__meta movie-meta-list"><li>{movie.genre}</li><li>{movie.runningTime}분</li></ul>
                   <p>{movie.shortDescription}</p>
                 </div>
               </article>
