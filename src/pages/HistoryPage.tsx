@@ -40,14 +40,9 @@ const HistoryPage = () => {
       <section className="cinema-page-body">
         <div className="container">
           <div className="booking-panel history-lookup-panel">
-            <div className="history-lookup-copy">
-              <strong>예매 조회</strong>
-              <p>키워드와 상태를 조합해 예매내역을 필터링합니다.</p>
-            </div>
             <div className="history-lookup-form">
               <label><span>검색어</span><input value={keyword} onChange={(event) => setKeyword(event.target.value)} placeholder="예매번호, 영화명, 이름" /></label>
               <label><span>상태</span><select value={status} onChange={(event) => setStatus(event.target.value as typeof status)}><option value="ALL">전체</option><option value="BOOKED">예매완료</option><option value="USED">관람완료</option><option value="CANCELED">취소완료</option></select></label>
-              <label><span>취소 사유</span><input value={cancelReason} onChange={(event) => setCancelReason(event.target.value)} /></label>
             </div>
           </div>
 
@@ -69,14 +64,25 @@ const HistoryPage = () => {
                     <li><span>극장</span><strong>{booking.theaterName} {booking.screenName}</strong></li>
                     <li><span>좌석</span><strong>{booking.seatNames}</strong></li>
                     <li><span>결제</span><strong>{paymentMethodLabel(booking.paymentMethod)} · {formatCurrency(booking.totalPrice)}</strong></li>
+                    {booking.status === 'BOOKED' ? (
+                      <li className="history-action-cell">
+                        <form className="history-card-actions" onSubmit={(event) => handleCancel(event, booking.bookingCode)}>
+                          <label className="history-cancel-reason-field">
+                            <span>취소 사유</span>
+                            <input
+                              value={cancelReason}
+                              onChange={(event) => setCancelReason(event.target.value)}
+                              placeholder="예: 일정 변경"
+                            />
+                          </label>
+                          <button type="submit" className="hero-btn secondary">예매 취소</button>
+                        </form>
+                      </li>
+                    ) : null}
                   </ul>
-                  {booking.status === 'BOOKED' ? (
-                    <form className="history-card-actions" onSubmit={(event) => handleCancel(event, booking.bookingCode)}>
-                      <button type="submit" className="hero-btn secondary">예매 취소</button>
-                    </form>
-                  ) : (
+                  {booking.status !== 'BOOKED' ? (
                     <p className="panel-description">현재 상태: {bookingStatusLabel(booking.status)} {booking.cancelReason ? `· ${booking.cancelReason}` : ''}</p>
-                  )}
+                  ) : null}
                 </div>
               </article>
             ))}

@@ -4180,26 +4180,28 @@ textarea:focus,
 
 .booking-history-page .history-lookup-panel {
   display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
-  gap: 20px;
-  margin-bottom: 16px;
-  padding: 20px;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding: 20px 22px;
   border: 1px solid rgba(104, 114, 156, 0.14);
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.86);
+  background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 18px 36px rgba(125, 134, 179, 0.12);
 }
 
 .booking-history-page .history-lookup-copy strong {
-  display: block;
-  margin-bottom: 6px;
+  display: inline-flex;
+  margin: 0 12px 0 0;
   color: #1f2a44;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.3;
 }
 
 .booking-history-page .history-lookup-copy p {
+  display: inline;
+  max-width: none;
   margin: 0;
   color: #64748b;
   font-size: 13px;
@@ -4208,32 +4210,55 @@ textarea:focus,
 
 .booking-history-page .history-lookup-form {
   display: grid;
-  grid-template-columns: minmax(260px, 1.4fr) minmax(160px, 0.7fr) minmax(220px, 1fr);
+  grid-template-columns: minmax(340px, 0.72fr) minmax(150px, 0.28fr) minmax(220px, 1fr);
   gap: 12px;
+  align-items: end;
+}
+
+.booking-history-page .history-lookup-form::after {
+  content: "예매번호, 영화명, 예매자명으로 조회할 수 있습니다.";
+  align-self: center;
+  justify-self: end;
+  max-width: 320px;
+  padding: 10px 14px;
+  border: 1px solid rgba(104, 114, 156, 0.1);
+  border-radius: 14px;
+  background: rgba(248, 250, 255, 0.78);
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.45;
 }
 
 .booking-history-page .history-lookup-form label {
   display: grid;
-  gap: 6px;
+  gap: 7px;
   min-width: 0;
 }
 
 .booking-history-page .history-lookup-form label span {
-  color: #475569;
+  color: #334155;
   font-size: 12px;
-  font-weight: 850;
+  font-weight: 900;
 }
 
 .booking-history-page .history-lookup-form input,
 .booking-history-page .history-lookup-form select {
   width: 100%;
-  min-height: 44px;
-  padding: 0 13px;
+  min-height: 48px;
+  padding: 0 15px;
   border: 1px solid rgba(104, 114, 156, 0.16);
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.96);
   color: #1f2a44;
+  font-weight: 750;
   outline: none;
+}
+
+.booking-history-page .history-lookup-form input:focus,
+.booking-history-page .history-lookup-form select:focus {
+  border-color: rgba(248, 95, 143, 0.42);
+  box-shadow: 0 0 0 4px rgba(248, 95, 143, 0.1);
 }
 
 .booking-history-page .history-card-list {
@@ -4329,6 +4354,16 @@ textarea:focus,
   grid-column: span 2;
 }
 
+.booking-history-page .history-info-grid .history-action-cell {
+  grid-column: span 2;
+  align-self: end;
+  display: grid;
+  align-content: end;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
 .booking-history-page .history-info-grid li span {
   display: block;
   margin-bottom: 5px;
@@ -4348,13 +4383,40 @@ textarea:focus,
 }
 
 .booking-history-page .history-card-actions {
-  margin-top: 2px;
+  display: flex;
+  align-items: end;
+  gap: 10px;
+  justify-content: flex-start;
+  margin-top: 0;
+}
+
+.booking-history-page .history-cancel-reason-field {
+  display: grid;
+  gap: 6px;
+  width: 220px;
+  max-width: 100%;
+}
+
+.booking-history-page .history-cancel-reason-field span {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.booking-history-page .history-cancel-reason-field input {
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid rgba(104, 114, 156, 0.16);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #1f2a44;
 }
 
 .booking-history-page .history-card-actions .hero-btn {
-  min-width: 112px;
+  flex: 0 0 auto;
+  min-width: 104px;
   min-height: 38px;
-  padding: 0 16px;
+  padding: 0 15px;
   font-size: 13px;
 }
 
@@ -4402,8 +4464,30 @@ textarea:focus,
     grid-template-columns: 1fr;
   }
 
+  .booking-history-page .history-lookup-panel {
+    gap: 16px;
+  }
+
+  .booking-history-page .history-lookup-copy p {
+    max-width: none;
+  }
+
   .booking-history-page .history-lookup-form {
     grid-template-columns: 1fr;
+  }
+
+  .booking-history-page .history-lookup-form::after {
+    justify-self: stretch;
+    max-width: none;
+  }
+
+  .booking-history-page .history-card-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .booking-history-page .history-cancel-reason-field {
+    width: 100%;
   }
 
   .booking-history-page .history-booking-card > img {
@@ -4415,6 +4499,10 @@ textarea:focus,
   }
 
   .booking-history-page .history-info-grid li:nth-child(5) {
+    grid-column: span 2;
+  }
+
+  .booking-history-page .history-info-grid .history-action-cell {
     grid-column: span 2;
   }
 }
@@ -4453,6 +4541,10 @@ textarea:focus,
   }
 
   .booking-history-page .history-info-grid li:nth-child(5) {
+    grid-column: auto;
+  }
+
+  .booking-history-page .history-info-grid .history-action-cell {
     grid-column: auto;
   }
 }
