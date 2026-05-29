@@ -2300,6 +2300,18 @@ button:disabled {
   min-width: 0;
 }
 
+.storefront-detail-page .detail-schedule-list .schedule-card {
+  display: block;
+  grid-template-columns: none;
+  gap: 0;
+  align-items: stretch;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
 .storefront-detail-page .detail-schedule-list button,
 .storefront-detail-page .detail-schedule-list a {
   width: 100%;
@@ -2546,24 +2558,47 @@ button:disabled {
 
 .storefront-detail-page .detail-schedule-list {
   gap: 12px;
+  align-items: stretch;
 }
 
-.storefront-detail-page .detail-schedule-list button,
-.storefront-detail-page .detail-schedule-list a {
-  min-height: 84px;
+.storefront-detail-page .detail-schedule-list .schedule-card {
+  display: block;
+  grid-template-columns: none;
+  gap: 0;
+  align-items: stretch;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.storefront-detail-page .detail-schedule-list .schedule-card > button,
+.storefront-detail-page .detail-schedule-list .schedule-card > a {
+  width: 100%;
+  justify-self: stretch;
+  min-height: 96px;
+  margin: 0;
+  display: grid;
+  align-content: center;
   gap: 7px;
-  padding: 14px;
-  border-radius: 16px;
-  border-color: rgba(116, 103, 173, 0.17);
-  background: rgba(255, 255, 255, 0.84);
+  padding: 16px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(104, 114, 156, 0.16);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: none;
 }
 
-.storefront-detail-page .detail-schedule-list button:hover,
-.storefront-detail-page .detail-schedule-list a:hover,
-.storefront-detail-page .detail-schedule-list li.is-selected button,
-.storefront-detail-page .detail-schedule-list li.is-selected a {
+.storefront-detail-page .detail-schedule-list .schedule-card > button:hover,
+.storefront-detail-page .detail-schedule-list .schedule-card > a:hover,
+.storefront-detail-page .detail-schedule-list .schedule-card.is-selected > button,
+.storefront-detail-page .detail-schedule-list .schedule-card.is-selected > a {
   transform: translateY(-1px);
-  box-shadow: 0 10px 20px rgba(125, 134, 179, 0.13);
+  border-color: rgba(248, 95, 143, 0.38);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(255, 227, 239, 0.78), transparent 42%),
+    linear-gradient(135deg, rgba(255, 237, 245, 0.94), rgba(238, 231, 255, 0.88));
+  box-shadow: 0 12px 24px rgba(248, 95, 143, 0.12);
 }
 
 .storefront-detail-page .detail-schedule-list .schedule-card__datetime {
@@ -2780,7 +2815,6 @@ button:disabled {
 .detail-body .info-table-grid div,
 .detail-body .theater-link-card,
 .detail-body .detail-schedule-group,
-.detail-body .detail-schedule-list li,
 .ticket-frame,
 .payment-input-card,
 .method-card,
