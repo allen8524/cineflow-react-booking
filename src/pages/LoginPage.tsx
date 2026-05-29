@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import PageHero from '../components/PageHero';
 import { useBooking } from '../context/BookingContext';
 
 const LoginPage = () => {
@@ -22,12 +23,11 @@ const LoginPage = () => {
 
   return (
     <main className="cinema-page booking-page">
-      <section className="cinema-page-hero booking-hero">
-        <div className="container">
-          <h1>로그인</h1>
-          <p>관리자와 예매자 정보를 확인한 뒤 서비스를 이용할 수 있습니다.</p>
-        </div>
-      </section>
+      <PageHero
+        className="booking-hero login-hero"
+        title="로그인"
+        description="관리자와 예매자 정보를 확인한 뒤 서비스를 이용할 수 있습니다."
+      />
       <section className="cinema-page-body">
         <div className="container auth-page-container">
           <form className="booking-panel auth-form" onSubmit={handleSubmit}>

@@ -1,4 +1,5 @@
 import { Link, useSearchParams } from 'react-router-dom';
+import PageHero from '../components/PageHero';
 import StatusBadge from '../components/StatusBadge';
 import { useBooking } from '../context/BookingContext';
 import { formatCurrency, formatDateTime, paymentMethodLabel } from '../utils/format';
@@ -12,27 +13,28 @@ const CompletePage = () => {
   if (!booking) {
     return (
       <main className="booking-page cinema-page">
-        <section className="cinema-page-hero booking-hero complete-hero"><div className="container"><h1>완료된 예매가 없습니다.</h1><Link to="/booking" className="hero-btn primary">예매하러 가기</Link></div></section>
+        <PageHero
+          className="booking-hero complete-hero"
+          title="완료된 예매가 없습니다."
+          actions={<Link to="/booking" className="hero-btn primary">예매하러 가기</Link>}
+        />
       </main>
     );
   }
 
   return (
     <main className="booking-page cinema-page">
-      <section className="cinema-page-hero booking-hero complete-hero">
-        <div className="container">
-          <div className="booking-hero__intro">
-            <div>
-              <h1>예매가 완료되었습니다.</h1>
-              <p>예매번호와 관람 정보를 확인하세요.</p>
-            </div>
-            <div className="booking-hero__actions">
-              <Link to="/history" className="hero-btn primary" onClick={resetDraft}>예매내역 보기</Link>
-              <Link to="/" className="hero-btn secondary">메인으로 이동</Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        className="booking-hero complete-hero"
+        title="예매가 완료되었습니다."
+        description="예매번호와 관람 정보를 확인하세요."
+        actions={(
+          <>
+            <Link to="/history" className="hero-btn primary" onClick={resetDraft}>예매내역 보기</Link>
+            <Link to="/" className="hero-btn secondary">메인으로 이동</Link>
+          </>
+        )}
+      />
 
       <section className="cinema-page-body">
         <div className="container">

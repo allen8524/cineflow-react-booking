@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import BookingSummary from '../components/BookingSummary';
+import PageHero from '../components/PageHero';
 import { useBooking } from '../context/BookingContext';
 import type { PaymentMethod } from '../types/cineflow';
 import { formatCurrency, paymentMethodLabel } from '../utils/format';
@@ -37,16 +38,11 @@ const PaymentPage = () => {
 
   return (
     <main className="booking-page cinema-page">
-      <section className="cinema-page-hero booking-hero payment-hero">
-        <div className="container">
-          <div className="booking-hero__intro">
-            <div>
-              <h1>결제 정보 입력</h1>
-              <p>선택한 영화, 상영 시간, 좌석 정보를 확인하고 결제 수단을 선택합니다.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        className="booking-hero payment-hero"
+        title="결제 정보 입력"
+        description="선택한 영화, 상영 시간, 좌석 정보를 확인하고 결제 수단을 선택합니다."
+      />
 
       <section className="cinema-page-body">
         <div className="container">

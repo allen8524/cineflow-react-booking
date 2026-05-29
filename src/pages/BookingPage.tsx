@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import BookingSummary from '../components/BookingSummary';
+import PageHero from '../components/PageHero';
 import PersonCounter from '../components/PersonCounter';
 import ScheduleCard from '../components/ScheduleCard';
 import SeatMap from '../components/SeatMap';
@@ -21,20 +22,17 @@ const BookingPage = () => {
 
   return (
     <main className="booking-page cinema-page">
-      <section className="cinema-page-hero booking-hero booking-hero--primary">
-        <div className="container">
-          <div className="booking-hero__intro">
-            <div>
-              <h1>빠른예매</h1>
-              <p>영화와 상영 시간을 선택한 뒤 관람 인원과 좌석을 지정합니다.</p>
-            </div>
-            <div className="booking-hero__actions">
-              <Link to="/movies" className="hero-btn secondary">영화 목록 보기</Link>
-              <Link to="/history" className="hero-btn secondary">예매내역</Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        className="booking-hero booking-hero--primary"
+        title="빠른예매"
+        description="영화와 상영 시간을 선택한 뒤 관람 인원과 좌석을 지정합니다."
+        actions={(
+          <>
+            <Link to="/movies" className="hero-btn secondary">영화 목록 보기</Link>
+            <Link to="/history" className="hero-btn secondary">예매내역</Link>
+          </>
+        )}
+      />
 
       <section className="cinema-page-body">
         <div className="container">

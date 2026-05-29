@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import MovieCard from '../components/MovieCard';
+import PageHero from '../components/PageHero';
 import { movies } from '../data/movies';
 
 const MovieListPage = () => {
@@ -21,20 +22,17 @@ const MovieListPage = () => {
 
   return (
     <main className="storefront-catalog-page cinema-page">
-      <section className="cinema-page-hero catalog-hero">
-        <div className="container">
-          <div className="catalog-hero__content">
-            <div className="catalog-hero__copy">
-              <h1>영화 목록</h1>
-              <p>상영중인 작품과 개봉 예정작을 검색하고 예매율, 평점, 개봉일 기준으로 살펴보세요.</p>
-            </div>
-            <div className="catalog-hero__actions">
-              <Link to="/booking" className="hero-btn primary">빠른예매</Link>
-              <Link to="/history" className="hero-btn secondary">예매내역</Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        className="catalog-hero"
+        title="영화 목록"
+        description="상영중인 작품과 개봉 예정작을 검색하고 예매율, 평점, 개봉일 기준으로 살펴보세요."
+        actions={(
+          <>
+            <Link to="/booking" className="hero-btn primary">빠른예매</Link>
+            <Link to="/history" className="hero-btn secondary">예매내역</Link>
+          </>
+        )}
+      />
 
       <section className="cinema-page-body">
         <div className="container">

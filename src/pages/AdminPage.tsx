@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import PageHero from '../components/PageHero';
 import StatusBadge from '../components/StatusBadge';
 import { useBooking } from '../context/BookingContext';
 import { movies, schedules, screens, theaters } from '../data/movies';
@@ -21,12 +22,11 @@ const AdminPage = () => {
 
   return (
     <main className="admin-page cinema-page">
-      <section className="cinema-page-hero admin-hero">
-        <div className="container">
-          <h1>관리자 대시보드</h1>
-          <p>영화, 시간표, 예매 현황을 한곳에서 확인할 수 있습니다.</p>
-        </div>
-      </section>
+      <PageHero
+        className="admin-hero"
+        title="관리자 대시보드"
+        description="영화, 시간표, 예매 현황을 한곳에서 확인할 수 있습니다."
+      />
 
       <section className="admin-body cinema-page-body">
         <div className="container">

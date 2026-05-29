@@ -1,5 +1,6 @@
 import { FormEvent, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import PageHero from '../components/PageHero';
 import StatusBadge from '../components/StatusBadge';
 import { useBooking } from '../context/BookingContext';
 import { bookingStatusLabel, formatCurrency, formatDateTime, paymentMethodLabel } from '../utils/format';
@@ -24,20 +25,17 @@ const HistoryPage = () => {
 
   return (
     <main className="booking-page booking-history-page cinema-page">
-      <section className="cinema-page-hero booking-hero history-hero">
-        <div className="container">
-          <div className="booking-hero__intro">
-            <div>
-              <h1>예매내역 조회</h1>
-              <p>예매번호, 영화명, 예매자 정보로 조회하고 예매 상태를 확인합니다.</p>
-            </div>
-            <div className="booking-hero__actions">
-              <Link to="/booking" className="hero-btn primary">빠른예매</Link>
-              <Link to="/movies" className="hero-btn secondary">상영작 보기</Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        className="booking-hero history-hero"
+        title="예매내역 조회"
+        description="예매번호, 영화명, 예매자 정보로 조회하고 예매 상태를 확인합니다."
+        actions={(
+          <>
+            <Link to="/booking" className="hero-btn primary">빠른예매</Link>
+            <Link to="/movies" className="hero-btn secondary">상영작 보기</Link>
+          </>
+        )}
+      />
 
       <section className="cinema-page-body">
         <div className="container">

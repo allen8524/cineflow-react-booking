@@ -1283,6 +1283,76 @@ body {
   padding-bottom: 64px;
 }
 
+.cinema-page-hero.page-hero {
+  padding: 44px 0 38px;
+  border-bottom: 1px solid #eadff8;
+  background:
+    radial-gradient(circle at 14% 8%, rgba(255, 237, 245, 0.82), transparent 32%),
+    radial-gradient(circle at 86% 10%, rgba(238, 231, 255, 0.82), transparent 36%),
+    linear-gradient(135deg, #fff8fc 0%, #f5f1ff 52%, #f8fbff 100%);
+}
+
+.page-hero__inner {
+  min-height: 116px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 28px;
+}
+
+.page-hero--solo .page-hero__inner {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.page-hero__copy {
+  min-width: 0;
+}
+
+.cinema-page-hero.page-hero .page-hero__title {
+  margin: 0 0 10px;
+  color: var(--cf-text-strong) !important;
+  font-size: clamp(38px, 4.2vw, 52px);
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+.cinema-page-hero.page-hero .page-hero__description {
+  max-width: 680px;
+  margin: 0;
+  color: var(--cf-text-body) !important;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.page-hero__aside {
+  justify-self: end;
+  min-width: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.support-hero .page-hero__aside {
+  width: 390px;
+  max-width: calc(100vw - 40px);
+}
+
+.page-hero__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(104, 114, 156, 0.12);
+  background: rgba(255, 255, 255, 0.68);
+  box-shadow: 0 14px 30px rgba(125, 134, 179, 0.12);
+}
+
+.page-hero__actions .hero-btn {
+  min-height: 43px;
+  padding: 0 20px;
+  border-radius: 999px;
+}
+
 .home-section {
   padding: 48px 0 0;
 }
@@ -1751,10 +1821,39 @@ button:disabled {
   }
 }
 
+@media (max-width: 768px) {
+  .cinema-page-hero.page-hero {
+    padding: 34px 0 28px;
+  }
+
+  .page-hero__inner {
+    min-height: 0;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .cinema-page-hero.page-hero .page-hero__title {
+    font-size: clamp(32px, 9vw, 42px);
+  }
+
+  .page-hero__aside {
+    justify-self: stretch;
+  }
+
+  .support-hero .page-hero__aside {
+    width: 100%;
+    max-width: none;
+  }
+
+  .page-hero__actions {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
 @media (max-width: 640px) {
   .hero-actions,
-  .booking-hero__actions,
-  .catalog-hero__actions,
   .complete-actions {
     display: grid;
     grid-template-columns: 1fr;
@@ -1762,8 +1861,6 @@ button:disabled {
   }
 
   .hero-actions .hero-btn,
-  .booking-hero__actions .hero-btn,
-  .catalog-hero__actions .hero-btn,
   .complete-actions .hero-btn {
     width: 100%;
     min-width: 0;
@@ -1962,7 +2059,7 @@ button:disabled,
 .detail-link,
 .catalog-card__actions .detail-link,
 .home-showcase-card__actions .detail-link,
-.booking-history-page .booking-hero__actions .hero-btn.secondary,
+.page-hero__actions .hero-btn.secondary,
 .detail-actions .hero-btn.secondary,
 .support-page .hero-btn.secondary {
   color: #1f2a44 !important;
@@ -3031,41 +3128,8 @@ textarea:focus,
 }
 
 /* Support page polish */
-.support-page .cinema-page-hero.support-hero {
-  padding: 42px 0 38px;
-  border-bottom: 1px solid #eadff8;
-  background:
-    radial-gradient(circle at 14% 8%, rgba(255, 237, 245, 0.82), transparent 32%),
-    radial-gradient(circle at 86% 10%, rgba(238, 231, 255, 0.82), transparent 36%),
-    linear-gradient(135deg, #fff8fc 0%, #f5f1ff 52%, #f8fbff 100%);
-}
-
-.support-hero__layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(330px, 400px);
-  align-items: center;
-  gap: 24px;
-}
-
-.support-hero__copy {
-  min-width: 0;
-}
-
-.support-hero__copy h1 {
-  margin: 0 0 10px;
-  font-size: clamp(38px, 5vw, 56px);
-  line-height: 1.08;
-}
-
-.support-hero__copy p {
-  max-width: 560px;
-  margin: 0;
-  color: #4b5563 !important;
-  font-size: 16px;
-  line-height: 1.68;
-}
-
 .support-contact-strip {
+  width: min(390px, 100%);
   display: grid;
   grid-template-columns: 1fr;
   gap: 10px;
@@ -3286,13 +3350,9 @@ textarea:focus,
 }
 
 @media (max-width: 992px) {
-  .support-hero__layout {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-
   .support-contact-strip {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
   }
 
   .support-faq-list,
@@ -3302,10 +3362,6 @@ textarea:focus,
 }
 
 @media (max-width: 640px) {
-  .support-page .cinema-page-hero.support-hero {
-    padding: 34px 0 28px;
-  }
-
   .support-contact-strip {
     grid-template-columns: 1fr;
     padding: 12px;
