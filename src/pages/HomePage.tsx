@@ -82,18 +82,7 @@ const HomePage = () => {
             </div>
           </div>
           <div className="home-upcoming-grid">
-            {upcoming.map((movie) => (
-              <article className="home-upcoming-card" key={movie.id}>
-                <Link to={`/movies/${movie.id}`} className="home-upcoming-card__poster">
-                  <img src={movie.posterUrl} alt={`${movie.title} 포스터`} />
-                </Link>
-                <div className="home-upcoming-card__body">
-                  <h3><Link to={`/movies/${movie.id}`}>{movie.title}</Link></h3>
-                  <ul className="home-upcoming-card__meta movie-meta-list"><li>{movie.genre}</li><li>{movie.runningTime}분</li></ul>
-                  <p>{movie.shortDescription}</p>
-                </div>
-              </article>
-            ))}
+            {upcoming.map((movie) => <MovieCard movie={movie} variant="upcoming" key={movie.id} />)}
           </div>
         </div>
       </section>

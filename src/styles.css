@@ -883,7 +883,8 @@ img { max-width: 100%; }
   line-height: 1.28;
 }
 
-.movie-meta-list {
+.movie-meta-list,
+.home-upcoming-card__meta.movie-meta-list {
   display: flex;
   flex-wrap: wrap;
   gap: 7px;
@@ -893,7 +894,8 @@ img { max-width: 100%; }
   list-style: none;
 }
 
-.movie-meta-list li {
+.movie-meta-list li,
+.movie-meta-chip {
   display: inline-flex;
   align-items: center;
   justify-content: center;
