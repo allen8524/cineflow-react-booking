@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
+import ScrollToTop from './components/ScrollToTop';
 import { BookingProvider } from './context/BookingContext';
 import AdminPage from './pages/AdminPage';
 import BookingPage from './pages/BookingPage';
@@ -17,6 +18,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <BookingProvider>
+        <ScrollToTop />
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<HomePage />} />
