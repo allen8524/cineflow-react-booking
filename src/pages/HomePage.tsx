@@ -60,7 +60,6 @@ const HomePage = () => {
             <aside className="home-rank-board">
               <div className="home-rank-board__head">
                 <h3>예매 현황</h3>
-                <span>실시간 서비스 요약</span>
               </div>
               <ul className="home-rank-board__list">
                 <li><Link to="/admin"><strong>{movies.length}</strong><span>등록 영화</span><em>현재 등록된 영화</em></Link></li>

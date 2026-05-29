@@ -2530,7 +2530,14 @@ button:disabled {
 
 .storefront-detail-page .movie-detail-top::before {
   background:
-    linear-gradient(90deg, rgba(255, 250, 254, 0.97) 0%, rgba(247, 250, 255, 0.92) 54%, rgba(238, 231, 255, 0.88) 100%);
+    linear-gradient(
+      90deg,
+      rgba(8, 10, 24, 0.82) 0%,
+      rgba(8, 10, 24, 0.68) 42%,
+      rgba(8, 10, 24, 0.38) 72%,
+      rgba(8, 10, 24, 0.18) 100%
+    );
+  pointer-events: none;
 }
 
 .storefront-detail-page .movie-detail-top__backdrop {
