@@ -60,6 +60,9 @@ const HistoryPage = () => {
                     <div><span>{booking.bookingCode}</span><h3>{booking.movieTitle}</h3></div>
                     <StatusBadge status={booking.status} />
                   </div>
+                  <p className="history-card-summary">
+                    {booking.customerName} · {formatDateTime(booking.startTime)}
+                  </p>
                   <ul className="history-info-grid">
                     <li><span>예매자</span><strong>{booking.customerName}</strong></li>
                     <li><span>상영</span><strong>{formatDateTime(booking.startTime)}</strong></li>
