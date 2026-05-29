@@ -41,8 +41,8 @@ const HistoryPage = () => {
         <div className="container">
           <div className="booking-panel history-lookup-panel">
             <div className="history-lookup-form">
-              <label><span>검색어</span><input value={keyword} onChange={(event) => setKeyword(event.target.value)} placeholder="예매번호, 영화명, 이름" /></label>
-              <label><span>상태</span><select value={status} onChange={(event) => setStatus(event.target.value as typeof status)}><option value="ALL">전체</option><option value="BOOKED">예매완료</option><option value="USED">관람완료</option><option value="CANCELED">취소완료</option></select></label>
+              <label className="history-search-field"><span>검색어</span><input value={keyword} onChange={(event) => setKeyword(event.target.value)} placeholder="예매번호, 영화명, 이름" /></label>
+              <label className="history-status-field"><span>상태</span><select value={status} onChange={(event) => setStatus(event.target.value as typeof status)}><option value="ALL">전체</option><option value="BOOKED">예매완료</option><option value="USED">관람완료</option><option value="CANCELED">취소완료</option></select></label>
             </div>
           </div>
 

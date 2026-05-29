@@ -4179,16 +4179,24 @@ textarea:focus,
 }
 
 .booking-history-page .history-lookup-panel {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  align-items: center;
-  gap: 14px;
+  display: block;
   margin-bottom: 18px;
   padding: 20px 22px;
   border: 1px solid rgba(104, 114, 156, 0.14);
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 18px 36px rgba(125, 134, 179, 0.12);
+}
+
+.booking-history-page .history-lookup-panel::before,
+.booking-history-page .history-lookup-panel::after {
+  display: none;
+  content: none;
+}
+
+.booking-history-page .history-lookup-copy,
+.booking-history-page .history-lookup-note {
+  display: none;
 }
 
 .booking-history-page .history-lookup-copy strong {
@@ -4210,24 +4218,10 @@ textarea:focus,
 
 .booking-history-page .history-lookup-form {
   display: grid;
-  grid-template-columns: minmax(340px, 0.72fr) minmax(150px, 0.28fr) minmax(220px, 1fr);
-  gap: 12px;
+  grid-template-columns: minmax(0, 1fr) 170px;
+  gap: 14px;
   align-items: end;
-}
-
-.booking-history-page .history-lookup-form::after {
-  content: "예매번호, 영화명, 예매자명으로 조회할 수 있습니다.";
-  align-self: center;
-  justify-self: end;
-  max-width: 320px;
-  padding: 10px 14px;
-  border: 1px solid rgba(104, 114, 156, 0.1);
-  border-radius: 14px;
-  background: rgba(248, 250, 255, 0.78);
-  color: #64748b;
-  font-size: 12px;
-  font-weight: 750;
-  line-height: 1.45;
+  width: 100%;
 }
 
 .booking-history-page .history-lookup-form label {
@@ -4237,22 +4231,28 @@ textarea:focus,
 }
 
 .booking-history-page .history-lookup-form label span {
-  color: #334155;
+  color: #1f2a44;
   font-size: 12px;
   font-weight: 900;
+  line-height: 1.2;
 }
 
 .booking-history-page .history-lookup-form input,
 .booking-history-page .history-lookup-form select {
   width: 100%;
   min-height: 48px;
-  padding: 0 15px;
+  padding: 0 16px;
   border: 1px solid rgba(104, 114, 156, 0.16);
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.96);
   color: #1f2a44;
-  font-weight: 750;
+  font-weight: 800;
   outline: none;
+}
+
+.booking-history-page .history-lookup-form input::placeholder {
+  color: #64748b;
+  opacity: 1;
 }
 
 .booking-history-page .history-lookup-form input:focus,
@@ -4459,13 +4459,8 @@ textarea:focus,
 }
 
 @media (max-width: 900px) {
-  .booking-history-page .history-lookup-panel,
   .booking-history-page .history-booking-card {
     grid-template-columns: 1fr;
-  }
-
-  .booking-history-page .history-lookup-panel {
-    gap: 16px;
   }
 
   .booking-history-page .history-lookup-copy p {
@@ -4474,11 +4469,6 @@ textarea:focus,
 
   .booking-history-page .history-lookup-form {
     grid-template-columns: 1fr;
-  }
-
-  .booking-history-page .history-lookup-form::after {
-    justify-self: stretch;
-    max-width: none;
   }
 
   .booking-history-page .history-card-actions {
