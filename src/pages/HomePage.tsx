@@ -81,7 +81,7 @@ const HomePage = () => {
             </div>
           </div>
           <div className="home-upcoming-grid">
-            {upcoming.map((movie, index) => <MovieCard movie={movie} rank={index + 1} variant="upcoming" key={movie.id} />)}
+            {upcoming.map((movie) => <MovieCard movie={movie} variant="upcoming" key={movie.id} />)}
           </div>
         </div>
       </section>
