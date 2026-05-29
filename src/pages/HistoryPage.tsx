@@ -26,7 +26,7 @@ const HistoryPage = () => {
   return (
     <main className="booking-page booking-history-page cinema-page">
       <PageHero
-        className="booking-hero history-hero"
+        className="booking-hero booking-hero--primary history-hero"
         title="예매내역 조회"
         description="예매번호, 영화명, 예매자 정보로 조회하고 예매 상태를 확인합니다."
         actions={(
@@ -52,12 +52,15 @@ const HistoryPage = () => {
                 <img src={booking.posterUrl} alt={`${booking.movieTitle} 포스터`} />
                 <div className="history-card-main">
                   <div className="history-card-top">
-                    <div><span>{booking.bookingCode}</span><h3>{booking.movieTitle}</h3></div>
+                    <div className="history-card-heading">
+                      <span>{booking.bookingCode}</span>
+                      <h3>{booking.movieTitle}</h3>
+                      <p className="history-card-summary">
+                        {booking.customerName} · {formatDateTime(booking.startTime)}
+                      </p>
+                    </div>
                     <StatusBadge status={booking.status} />
                   </div>
-                  <p className="history-card-summary">
-                    {booking.customerName} · {formatDateTime(booking.startTime)}
-                  </p>
                   <ul className="history-info-grid">
                     <li><span>예매자</span><strong>{booking.customerName}</strong></li>
                     <li><span>상영</span><strong>{formatDateTime(booking.startTime)}</strong></li>

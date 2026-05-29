@@ -4148,34 +4148,57 @@ textarea:focus,
 }
 
 .booking-history-page .cinema-page-body {
-  padding-top: 26px;
+  padding-top: 22px;
   padding-bottom: 64px;
 }
 
 .booking-history-page .history-hero {
-  padding: 34px 0 30px;
+  padding: 44px 0 38px;
 }
 
-.booking-history-page .page-hero__inner {
-  min-height: 96px;
+.booking-history-page .history-hero .page-hero__inner {
+  grid-template-columns: minmax(0, 1fr) auto;
+  min-height: 116px;
   align-items: center;
+  gap: 28px;
 }
 
-.booking-history-page .page-hero__title {
-  font-size: clamp(36px, 4vw, 52px);
+.booking-history-page .history-hero .page-hero__title {
+  margin: 0 0 10px;
+  color: var(--cf-text-strong) !important;
+  font-size: clamp(38px, 4.2vw, 52px);
   line-height: 1.08;
+  letter-spacing: 0;
 }
 
-.booking-history-page .page-hero__description {
-  max-width: 560px;
-  margin-top: 10px;
+.booking-history-page .history-hero .page-hero__description {
+  max-width: 680px;
+  margin: 0;
+  color: var(--cf-text-body) !important;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
-.booking-history-page .page-hero__actions {
-  padding: 8px;
+.booking-history-page .history-hero .page-hero__aside {
+  justify-self: end;
+}
+
+.booking-history-page .history-hero .page-hero__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
   border: 1px solid rgba(104, 114, 156, 0.12);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.68);
+  box-shadow: 0 14px 30px rgba(125, 134, 179, 0.12);
+}
+
+.booking-history-page .history-hero .page-hero__actions .hero-btn {
+  min-height: 43px;
+  padding: 0 20px;
+  border-radius: 999px;
+  font-weight: 850;
 }
 
 .booking-history-page .history-lookup-panel {
@@ -4302,14 +4325,24 @@ textarea:focus,
 }
 
 .booking-history-page .history-card-top {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: 14px;
+  gap: 16px;
   margin: 0;
 }
 
-.booking-history-page .history-card-top span {
+.booking-history-page .history-card-top > div {
+  min-width: 0;
+}
+
+.booking-history-page .history-card-heading {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.booking-history-page .history-card-top span:not(.history-state-chip) {
   display: block;
   margin-bottom: 5px;
   color: #64748b;
@@ -4326,7 +4359,7 @@ textarea:focus,
 }
 
 .booking-history-page .history-card-summary {
-  margin: -4px 0 0;
+  margin: 0;
   color: #475569;
   font-size: 13px;
   font-weight: 750;
@@ -4429,33 +4462,64 @@ textarea:focus,
 }
 
 .booking-history-page .history-state-chip {
-  min-height: 28px;
+  position: static;
+  align-self: start;
+  justify-self: end;
+  min-height: 32px !important;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 11px;
+  padding: 0 13px !important;
   border-radius: 999px;
-  font-size: 11px;
+  font-size: 12px !important;
   font-weight: 900;
+  line-height: 1;
   white-space: nowrap;
+  box-shadow: 0 8px 18px rgba(125, 134, 179, 0.12);
 }
 
 .booking-history-page .history-state-chip.booked {
-  border: 1px solid rgba(248, 95, 143, 0.24);
+  border: 1px solid rgba(248, 95, 143, 0.36);
   background: #ffedf5;
   color: #9c385d !important;
 }
 
 .booking-history-page .history-state-chip.used {
-  border: 1px solid rgba(45, 122, 84, 0.18);
+  border: 1px solid rgba(45, 122, 84, 0.26);
   background: #e7f7ee;
   color: #2d7a54 !important;
 }
 
 .booking-history-page .history-state-chip.canceled {
-  border: 1px solid rgba(147, 64, 93, 0.18);
+  border: 1px solid rgba(147, 64, 93, 0.26);
   background: #ffe9ef;
   color: #93405d !important;
+}
+
+@media (max-width: 768px) {
+  .booking-history-page .history-hero {
+    padding: 34px 0 28px;
+  }
+
+  .booking-history-page .history-hero .page-hero__inner {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    gap: 18px;
+  }
+
+  .booking-history-page .history-hero .page-hero__aside {
+    justify-self: stretch;
+  }
+
+  .booking-history-page .history-hero .page-hero__actions {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .booking-history-page .history-hero .page-hero__actions .hero-btn {
+    min-width: 0;
+  }
 }
 
 @media (max-width: 900px) {
@@ -4504,7 +4568,7 @@ textarea:focus,
   }
 
   .booking-history-page .history-hero {
-    padding: 28px 0 24px;
+    padding: 34px 0 28px;
   }
 
   .booking-history-page .page-hero__inner {
@@ -4523,7 +4587,12 @@ textarea:focus,
   }
 
   .booking-history-page .history-card-top {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .booking-history-page .history-state-chip {
+    justify-self: start;
   }
 
   .booking-history-page .history-info-grid {
