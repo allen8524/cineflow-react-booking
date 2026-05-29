@@ -1332,7 +1332,7 @@ body {
 }
 
 .support-hero .page-hero__aside {
-  width: 390px;
+  width: 520px;
   max-width: calc(100vw - 40px);
 }
 
@@ -3129,36 +3129,37 @@ textarea:focus,
 
 /* Support page polish */
 .support-contact-strip {
-  width: min(390px, 100%);
+  width: min(520px, 100%);
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  padding: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  padding: 8px;
   border: 1px solid rgba(199, 184, 255, 0.34);
-  border-radius: 20px;
+  border-radius: 18px;
   background: rgba(255, 255, 255, 0.82);
-  box-shadow: 0 16px 30px rgba(125, 134, 179, 0.12);
+  box-shadow: 0 14px 26px rgba(125, 134, 179, 0.12);
 }
 
 .support-contact-strip > div {
   display: grid;
-  gap: 5px;
-  min-height: 76px;
-  padding: 15px 18px;
-  border-radius: 16px;
+  align-content: center;
+  gap: 4px;
+  min-height: 58px;
+  padding: 11px 14px;
+  border-radius: 14px;
   background: linear-gradient(135deg, rgba(255, 250, 252, 0.92), rgba(246, 243, 255, 0.9)) !important;
   border: 1px solid #eadff8 !important;
 }
 
 .support-contact-strip span {
   color: #6b628d !important;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 850;
 }
 
 .support-contact-strip strong {
   color: #8d3153;
-  font-size: 23px;
+  font-size: 19px;
   line-height: 1.2;
   letter-spacing: 0;
 }
@@ -3363,12 +3364,13 @@ textarea:focus,
 
 @media (max-width: 640px) {
   .support-contact-strip {
+    width: 100%;
     grid-template-columns: 1fr;
-    padding: 12px;
+    padding: 10px;
   }
 
   .support-contact-strip > div {
-    min-height: 72px;
+    min-height: 58px;
   }
 
   .support-quick-card {
