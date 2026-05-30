@@ -1,7 +1,10 @@
 import { Link, Outlet } from 'react-router-dom';
+import { useBooking } from '../context/BookingContext';
 import Header from './Header';
 
 const Layout = () => {
+  const { isAdmin } = useBooking();
+
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -50,7 +53,7 @@ const Layout = () => {
               <ul>
                 <li><Link to="/booking">빠른예매</Link></li>
                 <li><Link to="/movies">현재 상영작</Link></li>
-                <li><Link to="/admin">관리자 대시보드</Link></li>
+                {isAdmin ? <li><Link to="/admin">관리자 대시보드</Link></li> : null}
                 <li><Link to="/support">고객센터</Link></li>
               </ul>
             </div>
