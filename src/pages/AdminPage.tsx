@@ -97,7 +97,7 @@ const AdminPage = () => {
                   <tbody>
                     {schedules.map((schedule) => {
                       const movie = movies.find((item) => item.id === schedule.movieId);
-                      const screen = screens.find((item) => item.id === screen?.theaterId);
+                      const screen = screens.find((item) => item.id === schedule.screenId);
                       const theater = theaters.find((item) => item.id === screen?.theaterId);
 
                       return (
