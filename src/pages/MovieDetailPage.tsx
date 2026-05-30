@@ -1,15 +1,14 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import ScheduleCard from '../components/ScheduleCard';
 import { useBooking } from '../context/BookingContext';
-import { movies, schedules } from '../data/movies';
+import { schedules } from '../data/movies';
 import { formatCurrency, formatDate } from '../utils/format';
 
 const MovieDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { draft, movies, setMovie, setSchedule } = useBooking();
   const movie = movies.find((item) => item.id === Number(id));
-  const { draft, setMovie, setSchedule } = useBooking();
-
 
   if (!movie) {
     return (
