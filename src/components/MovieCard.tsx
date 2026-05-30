@@ -43,6 +43,7 @@ const MovieCard = ({ movie, rank, variant = 'catalog' }: MovieCardProps) => {
   const stateLabel = movie.status === 'NOW_SHOWING' ? '상영중' : '상영예정';
   const ageClass = getAgeClass(movie.ageRating);
   const statusClass = movie.status === 'NOW_SHOWING' ? 'status-now' : 'status-upcoming upcoming';
+  const popularityText = (movie.popularity ?? movie.bookingRate).toFixed(1);
 
   const cardClass = variant === 'upcoming'
     ? 'home-upcoming-card'
@@ -65,10 +66,10 @@ const MovieCard = ({ movie, rank, variant = 'catalog' }: MovieCardProps) => {
       ? 'home-showcase-card__head movie-card-head'
       : 'catalog-card__head movie-card-head';
   const metaClass = variant === 'upcoming'
-    ? 'home-upcoming-card__meta movie-meta-list'
+    ? 'home-upcoming-card__meta movie-meta-list movie-meta-panel'
     : variant === 'home'
-      ? 'home-showcase-card__meta movie-meta-list'
-      : 'catalog-card__meta movie-meta-mini movie-meta-list';
+      ? 'home-showcase-card__meta movie-meta-list movie-meta-panel'
+      : 'catalog-card__meta movie-meta-mini movie-meta-list movie-meta-panel';
   const actionsClass = variant === 'upcoming'
     ? 'home-upcoming-card__actions'
     : variant === 'home'
@@ -88,9 +89,9 @@ const MovieCard = ({ movie, rank, variant = 'catalog' }: MovieCardProps) => {
           <span className={`age-badge ${ageClass}`}>{movie.ageRating}</span>
         </div>
         <ul className={metaClass}>
-          <li className="movie-meta-chip">인기도 {movie.popularity?.toFixed(1) ?? movie.bookingRate.toFixed(1)}</li>
-          <li className="movie-meta-chip">평점 {movie.score.toFixed(1)}</li>
-          <li className="movie-meta-chip">{formatDate(movie.releaseDate)}</li>
+          <li className="movie-meta-item"><span>인기도</span><strong>{popularityText}</strong></li>
+          <li className="movie-meta-item"><span>평점</span><strong>{movie.score.toFixed(1)}</strong></li>
+          <li className="movie-meta-item movie-meta-item--date"><span>개봉일</span><strong>{formatDate(movie.releaseDate)}</strong></li>
         </ul>
         <p className="movie-card-summary">{movie.shortDescription}</p>
         <div className={actionsClass}>
