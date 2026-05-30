@@ -1,0 +1,101 @@
+.admin-section-head {
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.admin-section-head p {
+  margin: 6px 0 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.admin-section-head > span {
+  flex: 0 0 auto;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.admin-table-wrap--compact {
+  overflow-x: auto;
+}
+
+.admin-table--compact {
+  table-layout: fixed;
+  min-width: 760px;
+}
+
+.admin-table--compact th,
+.admin-table--compact td {
+  vertical-align: middle;
+}
+
+.admin-table--compact th:nth-child(1),
+.admin-table--compact td:nth-child(1) {
+  width: 28%;
+}
+
+.admin-table--compact th:nth-child(2),
+.admin-table--compact td:nth-child(2) {
+  width: 28%;
+}
+
+.admin-table--compact th:nth-child(3),
+.admin-table--compact td:nth-child(3) {
+  width: 12%;
+}
+
+.admin-table--compact th:nth-child(4),
+.admin-table--compact td:nth-child(4) {
+  width: 16%;
+}
+
+.admin-table--compact th:nth-child(5),
+.admin-table--compact td:nth-child(5) {
+  width: 16%;
+}
+
+.admin-table-ellipsis {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.admin-pagination button {
+  min-width: 40px;
+  min-height: 38px;
+  padding: 0 13px;
+  border-radius: 999px;
+  border: 1px solid rgba(104, 114, 156, 0.18);
+  background: rgba(255, 255, 255, 0.82);
+  color: #34405c;
+  font-weight: 800;
+}
+
+.admin-pagination button.is-active {
+  border-color: transparent;
+  background: linear-gradient(135deg, #f85f8f, #c7b8ff);
+  color: #fff;
+}
+
+.admin-pagination button:disabled {
+  opacity: 0.45;
+}
+
+@media (max-width: 720px) {
+  .admin-section-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
