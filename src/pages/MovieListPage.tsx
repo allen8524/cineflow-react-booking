@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
 import MovieCard from '../components/MovieCard';
 import PageHero from '../components/PageHero';
 import { useBooking } from '../context/BookingContext';
@@ -49,12 +48,6 @@ const MovieListPage = () => {
         className="catalog-hero"
         title="영화 목록"
         description="상영중인 작품과 개봉 예정작을 검색하고 인기도, 평점, 개봉일 기준으로 살펴보세요."
-        actions={(
-          <>
-            <Link to="/booking" className="hero-btn primary">빠른예매</Link>
-            <Link to="/history" className="hero-btn secondary">예매내역</Link>
-          </>
-        )}
       />
 
       <section className="cinema-page-body">
