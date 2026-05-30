@@ -6,11 +6,11 @@ import PersonCounter from '../components/PersonCounter';
 import ScheduleCard from '../components/ScheduleCard';
 import SeatMap from '../components/SeatMap';
 import { useBooking } from '../context/BookingContext';
-import { movies, schedules } from '../data/movies';
+import { schedules } from '../data/movies';
 
 const BookingPage = () => {
   const [searchParams] = useSearchParams();
-  const { draft, setMovie, setSchedule, setPeopleCount, clearSeats, selectedMovie } = useBooking();
+  const { draft, movies, setMovie, setSchedule, setPeopleCount, clearSeats, selectedMovie } = useBooking();
   const movieSchedules = schedules.filter((schedule) => schedule.movieId === draft.movieId);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const BookingPage = () => {
     if (movieId && movies.some((movie) => movie.id === movieId)) {
       setMovie(movieId);
     }
-  }, []);
+  }, [movies, searchParams, setMovie]);
 
   return (
     <main className="booking-page cinema-page">
