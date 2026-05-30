@@ -100,7 +100,7 @@ const MovieCard = ({ movie, rank, variant = 'catalog' }: MovieCardProps) => {
             <strong>{scoreText}</strong>
           </li>
           <li className="movie-meta-item movie-meta-item--date">
-            <span>개봉일</span>
+            <span>개봉</span>
             <strong>{formatDate(movie.releaseDate)}</strong>
           </li>
         </ul>
