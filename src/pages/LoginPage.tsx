@@ -48,14 +48,15 @@ const LoginPage = () => {
         className="booking-hero login-hero"
         title={mode === 'login' ? '로그인' : '회원가입'}
         description="회원은 예매 서비스를 이용할 수 있고, 관리자 계정은 관리자 페이지에 접근할 수 있습니다."
-      />
-      <section className="cinema-page-body">
-        <div className="container auth-page-container">
+        actions={(
           <div className="auth-mode-tabs">
             <button type="button" className={mode === 'login' ? 'is-active' : ''} onClick={() => switchMode('login')}>로그인</button>
             <button type="button" className={mode === 'register' ? 'is-active' : ''} onClick={() => switchMode('register')}>회원가입</button>
           </div>
-
+        )}
+      />
+      <section className="cinema-page-body">
+        <div className="container auth-page-container">
           <form className="booking-panel auth-form" onSubmit={mode === 'login' ? handleLogin : handleRegister}>
             <div className="panel-head"><h2>{mode === 'login' ? '계정 확인' : '새 회원 등록'}</h2></div>
             <div className="demo-account-note">
