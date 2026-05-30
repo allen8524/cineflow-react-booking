@@ -1,17 +1,21 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { initialBookings } from '../data/bookings';
-import { movies, schedules, screens, theaters } from '../data/movies';
+import { movies as fallbackMovies, schedules, screens, theaters } from '../data/movies';
 import { createSeatsForSchedule } from '../data/seats';
-import type { Booking, BookingDraft, PaymentMethod, PersonCounts } from '../types/cineflow';
+import { fetchMoviesFromTmdb } from '../services/tmdb';
+import type { Booking, BookingDraft, Movie, PaymentMethod, PersonCounts } from '../types/cineflow';
 import { createBookingCode } from '../utils/format';
 
 interface BookingContextValue {
   draft: BookingDraft;
   bookings: Booking[];
+  movies: Movie[];
+  isMovieApiLoading: boolean;
+  movieApiError: string | null;
   isLoggedIn: boolean;
   loginUserName: string;
   totalPeople: number;
-  selectedMovie: (typeof movies)[number] | undefined;
+  selectedMovie: Movie | undefined;
   selectedSchedule: (typeof schedules)[number] | undefined;
   selectedScreen: (typeof screens)[number] | undefined;
   selectedTheater: (typeof theaters)[number] | undefined;
@@ -75,6 +79,9 @@ const readDraftFromStorage = (): BookingDraft => {
 export const BookingProvider = ({ children }: { children: ReactNode }) => {
   const [draft, setDraft] = useState<BookingDraft>(readDraftFromStorage);
   const [bookings, setBookings] = useState<Booking[]>(readBookingsFromStorage);
+  const [movies, setMovies] = useState<Movie[]>(fallbackMovies);
+  const [isMovieApiLoading, setIsMovieApiLoading] = useState(true);
+  const [movieApiError, setMovieApiError] = useState<string | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(() => window.localStorage.getItem('cineflow-login') === 'true');
   const [loginUserName, setLoginUserName] = useState(() => window.localStorage.getItem('cineflow-user-name') ?? '김민서');
 
@@ -83,7 +90,7 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
     [draft.peopleCounts]
   );
 
-  const selectedMovie = useMemo(() => movies.find((movie) => movie.id === draft.movieId), [draft.movieId]);
+  const selectedMovie = useMemo(() => movies.find((movie) => movie.id === draft.movieId), [draft.movieId, movies]);
   const selectedSchedule = useMemo(() => schedules.find((schedule) => schedule.id === draft.scheduleId), [draft.scheduleId]);
   const selectedScreen = useMemo(
     () => screens.find((screen) => screen.id === selectedSchedule?.screenId),
@@ -105,6 +112,43 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
       return sum + (seat?.price ?? selectedSchedule.price);
     }, 0);
   }, [draft.selectedSeats, selectedSchedule]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadMovies = async () => {
+      try {
+        const apiMovies = await fetchMoviesFromTmdb();
+
+        if (!isMounted) {
+          return;
+        }
+
+        if (apiMovies) {
+          setMovies(apiMovies);
+          setMovieApiError(null);
+        } else {
+          setMovies(fallbackMovies);
+          setMovieApiError('TMDB API 키가 없어 기본 영화 데이터를 표시합니다.');
+        }
+      } catch {
+        if (isMounted) {
+          setMovies(fallbackMovies);
+          setMovieApiError('TMDB API 호출에 실패해 기본 영화 데이터를 표시합니다.');
+        }
+      } finally {
+        if (isMounted) {
+          setIsMovieApiLoading(false);
+        }
+      }
+    };
+
+    loadMovies();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     window.localStorage.setItem('cineflow-draft', JSON.stringify(draft));
@@ -261,6 +305,9 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
   const value: BookingContextValue = {
     draft,
     bookings,
+    movies,
+    isMovieApiLoading,
+    movieApiError,
     isLoggedIn,
     loginUserName,
     totalPeople,
