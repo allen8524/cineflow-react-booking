@@ -8,7 +8,7 @@ const CompletePage = () => {
   const [searchParams] = useSearchParams();
   const { bookings, resetDraft } = useBooking();
   const bookingCode = searchParams.get('code');
-  const booking = bookings.find((item) => item.bookingCode === bookingCode) ?? bookings[0];
+  const booking = bookings.find((item) => item.bookingCode === bookingCode);
 
   if (!booking) {
     return (
@@ -39,12 +39,23 @@ const CompletePage = () => {
       <section className="cinema-page-body">
         <div className="container">
           <article className="booking-panel complete-success-hero">
-            <h2>{booking.movieTitle}</h2>
-            <div className="ticket-frame">
+            <div className="complete-success-head">
+              <div>
+                <span className="success-state-badge">예매 완료</span>
+                <h2>{booking.movieTitle}</h2>
+                <p>예매번호와 관람 정보를 아래에서 확인하세요.</p>
+              </div>
+              <StatusBadge status={booking.status} />
+            </div>
+
+            <div className="ticket-frame complete-ticket-frame">
               <img src={booking.posterUrl} alt={`${booking.movieTitle} 포스터`} />
-              <div className="ticket-info">
-                <div className="ticket-code"><span>예매번호</span><strong>{booking.bookingCode}</strong><StatusBadge status={booking.status} /></div>
-                <div className="screening-summary-grid">
+              <div className="ticket-info complete-ticket-info">
+                <div className="ticket-code-card">
+                  <span>예매번호</span>
+                  <strong>{booking.bookingCode}</strong>
+                </div>
+                <div className="screening-summary-grid complete-ticket-grid">
                   <div className="summary-info-block"><span>상영</span><strong>{formatDateTime(booking.startTime)}</strong></div>
                   <div className="summary-info-block"><span>극장</span><strong>{booking.theaterName} {booking.screenName} {booking.screenType}</strong></div>
                   <div className="summary-info-block"><span>좌석</span><strong>{booking.seatNames}</strong></div>
@@ -52,6 +63,7 @@ const CompletePage = () => {
                 </div>
               </div>
             </div>
+
             <div className="hero-actions complete-actions">
               <Link to="/history" className="hero-btn primary" onClick={resetDraft}>예매내역 보기</Link>
               <Link to="/movies" className="hero-btn secondary">다른 영화 보기</Link>
