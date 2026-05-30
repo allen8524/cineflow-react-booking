@@ -18,7 +18,7 @@ const BookingPage = () => {
     if (movieId && movies.some((movie) => movie.id === movieId)) {
       setMovie(movieId);
     }
-  }, [movies, searchParams, setMovie]);
+  }, []);
 
   return (
     <main className="booking-page cinema-page">
