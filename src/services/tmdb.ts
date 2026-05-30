@@ -100,16 +100,16 @@ const createShortDescription = (overview: string, title: string) => {
   return text.length > 70 ? `${text.slice(0, 70)}...` : text;
 };
 
-const createBookingRate = (popularity: number, index: number) => {
-  const normalized = popularity > 0 ? Math.min(39.9, Math.max(5, popularity / 20)) : 35 - index * 3;
-  return Number(normalized.toFixed(1));
+const fetchTmdbMovieDetail = async (movieId: number) => {
+  try {
+    return await requestTmdb<TmdbMovieDetail>(`/movie/${movieId}`, { append_to_response: 'release_dates' });
+  } catch {
+    return null;
+  }
 };
 
-const fetchTmdbMovieDetail = (movieId: number) =>
-  requestTmdb<TmdbMovieDetail>(`/movie/${movieId}`, { append_to_response: 'release_dates' });
-
-const createAgeRating = (detail: TmdbMovieDetail) => {
-  const krReleaseDates = detail.release_dates?.results.find((region) => region.iso_3166_1 === 'KR')?.release_dates;
+const createAgeRating = (detail: TmdbMovieDetail | null) => {
+  const krReleaseDates = detail?.release_dates?.results.find((region) => region.iso_3166_1 === 'KR')?.release_dates;
   const certification = krReleaseDates?.map((releaseDate) => releaseDate.certification.trim()).find(Boolean);
 
   if (!certification) {
@@ -121,7 +121,7 @@ const createAgeRating = (detail: TmdbMovieDetail) => {
 
 const mapTmdbMovie = (
   movie: TmdbMovie,
-  detail: TmdbMovieDetail,
+  detail: TmdbMovieDetail | null,
   index: number,
   status: MovieStatus,
   genreMap: Map<number, string>
@@ -138,10 +138,11 @@ const mapTmdbMovie = (
     description,
     genre,
     ageRating: createAgeRating(detail),
-    runningTime: detail.runtime ?? 0,
+    runningTime: detail?.runtime ?? 0,
     posterUrl: createImageUrl(movie.poster_path, 'w500', POSTER_PLACEHOLDER),
     backdropUrl: createImageUrl(movie.backdrop_path, 'original', BACKDROP_PLACEHOLDER),
-    bookingRate: createBookingRate(movie.popularity, index),
+    bookingRate: movie.popularity,
+    popularity: movie.popularity,
     score: movie.vote_average,
     releaseDate: movie.release_date,
     status,
