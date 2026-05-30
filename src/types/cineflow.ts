@@ -2,6 +2,7 @@ export type MovieStatus = 'NOW_SHOWING' | 'COMING_SOON';
 export type SeatType = 'STANDARD' | 'PREMIUM' | 'COUPLE';
 export type BookingStatus = 'BOOKED' | 'USED' | 'CANCELED';
 export type PaymentMethod = 'CARD' | 'KAKAO_PAY' | 'NAVER_PAY' | 'TOSS' | 'BANK_TRANSFER';
+export type UserRole = 'USER' | 'ADMIN';
 
 export interface Movie {
   id: number;
@@ -95,6 +96,15 @@ export interface Booking {
   paymentMethod: PaymentMethod;
   createdAt: string;
   cancelReason?: string;
+}
+
+export interface UserAccount {
+  id: string;
+  passcode: string;
+  name: string;
+  phone: string;
+  role: UserRole;
+  createdAt: string;
 }
 
 export interface AdminMetric {
