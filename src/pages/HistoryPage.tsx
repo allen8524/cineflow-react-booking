@@ -1,5 +1,4 @@
 import { FormEvent, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 import StatusBadge from '../components/StatusBadge';
 import { useBooking } from '../context/BookingContext';
@@ -29,12 +28,6 @@ const HistoryPage = () => {
         className="booking-hero booking-hero--primary history-hero"
         title="예매내역 조회"
         description="예매번호, 영화명, 예매자 정보로 조회하고 예매 상태를 확인합니다."
-        actions={(
-          <>
-            <Link to="/booking" className="hero-btn primary">빠른예매</Link>
-            <Link to="/movies" className="hero-btn secondary">상영작 보기</Link>
-          </>
-        )}
       />
 
       <section className="cinema-page-body">
