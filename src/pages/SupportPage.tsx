@@ -14,18 +14,6 @@ const SupportPage = () => {
         className="support-hero"
         title="고객센터"
         description="예매, 취소, 환불, 관람 안내를 빠르게 확인할 수 있습니다."
-        sideContent={(
-          <div className="support-contact-strip">
-            <div>
-              <span>대표번호</span>
-              <strong>1544-0000</strong>
-            </div>
-            <div>
-              <span>운영시간</span>
-              <strong>09:00 - 18:00</strong>
-            </div>
-          </div>
-        )}
       />
 
       <section className="cinema-page-body">
