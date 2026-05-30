@@ -1,4 +1,3 @@
-import { movies as fallbackMovies } from '../data/movies';
 import type { Movie, MovieStatus } from '../types/cineflow';
 
 const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
@@ -30,6 +29,22 @@ interface TmdbGenre {
 
 interface TmdbGenreResponse {
   genres: TmdbGenre[];
+}
+
+interface TmdbReleaseDate {
+  certification: string;
+}
+
+interface TmdbReleaseDateRegion {
+  iso_3166_1: string;
+  release_dates: TmdbReleaseDate[];
+}
+
+interface TmdbMovieDetail {
+  runtime: number | null;
+  release_dates?: {
+    results: TmdbReleaseDateRegion[];
+  };
 }
 
 const hasTmdbCredentials = Boolean(TMDB_ACCESS_TOKEN || TMDB_API_KEY);
@@ -66,6 +81,12 @@ const requestTmdb = async <T>(path: string, params?: Record<string, string>): Pr
   return response.json() as Promise<T>;
 };
 
+const POSTER_PLACEHOLDER =
+  'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="500" height="750" viewBox="0 0 500 750"%3E%3Crect width="500" height="750" fill="%231f2937"/%3E%3Ctext x="250" y="375" fill="%23f9fafb" font-family="Arial, sans-serif" font-size="36" text-anchor="middle"%3ENo Poster%3C/text%3E%3C/svg%3E';
+
+const BACKDROP_PLACEHOLDER =
+  'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720"%3E%3Crect width="1280" height="720" fill="%23111827"/%3E%3Ctext x="640" y="360" fill="%23f9fafb" font-family="Arial, sans-serif" font-size="52" text-anchor="middle"%3ENo Backdrop%3C/text%3E%3C/svg%3E';
+
 const createImageUrl = (path: string | null, size: 'w500' | 'original', fallbackUrl: string) => {
   if (!path) {
     return fallbackUrl;
@@ -84,30 +105,45 @@ const createBookingRate = (popularity: number, index: number) => {
   return Number(normalized.toFixed(1));
 };
 
+const fetchTmdbMovieDetail = (movieId: number) =>
+  requestTmdb<TmdbMovieDetail>(`/movie/${movieId}`, { append_to_response: 'release_dates' });
+
+const createAgeRating = (detail: TmdbMovieDetail) => {
+  const krReleaseDates = detail.release_dates?.results.find((region) => region.iso_3166_1 === 'KR')?.release_dates;
+  const certification = krReleaseDates?.map((releaseDate) => releaseDate.certification.trim()).find(Boolean);
+
+  if (!certification) {
+    return '미정';
+  }
+
+  return certification.toLowerCase() === 'all' ? 'ALL' : certification;
+};
+
 const mapTmdbMovie = (
   movie: TmdbMovie,
+  detail: TmdbMovieDetail,
   index: number,
   status: MovieStatus,
   genreMap: Map<number, string>
 ): Movie => {
-  const fallbackMovie = fallbackMovies[index % fallbackMovies.length];
-  const title = movie.title || movie.original_title || fallbackMovie.title;
-  const genre = movie.genre_ids.map((genreId) => genreMap.get(genreId)).filter(Boolean).join(' · ') || fallbackMovie.genre;
+  const title = movie.title || movie.original_title || '제목 미정';
+  const genre = movie.genre_ids.map((genreId) => genreMap.get(genreId)).filter(Boolean).join(' · ') || '장르 미정';
+  const description = movie.overview || `${title} 영화 정보입니다.`;
 
   return {
     id: index + 1,
     tmdbId: movie.id,
     title,
     shortDescription: createShortDescription(movie.overview, title),
-    description: movie.overview || fallbackMovie.description,
+    description,
     genre,
-    ageRating: fallbackMovie.ageRating,
-    runningTime: fallbackMovie.runningTime,
-    posterUrl: createImageUrl(movie.poster_path, 'w500', fallbackMovie.posterUrl),
-    backdropUrl: createImageUrl(movie.backdrop_path, 'original', fallbackMovie.backdropUrl ?? fallbackMovie.posterUrl),
+    ageRating: createAgeRating(detail),
+    runningTime: detail.runtime ?? 0,
+    posterUrl: createImageUrl(movie.poster_path, 'w500', POSTER_PLACEHOLDER),
+    backdropUrl: createImageUrl(movie.backdrop_path, 'original', BACKDROP_PLACEHOLDER),
     bookingRate: createBookingRate(movie.popularity, index),
-    score: movie.vote_average || fallbackMovie.score,
-    releaseDate: movie.release_date || fallbackMovie.releaseDate,
+    score: movie.vote_average,
+    releaseDate: movie.release_date,
     status,
     bookingOpen: status === 'NOW_SHOWING'
   };
@@ -128,11 +164,15 @@ export const fetchMoviesFromTmdb = async (): Promise<Movie[] | null> => {
   const nowPlaying = nowPlayingResponse.results.slice(0, 4);
   const nowPlayingIds = new Set(nowPlaying.map((movie) => movie.id));
   const upcoming = upcomingResponse.results.filter((movie) => !nowPlayingIds.has(movie.id)).slice(0, 3);
-
-  const movies = [
-    ...nowPlaying.map((movie, index) => mapTmdbMovie(movie, index, 'NOW_SHOWING', genreMap)),
-    ...upcoming.map((movie, index) => mapTmdbMovie(movie, nowPlaying.length + index, 'COMING_SOON', genreMap))
+  const selectedMovies = [
+    ...nowPlaying.map((movie, index) => ({ movie, index, status: 'NOW_SHOWING' as const })),
+    ...upcoming.map((movie, index) => ({ movie, index: nowPlaying.length + index, status: 'COMING_SOON' as const }))
   ];
+
+  const movieDetails = await Promise.all(selectedMovies.map(({ movie }) => fetchTmdbMovieDetail(movie.id)));
+  const movies = selectedMovies.map(({ movie, index, status }, detailIndex) =>
+    mapTmdbMovie(movie, movieDetails[detailIndex], index, status, genreMap)
+  );
 
   return movies.length > 0 ? movies : null;
 };

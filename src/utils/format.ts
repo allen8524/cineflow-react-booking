@@ -15,6 +15,10 @@ export const formatDateTime = (value: string): string => {
 
 export const formatDate = (value: string): string => {
   const date = new Date(value);
+  if (!value || Number.isNaN(date.getTime())) {
+    return '미정';
+  }
+
   return new Intl.DateTimeFormat('ko-KR', {
     year: 'numeric',
     month: '2-digit',

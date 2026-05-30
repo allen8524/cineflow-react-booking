@@ -8,28 +8,40 @@ interface MovieCardProps {
   variant?: 'home' | 'catalog' | 'upcoming';
 }
 
+const getAgeClass = (ageRating: string) => {
+  const normalizedAgeRating = ageRating.trim().toLowerCase();
+
+  if (!normalizedAgeRating || normalizedAgeRating.includes('미정')) {
+    return '';
+  }
+
+  if (normalizedAgeRating === 'all' || normalizedAgeRating.includes('전체')) {
+    return 'age-all all';
+  }
+
+  if (normalizedAgeRating.includes('12')) {
+    return 'age-12';
+  }
+
+  if (normalizedAgeRating.includes('15')) {
+    return 'age-15';
+  }
+
+  if (
+    normalizedAgeRating.includes('18') ||
+    normalizedAgeRating.includes('19') ||
+    normalizedAgeRating.includes('청소년')
+  ) {
+    return 'age-19';
+  }
+
+  const safeAgeClass = normalizedAgeRating.replace(/[^a-z0-9-]/g, '');
+  return safeAgeClass ? `age-${safeAgeClass}` : '';
+};
+
 const MovieCard = ({ movie, rank, variant = 'catalog' }: MovieCardProps) => {
   const stateLabel = movie.status === 'NOW_SHOWING' ? '상영중' : '상영예정';
-  const normalizedAgeRating = movie.ageRating.trim().toLowerCase();
-  const ageClass = (() => {
-    if (normalizedAgeRating === 'all' || normalizedAgeRating.includes('전체')) {
-      return 'age-all all';
-    }
-
-    if (normalizedAgeRating.includes('12')) {
-      return 'age-12';
-    }
-
-    if (normalizedAgeRating.includes('15')) {
-      return 'age-15';
-    }
-
-    if (normalizedAgeRating.includes('19') || normalizedAgeRating.includes('청소년')) {
-      return 'age-19';
-    }
-
-    return `age-${normalizedAgeRating.replace(/[^a-z0-9-]/g, '')}`;
-  })();
+  const ageClass = getAgeClass(movie.ageRating);
   const statusClass = movie.status === 'NOW_SHOWING' ? 'status-now' : 'status-upcoming upcoming';
 
   const cardClass = variant === 'upcoming'
