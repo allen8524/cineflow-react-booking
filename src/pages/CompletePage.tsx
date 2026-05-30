@@ -39,9 +39,7 @@ const CompletePage = () => {
       <section className="cinema-page-body">
         <div className="container">
           <article className="booking-panel complete-success-hero">
-            <div className="success-state-badge"><span>OK</span><strong>예매 완료</strong></div>
             <h2>{booking.movieTitle}</h2>
-            <p>예매번호 {booking.bookingCode}의 상세 정보입니다.</p>
             <div className="ticket-frame">
               <img src={booking.posterUrl} alt={`${booking.movieTitle} 포스터`} />
               <div className="ticket-info">
