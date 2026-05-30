@@ -3,7 +3,7 @@ import { initialBookings } from '../data/bookings';
 import { movies as fallbackMovies, schedules, screens, theaters } from '../data/movies';
 import { createSeatsForSchedule } from '../data/seats';
 import { fetchMoviesFromTmdb } from '../services/tmdb';
-import type { Booking, BookingDraft, Movie, PaymentMethod, PersonCounts } from '../types/cineflow';
+import type { Booking, BookingDraft, Movie, PaymentMethod, PersonCounts, UserAccount } from '../types/cineflow';
 import { createBookingCode } from '../utils/format';
 
 interface BookingContextValue {
@@ -13,7 +13,9 @@ interface BookingContextValue {
   isMovieApiLoading: boolean;
   movieApiError: string | null;
   isLoggedIn: boolean;
+  isAdmin: boolean;
   loginUserName: string;
+  currentUser: UserAccount | null;
   totalPeople: number;
   selectedMovie: Movie | undefined;
   selectedSchedule: (typeof schedules)[number] | undefined;
@@ -29,7 +31,8 @@ interface BookingContextValue {
   setPaymentMethod: (method: PaymentMethod) => void;
   createBooking: (customerOverride?: { name: string; phone: string }) => Booking | null;
   cancelBooking: (bookingCode: string, reason: string) => void;
-  login: (name: string) => void;
+  login: (id: string, passcode: string) => { ok: boolean; message?: string; user?: UserAccount };
+  register: (account: Omit<UserAccount, 'role' | 'createdAt'>) => { ok: boolean; message?: string; user?: UserAccount };
   logout: () => void;
   resetDraft: () => void;
 }
@@ -43,10 +46,29 @@ const initialDraft: BookingDraft = {
     senior: 0
   },
   selectedSeats: [],
-  customerName: '김민서',
-  customerPhone: '010-1234-5678',
+  customerName: '',
+  customerPhone: '',
   paymentMethod: 'CARD'
 };
+
+const defaultAccounts: UserAccount[] = [
+  {
+    id: 'admin',
+    passcode: '1234',
+    name: '관리자',
+    phone: '010-0000-0000',
+    role: 'ADMIN',
+    createdAt: '2026-01-01T00:00:00.000Z'
+  },
+  {
+    id: 'user',
+    passcode: '1234',
+    name: '일반회원',
+    phone: '010-1111-2222',
+    role: 'USER',
+    createdAt: '2026-01-01T00:00:00.000Z'
+  }
+];
 
 const BookingContext = createContext<BookingContextValue | null>(null);
 
@@ -76,14 +98,38 @@ const readDraftFromStorage = (): BookingDraft => {
   }
 };
 
+const readAccountsFromStorage = (): UserAccount[] => {
+  const stored = window.localStorage.getItem('cineflow-accounts');
+  if (!stored) {
+    return defaultAccounts;
+  }
+
+  try {
+    const parsedAccounts = JSON.parse(stored) as UserAccount[];
+    const hasAdmin = parsedAccounts.some((account) => account.id === 'admin');
+    return hasAdmin ? parsedAccounts : [...defaultAccounts, ...parsedAccounts];
+  } catch {
+    return defaultAccounts;
+  }
+};
+
+const readCurrentUserFromStorage = (accounts: UserAccount[]) => {
+  const currentUserId = window.localStorage.getItem('cineflow-current-user-id');
+  return accounts.find((account) => account.id === currentUserId) ?? null;
+};
+
 export const BookingProvider = ({ children }: { children: ReactNode }) => {
   const [draft, setDraft] = useState<BookingDraft>(readDraftFromStorage);
   const [bookings, setBookings] = useState<Booking[]>(readBookingsFromStorage);
   const [movies, setMovies] = useState<Movie[]>(fallbackMovies);
+  const [accounts, setAccounts] = useState<UserAccount[]>(readAccountsFromStorage);
+  const [currentUser, setCurrentUser] = useState<UserAccount | null>(() => readCurrentUserFromStorage(readAccountsFromStorage()));
   const [isMovieApiLoading, setIsMovieApiLoading] = useState(true);
   const [movieApiError, setMovieApiError] = useState<string | null>(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(() => window.localStorage.getItem('cineflow-login') === 'true');
-  const [loginUserName, setLoginUserName] = useState(() => window.localStorage.getItem('cineflow-user-name') ?? '김민서');
+
+  const isLoggedIn = Boolean(currentUser);
+  const isAdmin = currentUser?.role === 'ADMIN';
+  const loginUserName = currentUser?.name ?? '';
 
   const totalPeople = useMemo(
     () => draft.peopleCounts.adult + draft.peopleCounts.teen + draft.peopleCounts.senior,
@@ -159,9 +205,17 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
   }, [bookings]);
 
   useEffect(() => {
-    window.localStorage.setItem('cineflow-login', String(isLoggedIn));
-    window.localStorage.setItem('cineflow-user-name', loginUserName);
-  }, [isLoggedIn, loginUserName]);
+    window.localStorage.setItem('cineflow-accounts', JSON.stringify(accounts));
+  }, [accounts]);
+
+  useEffect(() => {
+    if (currentUser) {
+      window.localStorage.setItem('cineflow-current-user-id', currentUser.id);
+      setCustomer(currentUser.name, currentUser.phone);
+    } else {
+      window.localStorage.removeItem('cineflow-current-user-id');
+    }
+  }, [currentUser]);
 
   const setMovie = (movieId: number) => {
     const firstSchedule = schedules.find((schedule) => schedule.movieId === movieId);
@@ -245,6 +299,10 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const createBooking = (customerOverride?: { name: string; phone: string }) => {
+    if (!currentUser) {
+      return null;
+    }
+
     if (!selectedMovie || !selectedSchedule || !selectedScreen || !selectedTheater) {
       return null;
     }
@@ -256,8 +314,8 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
     const booking: Booking = {
       id: Date.now(),
       bookingCode: createBookingCode(selectedSchedule.startTime),
-      customerName: customerOverride?.name ?? draft.customerName,
-      customerPhone: customerOverride?.phone ?? draft.customerPhone,
+      customerName: customerOverride?.name ?? currentUser.name,
+      customerPhone: customerOverride?.phone ?? currentUser.phone,
       movieTitle: selectedMovie.title,
       posterUrl: selectedMovie.posterUrl,
       ageRating: selectedMovie.ageRating,
@@ -288,18 +346,48 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
-  const login = (name: string) => {
-    setIsLoggedIn(true);
-    setLoginUserName(name || '김민서');
-    setCustomer(name || '김민서', draft.customerPhone);
+  const login = (id: string, passcode: string) => {
+    const user = accounts.find((account) => account.id === id.trim() && account.passcode === passcode);
+
+    if (!user) {
+      return { ok: false, message: '아이디 또는 비밀번호를 확인해 주세요.' };
+    }
+
+    setCurrentUser(user);
+    return { ok: true, user };
+  };
+
+  const register = (account: Omit<UserAccount, 'role' | 'createdAt'>) => {
+    const nextId = account.id.trim();
+
+    if (!nextId || !account.passcode.trim() || !account.name.trim() || !account.phone.trim()) {
+      return { ok: false, message: '회원가입 정보를 모두 입력해 주세요.' };
+    }
+
+    if (accounts.some((user) => user.id === nextId)) {
+      return { ok: false, message: '이미 사용 중인 아이디입니다.' };
+    }
+
+    const user: UserAccount = {
+      ...account,
+      id: nextId,
+      name: account.name.trim(),
+      phone: account.phone.trim(),
+      role: 'USER',
+      createdAt: new Date().toISOString()
+    };
+
+    setAccounts((prev) => [user, ...prev]);
+    setCurrentUser(user);
+    return { ok: true, user };
   };
 
   const logout = () => {
-    setIsLoggedIn(false);
+    setCurrentUser(null);
   };
 
   const resetDraft = () => {
-    setDraft(initialDraft);
+    setDraft((prev) => ({ ...initialDraft, movieId: prev.movieId, scheduleId: prev.scheduleId }));
   };
 
   const value: BookingContextValue = {
@@ -309,7 +397,9 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
     isMovieApiLoading,
     movieApiError,
     isLoggedIn,
+    isAdmin,
     loginUserName,
+    currentUser,
     totalPeople,
     selectedMovie,
     selectedSchedule,
@@ -326,6 +416,7 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
     createBooking,
     cancelBooking,
     login,
+    register,
     logout,
     resetDraft
   };
