@@ -6,31 +6,32 @@
 }
 
 .complete-success-head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 18px;
-  padding-bottom: 18px;
+  display: grid;
+  gap: 8px;
+  padding-bottom: 20px;
   border-bottom: 1px solid rgba(104, 114, 156, 0.14);
 }
 
 .complete-success-head h2 {
-  margin: 10px 0 6px;
+  margin: 0;
   color: #1f2a44;
-  font-size: clamp(28px, 4vw, 42px);
+  font-size: clamp(30px, 4vw, 44px);
   line-height: 1.12;
+  letter-spacing: -0.04em;
 }
 
 .complete-success-head p {
   margin: 0;
   color: #65728d;
+  font-size: 15px;
 }
 
 .complete-success-head .success-state-badge {
+  width: fit-content;
   display: inline-flex;
   align-items: center;
   min-height: 30px;
-  padding: 0 12px;
+  padding: 0 13px;
   border-radius: 999px;
   background: linear-gradient(135deg, rgba(248, 95, 143, 0.15), rgba(199, 184, 255, 0.22));
   color: #8d3153;
@@ -148,10 +149,6 @@
 }
 
 @media (max-width: 640px) {
-  .complete-success-head {
-    display: grid;
-  }
-
   .complete-ticket-frame {
     grid-template-columns: 1fr;
   }
