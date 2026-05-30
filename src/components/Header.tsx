@@ -4,7 +4,7 @@ import { useBooking } from '../context/BookingContext';
 const navLinkClass = ({ isActive }: { isActive: boolean }) => `storefront-nav-link${isActive ? ' active' : ''}`;
 
 const Header = () => {
-  const { isLoggedIn, loginUserName, logout } = useBooking();
+  const { isLoggedIn, isAdmin, loginUserName, logout } = useBooking();
 
   return (
     <header className="ht-header full-width-hd cinema-header storefront-header">
@@ -22,7 +22,7 @@ const Header = () => {
               <li><NavLink to="/booking" className={navLinkClass}>빠른예매</NavLink></li>
               <li><NavLink to="/history" className={navLinkClass}>예매내역</NavLink></li>
               <li><NavLink to="/support" className={navLinkClass}>고객센터</NavLink></li>
-              <li><NavLink to="/admin" className={navLinkClass}>관리자</NavLink></li>
+              {isAdmin ? <li><NavLink to="/admin" className={navLinkClass}>관리자</NavLink></li> : null}
             </ul>
 
             <ul className="storefront-account-nav menu-right">
