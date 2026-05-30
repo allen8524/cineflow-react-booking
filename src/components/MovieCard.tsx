@@ -41,42 +41,21 @@ const getAgeClass = (ageRating: string) => {
 
 const MovieCard = ({ movie, rank, variant = 'catalog' }: MovieCardProps) => {
   const isComingSoon = movie.status === 'COMING_SOON';
+  const isCatalog = variant === 'catalog';
   const stateLabel = isComingSoon ? '상영예정' : '상영중';
   const ageClass = getAgeClass(movie.ageRating);
   const statusClass = isComingSoon ? 'status-upcoming upcoming' : 'status-now';
   const popularityText = (movie.popularity ?? movie.bookingRate).toFixed(1);
   const scoreText = isComingSoon ? '-' : movie.score > 0 ? `${movie.score.toFixed(1)}/10` : '미정';
 
-  const cardClass = variant === 'upcoming'
-    ? 'home-upcoming-card'
-    : variant === 'home'
-      ? 'home-showcase-card'
-      : 'catalog-card cinema-movie-card';
-  const posterClass = variant === 'upcoming'
-    ? 'home-upcoming-card__poster'
-    : variant === 'home'
-      ? 'home-showcase-card__poster'
-      : 'catalog-card__poster poster-wrap';
-  const bodyClass = variant === 'upcoming'
-    ? 'home-upcoming-card__body'
-    : variant === 'home'
-      ? 'home-showcase-card__body'
-      : 'catalog-card__body movie-card-body';
-  const headClass = variant === 'upcoming'
-    ? 'home-upcoming-card__head movie-card-head'
-    : variant === 'home'
-      ? 'home-showcase-card__head movie-card-head'
-      : 'catalog-card__head movie-card-head';
-  const metaClass = variant === 'upcoming'
-    ? 'home-upcoming-card__meta movie-meta-list movie-meta-panel'
-    : variant === 'home'
-      ? 'home-showcase-card__meta movie-meta-list movie-meta-panel'
-      : 'catalog-card__meta movie-meta-mini movie-meta-list movie-meta-panel';
-  const actionsClass = variant === 'upcoming'
-    ? 'home-upcoming-card__actions'
-    : variant === 'home'
-      ? 'home-showcase-card__actions'
-      : 'catalog-card__actions movie-card-actions';
+  const cardClass = isCatalog ? 'catalog-card cinema-movie-card' : 'home-showcase-card';
+  const posterClass = isCatalog ? 'catalog-card__poster poster-wrap' : 'home-showcase-card__poster';
+  const bodyClass = isCatalog ? 'catalog-card__body movie-card-body' : 'home-showcase-card__body';
+  const headClass = isCatalog ? 'catalog-card__head movie-card-head' : 'home-showcase-card__head movie-card-head';
+  const metaClass = isCatalog
+    ? 'catalog-card__meta movie-meta-mini movie-meta-list movie-meta-panel'
+    : 'home-showcase-card__meta movie-meta-list movie-meta-panel';
+  const actionsClass = isCatalog ? 'catalog-card__actions movie-card-actions' : 'home-showcase-card__actions';
 
   return (
     <article className={cardClass}>
