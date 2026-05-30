@@ -1,16 +1,13 @@
 import { Link } from 'react-router-dom';
 import MovieCard from '../components/MovieCard';
 import { useBooking } from '../context/BookingContext';
-import { schedules, theaters } from '../data/movies';
 import { formatDate } from '../utils/format';
 
 const HomePage = () => {
-  const { bookings, movies, isMovieApiLoading, movieApiError } = useBooking();
+  const { movies, isMovieApiLoading, movieApiError } = useBooking();
   const heroMovie = movies.find((movie) => movie.status === 'NOW_SHOWING') ?? movies[0];
-  const featuredMovie = movies.find((movie) => movie.bookingOpen) ?? movies[0];
-  const nowShowing = movies.filter((movie) => movie.status === 'NOW_SHOWING').slice(0, 3);
+  const nowShowing = movies.filter((movie) => movie.status === 'NOW_SHOWING').slice(0, 4);
   const upcoming = movies.filter((movie) => movie.status === 'COMING_SOON').slice(0, 4);
-  const activeBookings = bookings.filter((booking) => booking.status === 'BOOKED').length;
 
   return (
     <main className="storefront-home">
@@ -55,21 +52,8 @@ const HomePage = () => {
               <p>인기 상영작과 예매 가능한 시간표를 한눈에 확인하세요.</p>
             </div>
           </div>
-          <div className="home-showcase-layout">
-            <div className="home-showcase-grid">
-              {nowShowing.map((movie, index) => <MovieCard movie={movie} rank={index + 1} variant="home" key={movie.id} />)}
-            </div>
-            <aside className="home-rank-board">
-              <div className="home-rank-board__head">
-                <h3>예매 현황</h3>
-              </div>
-              <ul className="home-rank-board__list">
-                <li><Link to="/admin"><strong>{movies.length}</strong><span>등록 영화</span><em>현재 등록된 영화</em></Link></li>
-                <li><Link to="/booking"><strong>{schedules.length}</strong><span>상영 시간표</span><em>운영 중인 시간표</em></Link></li>
-                <li><Link to="/movies"><strong>{theaters.length}</strong><span>운영 지점</span><em>예매 가능 지점</em></Link></li>
-                <li><Link to="/history"><strong>{activeBookings}</strong><span>예매 완료 건</span><em>저장된 예매 내역</em></Link></li>
-              </ul>
-            </aside>
+          <div className="home-showcase-grid home-movie-grid-four">
+            {nowShowing.map((movie, index) => <MovieCard movie={movie} rank={index + 1} variant="home" key={movie.id} />)}
           </div>
         </div>
       </section>
@@ -82,7 +66,7 @@ const HomePage = () => {
               <p>곧 만날 수 있는 기대작을 미리 확인하고 관람 계획을 세워보세요.</p>
             </div>
           </div>
-          <div className="home-upcoming-grid">
+          <div className="home-upcoming-grid home-movie-grid-four">
             {upcoming.map((movie, index) => <MovieCard movie={movie} rank={index + 1} variant="upcoming" key={movie.id} />)}
           </div>
         </div>
