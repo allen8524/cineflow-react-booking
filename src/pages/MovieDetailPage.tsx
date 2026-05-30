@@ -4,6 +4,18 @@ import { useBooking } from '../context/BookingContext';
 import { schedules } from '../data/movies';
 import { formatCurrency, formatDate } from '../utils/format';
 
+const formatAgeRatingLabel = (ageRating: string) => {
+  if (ageRating === 'ALL') {
+    return '전체 관람가';
+  }
+
+  if (ageRating === '미정') {
+    return '관람등급 미정';
+  }
+
+  return `${ageRating}세 이상 관람가`;
+};
+
 const MovieDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -53,13 +65,13 @@ const MovieDetailPage = () => {
               <p className="detail-tagline">{movie.shortDescription}</p>
               <p className="detail-copy">{movie.description}</p>
               <div className="detail-score-grid">
-                <div className="score-item"><span>예매율</span><strong>{movie.bookingRate}%</strong></div>
+                <div className="score-item"><span>인기도</span><strong>{movie.popularity?.toFixed(1) ?? movie.bookingRate.toFixed(1)}</strong></div>
                 <div className="score-item"><span>평점</span><strong>{movie.score.toFixed(1)}</strong></div>
-                <div className="score-item"><span>러닝타임</span><strong>{movie.runningTime}분</strong></div>
+                <div className="score-item"><span>러닝타임</span><strong>{movie.runningTime > 0 ? `${movie.runningTime}분` : '미정'}</strong></div>
               </div>
               <ul className="hero-meta detail-meta-list">
                 <li>{movie.genre}</li>
-                <li>{movie.ageRating}세 이상 관람가</li>
+                <li>{formatAgeRatingLabel(movie.ageRating)}</li>
                 <li>개봉 {formatDate(movie.releaseDate)}</li>
               </ul>
               <div className="hero-actions detail-actions detail-actions--inline">
