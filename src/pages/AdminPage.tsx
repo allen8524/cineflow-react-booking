@@ -2,11 +2,11 @@ import { useMemo, useState } from 'react';
 import PageHero from '../components/PageHero';
 import StatusBadge from '../components/StatusBadge';
 import { useBooking } from '../context/BookingContext';
-import { movies, schedules, screens, theaters } from '../data/movies';
+import { schedules, screens, theaters } from '../data/movies';
 import { bookingStatusLabel, formatCurrency, formatDateTime } from '../utils/format';
 
 const AdminPage = () => {
-  const { bookings } = useBooking();
+  const { bookings, movies } = useBooking();
   const [tab, setTab] = useState<'dashboard' | 'movies' | 'schedules' | 'bookings'>('dashboard');
 
   const metrics = useMemo(() => {
@@ -18,7 +18,7 @@ const AdminPage = () => {
       { label: '예매 완료', value: `${booked.length}건`, description: '취소 제외 예매 건수' },
       { label: '예상 매출', value: formatCurrency(revenue), description: '취소 제외 예매 금액 기준' }
     ];
-  }, [bookings]);
+  }, [bookings, movies.length]);
 
   return (
     <main className="admin-page cinema-page">
@@ -97,7 +97,7 @@ const AdminPage = () => {
                   <tbody>
                     {schedules.map((schedule) => {
                       const movie = movies.find((item) => item.id === schedule.movieId);
-                      const screen = screens.find((item) => item.id === schedule.screenId);
+                      const screen = screens.find((item) => item.id === screen?.theaterId);
                       const theater = theaters.find((item) => item.id === screen?.theaterId);
 
                       return (
