@@ -13,6 +13,7 @@
   background: rgba(248, 250, 255, 0.72);
   justify-self: center;
   align-self: center;
+  transform: translateX(8px);
 }
 
 .movie-meta-panel .movie-meta-item {
@@ -75,5 +76,6 @@
   .catalog-card__meta.movie-meta-panel {
     grid-template-columns: 62px 54px 104px;
     width: 222px;
+    transform: translateX(6px);
   }
 }
