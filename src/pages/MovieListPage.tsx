@@ -8,7 +8,7 @@ const MovieListPage = () => {
   const { movies, isMovieApiLoading, movieApiError } = useBooking();
   const [keyword, setKeyword] = useState('');
   const [status, setStatus] = useState<'ALL' | 'NOW_SHOWING' | 'COMING_SOON'>('ALL');
-  const [sort, setSort] = useState<'booking' | 'score' | 'release'>('booking');
+  const [sort, setSort] = useState<'popularity' | 'score' | 'release'>('popularity');
 
   const filteredMovies = useMemo(() => {
     return [...movies]
@@ -17,7 +17,7 @@ const MovieListPage = () => {
       .sort((a, b) => {
         if (sort === 'score') return b.score - a.score;
         if (sort === 'release') return new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime();
-        return b.bookingRate - a.bookingRate;
+        return (b.popularity ?? b.bookingRate) - (a.popularity ?? a.bookingRate);
       });
   }, [keyword, movies, status, sort]);
 
@@ -26,7 +26,7 @@ const MovieListPage = () => {
       <PageHero
         className="catalog-hero"
         title="영화 목록"
-        description="상영중인 작품과 개봉 예정작을 검색하고 예매율, 평점, 개봉일 기준으로 살펴보세요."
+        description="상영중인 작품과 개봉 예정작을 검색하고 인기도, 평점, 개봉일 기준으로 살펴보세요."
         actions={(
           <>
             <Link to="/booking" className="hero-btn primary">빠른예매</Link>
@@ -52,7 +52,7 @@ const MovieListPage = () => {
                 <input className="movie-search-input" value={keyword} onChange={(event) => setKeyword(event.target.value)} placeholder="영화명 또는 장르 검색" />
               </label>
               <select className="movie-sort-select" value={sort} onChange={(event) => setSort(event.target.value as typeof sort)} aria-label="정렬">
-                <option value="booking">예매율순</option>
+                <option value="popularity">인기도순</option>
                 <option value="score">평점순</option>
                 <option value="release">개봉일순</option>
               </select>
