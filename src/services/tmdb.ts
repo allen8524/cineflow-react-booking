@@ -4,6 +4,7 @@ const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 const TMDB_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p';
 const TMDB_ACCESS_TOKEN = import.meta.env.VITE_TMDB_ACCESS_TOKEN;
 const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+const MOVIE_FETCH_LIMIT = 12;
 
 interface TmdbMovie {
   id: number;
@@ -162,9 +163,9 @@ export const fetchMoviesFromTmdb = async (): Promise<Movie[] | null> => {
   ]);
 
   const genreMap = new Map(genreResponse.genres.map((genre) => [genre.id, genre.name]));
-  const nowPlaying = nowPlayingResponse.results.slice(0, 4);
+  const nowPlaying = nowPlayingResponse.results.slice(0, MOVIE_FETCH_LIMIT);
   const nowPlayingIds = new Set(nowPlaying.map((movie) => movie.id));
-  const upcoming = upcomingResponse.results.filter((movie) => !nowPlayingIds.has(movie.id)).slice(0, 3);
+  const upcoming = upcomingResponse.results.filter((movie) => !nowPlayingIds.has(movie.id)).slice(0, MOVIE_FETCH_LIMIT);
   const selectedMovies = [
     ...nowPlaying.map((movie, index) => ({ movie, index, status: 'NOW_SHOWING' as const })),
     ...upcoming.map((movie, index) => ({ movie, index: nowPlaying.length + index, status: 'COMING_SOON' as const }))
