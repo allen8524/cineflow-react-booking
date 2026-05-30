@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import ScrollToTop from './components/ScrollToTop';
-import { BookingProvider } from './context/BookingContext';
+import { BookingProvider, useBooking } from './context/BookingContext';
 import AdminPage from './pages/AdminPage';
 import BookingPage from './pages/BookingPage';
 import CompletePage from './pages/CompletePage';
@@ -14,6 +14,16 @@ import MovieListPage from './pages/MovieListPage';
 import PaymentPage from './pages/PaymentPage';
 import SupportPage from './pages/SupportPage';
 
+const MemberRoute = ({ children }: { children: JSX.Element }) => {
+  const { isLoggedIn } = useBooking();
+  return isLoggedIn ? children : <Navigate to="/login" replace />;
+};
+
+const AdminRoute = ({ children }: { children: JSX.Element }) => {
+  const { isAdmin } = useBooking();
+  return isAdmin ? children : <Navigate to="/" replace />;
+};
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -24,13 +34,13 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/movies" element={<MovieListPage />} />
             <Route path="/movies/:id" element={<MovieDetailPage />} />
-            <Route path="/booking" element={<BookingPage />} />
-            <Route path="/payment" element={<PaymentPage />} />
-            <Route path="/complete" element={<CompletePage />} />
-            <Route path="/history" element={<HistoryPage />} />
-            <Route path="/booking/history" element={<HistoryPage />} />
+            <Route path="/booking" element={<MemberRoute><BookingPage /></MemberRoute>} />
+            <Route path="/payment" element={<MemberRoute><PaymentPage /></MemberRoute>} />
+            <Route path="/complete" element={<MemberRoute><CompletePage /></MemberRoute>} />
+            <Route path="/history" element={<MemberRoute><HistoryPage /></MemberRoute>} />
+            <Route path="/booking/history" element={<MemberRoute><HistoryPage /></MemberRoute>} />
             <Route path="/support" element={<SupportPage />} />
-            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/admin" element={<AdminRoute><AdminPage /></AdminRoute>} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/index.html" element={<Navigate to="/" replace />} />
             <Route path="*" element={<ErrorPage />} />
