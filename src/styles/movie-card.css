@@ -1,8 +1,8 @@
 .movie-meta-panel {
   display: grid;
-  grid-template-columns: 66px 58px 110px;
+  grid-template-columns: 64px 56px 108px;
   gap: 0;
-  width: fit-content;
+  width: 230px;
   max-width: 100%;
   margin: 0 auto;
   padding: 0;
@@ -11,6 +11,8 @@
   border: 1px solid rgba(104, 114, 156, 0.12);
   border-radius: 14px;
   background: rgba(248, 250, 255, 0.72);
+  justify-self: center;
+  align-self: center;
 }
 
 .movie-meta-panel .movie-meta-item {
@@ -31,7 +33,6 @@
 
 .movie-meta-panel .movie-meta-item--date {
   grid-column: auto;
-  min-width: 108px;
 }
 
 .movie-meta-panel .movie-meta-item span {
@@ -58,16 +59,21 @@
 .home-showcase-card__meta.movie-meta-panel,
 .catalog-card__meta.movie-meta-panel {
   display: grid;
-  grid-template-columns: 66px 58px 110px;
-  width: fit-content;
+  grid-template-columns: 64px 56px 108px;
+  width: 230px;
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
   align-items: stretch;
+  justify-self: center;
 }
 
 @media (max-width: 520px) {
-  .movie-meta-panel {
-    grid-template-columns: 66px 58px 110px;
+  .movie-meta-panel,
+  .home-upcoming-card__meta.movie-meta-panel,
+  .home-showcase-card__meta.movie-meta-panel,
+  .catalog-card__meta.movie-meta-panel {
+    grid-template-columns: 62px 54px 104px;
+    width: 222px;
   }
 }
