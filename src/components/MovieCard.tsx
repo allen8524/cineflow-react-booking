@@ -45,7 +45,7 @@ const MovieCard = ({ movie, rank, variant = 'catalog' }: MovieCardProps) => {
   const ageClass = getAgeClass(movie.ageRating);
   const statusClass = isComingSoon ? 'status-upcoming upcoming' : 'status-now';
   const popularityText = (movie.popularity ?? movie.bookingRate).toFixed(1);
-  const scoreText = isComingSoon ? '집계 전' : movie.score > 0 ? `${movie.score.toFixed(1)}/10` : '미정';
+  const scoreText = isComingSoon ? '-' : movie.score > 0 ? `${movie.score.toFixed(1)}/10` : '미정';
 
   const cardClass = variant === 'upcoming'
     ? 'home-upcoming-card'
