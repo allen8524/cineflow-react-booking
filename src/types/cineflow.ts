@@ -15,6 +15,7 @@ export interface Movie {
   posterUrl: string;
   backdropUrl?: string;
   bookingRate: number;
+  popularity?: number;
   score: number;
   releaseDate: string;
   status: MovieStatus;
