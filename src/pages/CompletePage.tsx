@@ -27,12 +27,6 @@ const CompletePage = () => {
         className="booking-hero complete-hero"
         title="예매가 완료되었습니다."
         description="예매번호와 관람 정보를 확인하세요."
-        actions={(
-          <>
-            <Link to="/history" className="hero-btn primary" onClick={resetDraft}>예매내역 보기</Link>
-            <Link to="/" className="hero-btn secondary">메인으로 이동</Link>
-          </>
-        )}
       />
 
       <section className="cinema-page-body">
