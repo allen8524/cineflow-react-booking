@@ -5,9 +5,12 @@ import { useBooking } from '../context/BookingContext';
 import { schedules, screens, theaters } from '../data/movies';
 import { bookingStatusLabel, formatCurrency, formatDateTime } from '../utils/format';
 
+const ADMIN_MOVIES_PER_PAGE = 12;
+
 const AdminPage = () => {
   const { bookings, movies } = useBooking();
   const [tab, setTab] = useState<'dashboard' | 'movies' | 'schedules' | 'bookings'>('dashboard');
+  const [moviePage, setMoviePage] = useState(1);
 
   const metrics = useMemo(() => {
     const booked = bookings.filter((booking) => booking.status === 'BOOKED');
@@ -19,6 +22,13 @@ const AdminPage = () => {
       { label: '예상 매출', value: formatCurrency(revenue), description: '취소 제외 예매 금액 기준' }
     ];
   }, [bookings, movies.length]);
+
+  const movieTotalPages = Math.max(1, Math.ceil(movies.length / ADMIN_MOVIES_PER_PAGE));
+  const currentMoviePage = Math.min(moviePage, movieTotalPages);
+  const pagedMovies = movies.slice(
+    (currentMoviePage - 1) * ADMIN_MOVIES_PER_PAGE,
+    currentMoviePage * ADMIN_MOVIES_PER_PAGE
+  );
 
   return (
     <main className="admin-page cinema-page">
@@ -50,32 +60,54 @@ const AdminPage = () => {
           ) : null}
 
           {tab === 'movies' ? (
-            <section className="admin-section">
-              <div className="panel-head"><h2>영화 관리</h2></div>
-              <div className="admin-table-wrap">
-                <table className="admin-table">
+            <section className="admin-section admin-movie-section">
+              <div className="panel-head admin-section-head">
+                <div>
+                  <h2>영화 관리</h2>
+                  <p>긴 제목과 장르는 줄임 처리하고, 한 페이지에 12개씩 표시합니다.</p>
+                </div>
+                <span>{movies.length}개 중 {(currentMoviePage - 1) * ADMIN_MOVIES_PER_PAGE + 1}-{Math.min(currentMoviePage * ADMIN_MOVIES_PER_PAGE, movies.length)}개</span>
+              </div>
+              <div className="admin-table-wrap admin-table-wrap--compact">
+                <table className="admin-table admin-table--compact">
                   <thead>
                     <tr>
                       <th>영화명</th>
                       <th>장르</th>
                       <th>등급</th>
-                      <th>예매율</th>
+                      <th>인기도</th>
                       <th>상태</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {movies.map((movie) => (
+                    {pagedMovies.map((movie) => (
                       <tr key={movie.id}>
-                        <td>{movie.title}</td>
-                        <td>{movie.genre}</td>
+                        <td><span className="admin-table-ellipsis" title={movie.title}>{movie.title}</span></td>
+                        <td><span className="admin-table-ellipsis" title={movie.genre}>{movie.genre}</span></td>
                         <td>{movie.ageRating}</td>
-                        <td>{movie.bookingRate}%</td>
+                        <td>{(movie.popularity ?? movie.bookingRate).toFixed(1)}</td>
                         <td>{movie.status === 'NOW_SHOWING' ? '상영중' : '상영예정'}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
+              {movieTotalPages > 1 ? (
+                <nav className="admin-pagination" aria-label="관리자 영화 목록 페이지">
+                  <button type="button" disabled={currentMoviePage === 1} onClick={() => setMoviePage((value) => Math.max(1, value - 1))}>이전</button>
+                  {Array.from({ length: movieTotalPages }, (_, index) => index + 1).map((pageNumber) => (
+                    <button
+                      type="button"
+                      className={currentMoviePage === pageNumber ? 'is-active' : ''}
+                      onClick={() => setMoviePage(pageNumber)}
+                      key={pageNumber}
+                    >
+                      {pageNumber}
+                    </button>
+                  ))}
+                  <button type="button" disabled={currentMoviePage === movieTotalPages} onClick={() => setMoviePage((value) => Math.min(movieTotalPages, value + 1))}>다음</button>
+                </nav>
+              ) : null}
             </section>
           ) : null}
 
