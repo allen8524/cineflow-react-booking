@@ -24,6 +24,7 @@ const Layout = () => {
                 <p className="storefront-footer__headline">CineFlow CINEMA</p>
                 <p>서울 강남구 시네마로 100, 4층</p>
                 <p>대표번호 1544-0000</p>
+                <p>운영시간 09:00 - 18:00</p>
                 <p>help@cineflow.co.kr</p>
               </div>
             </div>
