@@ -90,7 +90,7 @@ const MovieCard = ({ movie, rank, variant = 'catalog' }: MovieCardProps) => {
         </div>
         <ul className={metaClass}>
           <li className="movie-meta-item movie-meta-item--popularity" title="TMDB에서 제공하는 popularity 값입니다.">
-            <span>TMDB 인기</span>
+            <span>관심도</span>
             <strong>{popularityText}</strong>
           </li>
           <li className="movie-meta-item">
