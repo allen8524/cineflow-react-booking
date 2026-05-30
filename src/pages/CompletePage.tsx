@@ -39,9 +39,7 @@ const CompletePage = () => {
         <div className="container">
           <article className="booking-panel complete-success-hero">
             <div className="complete-success-head">
-              <span className="success-state-badge">예매 완료</span>
               <h2>{booking.movieTitle}</h2>
-              <p>예매번호와 관람 정보를 확인하세요.</p>
             </div>
 
             <div className="ticket-frame complete-ticket-frame">

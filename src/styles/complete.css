@@ -8,8 +8,8 @@
 .complete-success-head {
   display: grid;
   gap: 8px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(104, 114, 156, 0.14);
+  padding-bottom: 6px;
+  border-bottom: 0;
 }
 
 .complete-success-head h2 {
