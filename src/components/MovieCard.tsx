@@ -88,7 +88,7 @@ const MovieCard = ({ movie, rank, variant = 'catalog' }: MovieCardProps) => {
           <span className={`age-badge ${ageClass}`}>{movie.ageRating}</span>
         </div>
         <ul className={metaClass}>
-          <li className="movie-meta-chip">예매율 {movie.bookingRate}%</li>
+          <li className="movie-meta-chip">인기도 {movie.popularity?.toFixed(1) ?? movie.bookingRate.toFixed(1)}</li>
           <li className="movie-meta-chip">평점 {movie.score.toFixed(1)}</li>
           <li className="movie-meta-chip">{formatDate(movie.releaseDate)}</li>
         </ul>
