@@ -40,6 +40,11 @@ const CompletePage = () => {
           <article className="booking-panel complete-success-hero">
             <div className="complete-success-head">
               <h2>{booking.movieTitle}</h2>
+              <div className="hero-actions complete-actions complete-actions--head">
+                <Link to="/history" className="hero-btn primary" onClick={resetDraft}>예매내역 보기</Link>
+                <Link to="/movies" className="hero-btn secondary">다른 영화 보기</Link>
+                <Link to="/booking" className="hero-btn secondary">다시 예매하기</Link>
+              </div>
             </div>
 
             <div className="ticket-frame complete-ticket-frame">
@@ -56,12 +61,6 @@ const CompletePage = () => {
                   <div className="summary-info-block"><span>결제</span><strong>{paymentMethodLabel(booking.paymentMethod)} · {formatCurrency(booking.totalPrice)}</strong></div>
                 </div>
               </div>
-            </div>
-
-            <div className="hero-actions complete-actions">
-              <Link to="/history" className="hero-btn primary" onClick={resetDraft}>예매내역 보기</Link>
-              <Link to="/movies" className="hero-btn secondary">다른 영화 보기</Link>
-              <Link to="/booking" className="hero-btn secondary">다시 예매하기</Link>
             </div>
           </article>
         </div>
