@@ -6,7 +6,7 @@ import { formatDate } from '../utils/format';
 const HomePage = () => {
   const { movies, isMovieApiLoading, movieApiError } = useBooking();
   const heroMovie = movies.find((movie) => movie.status === 'NOW_SHOWING') ?? movies[0];
-  const nowShowing = movies.filter((movie) => movie.status === 'NOW_SHOWING').slice(0, 4);
+  const nowShowing = movies.filter((movie) => movie.status === 'NOW_SHOWING').slice(0, 8);
   const upcoming = movies.filter((movie) => movie.status === 'COMING_SOON').slice(0, 4);
 
   return (
