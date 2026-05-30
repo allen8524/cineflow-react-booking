@@ -1,0 +1,51 @@
+.auth-page-container {
+  display: grid;
+  gap: 14px;
+}
+
+.auth-mode-tabs {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(104, 114, 156, 0.14);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 14px 28px rgba(125, 134, 179, 0.12);
+}
+
+.auth-mode-tabs button {
+  min-width: 104px;
+  min-height: 42px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #34405c;
+  font-weight: 850;
+  transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.auth-mode-tabs button.is-active {
+  background: linear-gradient(135deg, #f85f8f, #c7b8ff);
+  color: #fff;
+  box-shadow: 0 12px 22px rgba(248, 95, 143, 0.2);
+}
+
+.auth-mode-tabs button:not(.is-active):hover,
+.auth-mode-tabs button:not(.is-active):focus {
+  background: rgba(248, 245, 255, 0.9);
+  color: #6655a8;
+}
+
+@media (max-width: 520px) {
+  .auth-mode-tabs {
+    width: 100%;
+  }
+
+  .auth-mode-tabs button {
+    flex: 1;
+    min-width: 0;
+  }
+}
