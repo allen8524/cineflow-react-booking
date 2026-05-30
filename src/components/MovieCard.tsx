@@ -44,6 +44,7 @@ const MovieCard = ({ movie, rank, variant = 'catalog' }: MovieCardProps) => {
   const ageClass = getAgeClass(movie.ageRating);
   const statusClass = movie.status === 'NOW_SHOWING' ? 'status-now' : 'status-upcoming upcoming';
   const popularityText = (movie.popularity ?? movie.bookingRate).toFixed(1);
+  const scoreText = movie.score > 0 ? `${movie.score.toFixed(1)}/10` : '미정';
 
   const cardClass = variant === 'upcoming'
     ? 'home-upcoming-card'
@@ -95,7 +96,7 @@ const MovieCard = ({ movie, rank, variant = 'catalog' }: MovieCardProps) => {
           </li>
           <li className="movie-meta-item">
             <span>평점</span>
-            <strong>{movie.score.toFixed(1)}/10</strong>
+            <strong>{scoreText}</strong>
           </li>
           <li className="movie-meta-item movie-meta-item--date">
             <span>개봉일</span>
