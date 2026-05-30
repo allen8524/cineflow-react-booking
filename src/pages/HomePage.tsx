@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import MovieCard from '../components/MovieCard';
 import { useBooking } from '../context/BookingContext';
-import { movies, schedules, screens, theaters } from '../data/movies';
+import { schedules, theaters } from '../data/movies';
 import { formatDate } from '../utils/format';
 
 const HomePage = () => {
-  const { bookings } = useBooking();
+  const { bookings, movies, isMovieApiLoading, movieApiError } = useBooking();
   const heroMovie = movies.find((movie) => movie.status === 'NOW_SHOWING') ?? movies[0];
   const featuredMovie = movies.find((movie) => movie.bookingOpen) ?? movies[0];
   const nowShowing = movies.filter((movie) => movie.status === 'NOW_SHOWING').slice(0, 3);
@@ -16,6 +16,8 @@ const HomePage = () => {
     <main className="storefront-home">
       <section className="storefront-hero-section">
         <div className="container">
+          {movieApiError ? <p className="booking-feedback-banner">{movieApiError}</p> : null}
+          {isMovieApiLoading ? <p className="panel-description">영화 API 데이터를 불러오는 중입니다.</p> : null}
           <div className="slick-hero storefront-hero-slider">
             <div className="hero-slide storefront-hero-card">
               <img className="storefront-hero-card__backdrop" src={heroMovie.backdropUrl ?? heroMovie.posterUrl} alt="" aria-hidden="true" />
