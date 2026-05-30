@@ -2,15 +2,16 @@ import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import MovieCard from '../components/MovieCard';
 import PageHero from '../components/PageHero';
-import { movies } from '../data/movies';
+import { useBooking } from '../context/BookingContext';
 
 const MovieListPage = () => {
+  const { movies, isMovieApiLoading, movieApiError } = useBooking();
   const [keyword, setKeyword] = useState('');
   const [status, setStatus] = useState<'ALL' | 'NOW_SHOWING' | 'COMING_SOON'>('ALL');
   const [sort, setSort] = useState<'booking' | 'score' | 'release'>('booking');
 
   const filteredMovies = useMemo(() => {
-    return movies
+    return [...movies]
       .filter((movie) => status === 'ALL' || movie.status === status)
       .filter((movie) => movie.title.includes(keyword) || movie.genre.includes(keyword))
       .sort((a, b) => {
@@ -18,7 +19,7 @@ const MovieListPage = () => {
         if (sort === 'release') return new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime();
         return b.bookingRate - a.bookingRate;
       });
-  }, [keyword, status, sort]);
+  }, [keyword, movies, status, sort]);
 
   return (
     <main className="storefront-catalog-page cinema-page">
@@ -36,6 +37,9 @@ const MovieListPage = () => {
 
       <section className="cinema-page-body">
         <div className="container">
+          {isMovieApiLoading ? <p className="panel-description">영화 API 데이터를 불러오는 중입니다.</p> : null}
+          {movieApiError ? <p className="booking-feedback-banner">{movieApiError}</p> : null}
+
           <div className="movie-list-controls movie-toolbar">
             <div className="movie-tabs-filter movie-filter-group">
               <button type="button" className={`movie-filter-chip movie-filter-button ${status === 'ALL' ? 'is-active active' : ''}`} onClick={() => setStatus('ALL')}>전체</button>
