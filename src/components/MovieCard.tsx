@@ -40,11 +40,12 @@ const getAgeClass = (ageRating: string) => {
 };
 
 const MovieCard = ({ movie, rank, variant = 'catalog' }: MovieCardProps) => {
-  const stateLabel = movie.status === 'NOW_SHOWING' ? '상영중' : '상영예정';
+  const isComingSoon = movie.status === 'COMING_SOON';
+  const stateLabel = isComingSoon ? '상영예정' : '상영중';
   const ageClass = getAgeClass(movie.ageRating);
-  const statusClass = movie.status === 'NOW_SHOWING' ? 'status-now' : 'status-upcoming upcoming';
+  const statusClass = isComingSoon ? 'status-upcoming upcoming' : 'status-now';
   const popularityText = (movie.popularity ?? movie.bookingRate).toFixed(1);
-  const scoreText = movie.score > 0 ? `${movie.score.toFixed(1)}/10` : '미정';
+  const scoreText = isComingSoon ? '집계 전' : movie.score > 0 ? `${movie.score.toFixed(1)}/10` : '미정';
 
   const cardClass = variant === 'upcoming'
     ? 'home-upcoming-card'
@@ -105,7 +106,7 @@ const MovieCard = ({ movie, rank, variant = 'catalog' }: MovieCardProps) => {
         </ul>
         <p className="movie-card-summary">{movie.shortDescription}</p>
         <div className={actionsClass}>
-          {movie.bookingOpen ? <Link to={`/booking?movieId=${movie.id}`} className="book-btn">예매하기</Link> : <span className="book-btn disabled" aria-disabled="true">준비 중</span>}
+          {movie.bookingOpen ? <Link to={`/booking?movieId=${movie.id}`} className="book-btn">예매하기</Link> : <span className="book-btn disabled" aria-disabled="true">개봉 예정</span>}
           <Link to={`/movies/${movie.id}`} className="detail-link">상세보기</Link>
         </div>
       </div>
