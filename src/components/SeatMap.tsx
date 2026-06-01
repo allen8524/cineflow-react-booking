@@ -1,15 +1,43 @@
 import { useMemo, useState } from 'react';
 import { createSeatsForSchedule } from '../data/seats';
+import { schedules } from '../data/movies';
 import { useBooking } from '../context/BookingContext';
 import { formatCurrency } from '../utils/format';
 
+const parseSeatNames = (seatNames: string): string[] =>
+  seatNames
+    .split(',')
+    .map((seatName) => seatName.trim())
+    .filter(Boolean);
+
 const SeatMap = () => {
-  const { selectedSchedule, draft, toggleSeat } = useBooking();
+  const { selectedSchedule, draft, bookings, toggleSeat } = useBooking();
   const [message, setMessage] = useState('');
 
+  const bookedSeatCodes = useMemo(() => {
+    if (!selectedSchedule) {
+      return [];
+    }
+
+    return bookings
+      .filter((booking) => {
+        if (booking.status !== 'BOOKED') {
+          return false;
+        }
+
+        if (booking.scheduleId) {
+          return booking.scheduleId === selectedSchedule.id;
+        }
+
+        const schedule = schedules.find((item) => item.id === selectedSchedule.id);
+        return schedule ? booking.startTime === schedule.startTime && booking.endTime === schedule.endTime : false;
+      })
+      .flatMap((booking) => parseSeatNames(booking.seatNames));
+  }, [bookings, selectedSchedule]);
+
   const seats = useMemo(
-    () => (selectedSchedule ? createSeatsForSchedule(selectedSchedule.id) : []),
-    [selectedSchedule]
+    () => (selectedSchedule ? createSeatsForSchedule(selectedSchedule.id, bookedSeatCodes) : []),
+    [bookedSeatCodes, selectedSchedule]
   );
 
   const groupedSeats = useMemo(() => {
