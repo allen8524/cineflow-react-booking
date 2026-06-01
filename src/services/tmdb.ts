@@ -1,35 +1,14 @@
-import type { Movie, MovieStatus } from '../types/cineflow';
+import { movies as fallbackMovies } from '../data/movies';
+import type { Movie } from '../types/cineflow';
 
 const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 const TMDB_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p';
 const TMDB_ACCESS_TOKEN = import.meta.env.VITE_TMDB_ACCESS_TOKEN;
 const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
-const MOVIE_FETCH_LIMIT = 12;
-
-interface TmdbMovie {
-  id: number;
-  title: string;
-  original_title: string;
-  overview: string;
-  poster_path: string | null;
-  backdrop_path: string | null;
-  release_date: string;
-  genre_ids: number[];
-  vote_average: number;
-  popularity: number;
-}
-
-interface TmdbMovieListResponse {
-  results: TmdbMovie[];
-}
 
 interface TmdbGenre {
   id: number;
   name: string;
-}
-
-interface TmdbGenreResponse {
-  genres: TmdbGenre[];
 }
 
 interface TmdbReleaseDate {
@@ -42,7 +21,17 @@ interface TmdbReleaseDateRegion {
 }
 
 interface TmdbMovieDetail {
+  id: number;
+  title: string;
+  original_title: string;
+  overview: string;
+  poster_path: string | null;
+  backdrop_path: string | null;
+  release_date: string;
+  genres?: TmdbGenre[];
   runtime: number | null;
+  vote_average: number;
+  popularity: number;
   release_dates?: {
     results: TmdbReleaseDateRegion[];
   };
@@ -109,45 +98,45 @@ const fetchTmdbMovieDetail = async (movieId: number) => {
   }
 };
 
-const createAgeRating = (detail: TmdbMovieDetail | null) => {
+const createAgeRating = (detail: TmdbMovieDetail | null, fallbackAgeRating: string) => {
   const krReleaseDates = detail?.release_dates?.results.find((region) => region.iso_3166_1 === 'KR')?.release_dates;
   const certification = krReleaseDates?.map((releaseDate) => releaseDate.certification.trim()).find(Boolean);
 
   if (!certification) {
-    return '미정';
+    return fallbackAgeRating;
   }
 
   return certification.toLowerCase() === 'all' ? 'ALL' : certification;
 };
 
-const mapTmdbMovie = (
-  movie: TmdbMovie,
-  detail: TmdbMovieDetail | null,
-  index: number,
-  status: MovieStatus,
-  genreMap: Map<number, string>
-): Movie => {
-  const title = movie.title || movie.original_title || '제목 미정';
-  const genre = movie.genre_ids.map((genreId) => genreMap.get(genreId)).filter(Boolean).join(' · ') || '장르 미정';
-  const description = movie.overview || `${title} 영화 정보입니다.`;
+const createGenreLabel = (detail: TmdbMovieDetail | null, fallbackGenre: string) => {
+  const genreLabel = detail?.genres?.map((genre) => genre.name).filter(Boolean).join(' · ');
+  return genreLabel || fallbackGenre;
+};
+
+const mapTmdbMovie = (fallbackMovie: Movie, detail: TmdbMovieDetail | null): Movie => {
+  if (!detail) {
+    return fallbackMovie;
+  }
+
+  const title = detail.title || detail.original_title || fallbackMovie.title;
+  const description = detail.overview || fallbackMovie.description;
 
   return {
-    id: index + 1,
-    tmdbId: movie.id,
+    ...fallbackMovie,
+    tmdbId: detail.id,
     title,
-    shortDescription: createShortDescription(movie.overview, title),
+    shortDescription: createShortDescription(description, title),
     description,
-    genre,
-    ageRating: createAgeRating(detail),
-    runningTime: detail?.runtime ?? 0,
-    posterUrl: createImageUrl(movie.poster_path, 'w500', POSTER_PLACEHOLDER),
-    backdropUrl: createImageUrl(movie.backdrop_path, 'original', BACKDROP_PLACEHOLDER),
-    bookingRate: movie.popularity,
-    popularity: movie.popularity,
-    score: movie.vote_average,
-    releaseDate: movie.release_date,
-    status,
-    bookingOpen: status === 'NOW_SHOWING'
+    genre: createGenreLabel(detail, fallbackMovie.genre),
+    ageRating: createAgeRating(detail, fallbackMovie.ageRating),
+    runningTime: detail.runtime ?? fallbackMovie.runningTime,
+    posterUrl: createImageUrl(detail.poster_path, 'w500', fallbackMovie.posterUrl || POSTER_PLACEHOLDER),
+    backdropUrl: createImageUrl(detail.backdrop_path, 'original', fallbackMovie.backdropUrl ?? BACKDROP_PLACEHOLDER),
+    bookingRate: detail.popularity ?? fallbackMovie.bookingRate,
+    popularity: detail.popularity ?? fallbackMovie.popularity ?? fallbackMovie.bookingRate,
+    score: detail.vote_average ?? fallbackMovie.score,
+    releaseDate: detail.release_date || fallbackMovie.releaseDate
   };
 };
 
@@ -156,25 +145,11 @@ export const fetchMoviesFromTmdb = async (): Promise<Movie[] | null> => {
     return null;
   }
 
-  const [genreResponse, nowPlayingResponse, upcomingResponse] = await Promise.all([
-    requestTmdb<TmdbGenreResponse>('/genre/movie/list'),
-    requestTmdb<TmdbMovieListResponse>('/movie/now_playing', { region: 'KR', page: '1' }),
-    requestTmdb<TmdbMovieListResponse>('/movie/upcoming', { region: 'KR', page: '1' })
-  ]);
+  const movieDetails = await Promise.all(fallbackMovies.map((movie) => fetchTmdbMovieDetail(movie.tmdbId)));
 
-  const genreMap = new Map(genreResponse.genres.map((genre) => [genre.id, genre.name]));
-  const nowPlaying = nowPlayingResponse.results.slice(0, MOVIE_FETCH_LIMIT);
-  const nowPlayingIds = new Set(nowPlaying.map((movie) => movie.id));
-  const upcoming = upcomingResponse.results.filter((movie) => !nowPlayingIds.has(movie.id)).slice(0, MOVIE_FETCH_LIMIT);
-  const selectedMovies = [
-    ...nowPlaying.map((movie, index) => ({ movie, index, status: 'NOW_SHOWING' as const })),
-    ...upcoming.map((movie, index) => ({ movie, index: nowPlaying.length + index, status: 'COMING_SOON' as const }))
-  ];
+  if (!movieDetails.some(Boolean)) {
+    return null;
+  }
 
-  const movieDetails = await Promise.all(selectedMovies.map(({ movie }) => fetchTmdbMovieDetail(movie.id)));
-  const movies = selectedMovies.map(({ movie, index, status }, detailIndex) =>
-    mapTmdbMovie(movie, movieDetails[detailIndex], index, status, genreMap)
-  );
-
-  return movies.length > 0 ? movies : null;
+  return fallbackMovies.map((movie, index) => mapTmdbMovie(movie, movieDetails[index]));
 };
