@@ -5,6 +5,8 @@ import { useBooking } from '../context/BookingContext';
 
 const MOVIES_PER_PAGE = 12;
 
+const normalizeSearchText = (text: string) => text.trim().toLowerCase();
+
 const MovieListPage = () => {
   const { movies, isMovieApiLoading, movieApiError } = useBooking();
   const [keyword, setKeyword] = useState('');
@@ -13,9 +15,26 @@ const MovieListPage = () => {
   const [page, setPage] = useState(1);
 
   const filteredMovies = useMemo(() => {
+    const normalizedKeyword = normalizeSearchText(keyword);
+
     return [...movies]
       .filter((movie) => status === 'ALL' || movie.status === status)
-      .filter((movie) => movie.title.includes(keyword) || movie.genre.includes(keyword))
+      .filter((movie) => {
+        if (!normalizedKeyword) {
+          return true;
+        }
+
+        const searchableText = normalizeSearchText([
+          movie.title,
+          movie.genre,
+          movie.shortDescription,
+          movie.description,
+          movie.ageRating,
+          movie.status === 'NOW_SHOWING' ? '상영중 now showing' : '상영예정 coming soon'
+        ].join(' '));
+
+        return searchableText.includes(normalizedKeyword);
+      })
       .sort((a, b) => {
         if (sort === 'score') return b.score - a.score;
         if (sort === 'release') return new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime();
@@ -64,7 +83,7 @@ const MovieListPage = () => {
             <div className="movie-utility-controls movie-search-sort">
               <label className="movie-search-dummy">
                 <span>검색</span>
-                <input className="movie-search-input" value={keyword} onChange={(event) => handleKeywordChange(event.target.value)} placeholder="영화명 또는 장르 검색" />
+                <input className="movie-search-input" value={keyword} onChange={(event) => handleKeywordChange(event.target.value)} placeholder="영화명, 장르, 줄거리 검색" />
               </label>
               <select className="movie-sort-select" value={sort} onChange={(event) => handleSortChange(event.target.value as typeof sort)} aria-label="정렬">
                 <option value="popularity">인기도순</option>
@@ -79,6 +98,8 @@ const MovieListPage = () => {
               <MovieCard movie={movie} rank={(currentPage - 1) * MOVIES_PER_PAGE + index + 1} key={movie.id} />
             ))}
           </div>
+
+          {pagedMovies.length === 0 ? <p className="booking-feedback-banner">검색 조건에 맞는 영화가 없습니다.</p> : null}
 
           {totalPages > 1 ? (
             <nav className="movie-pagination" aria-label="영화 목록 페이지">
