@@ -84,9 +84,44 @@ const HomePage = () => {
               </div>
             </div>
             <div className="home-guide-list">
-              <Link to="/movies" className="home-guide-card"><span className="home-guide-card__number">01</span><div><strong>영화 목록/상세</strong><p>원하는 작품과 상영 정보를 빠르게 확인</p></div><em>보기</em></Link>
-              <Link to="/booking" className="home-guide-card"><span className="home-guide-card__number">02</span><div><strong>빠른예매/좌석 선택</strong><p>영화, 극장, 시간, 인원, 좌석을 차례로 선택</p></div><em>시작</em></Link>
-              <Link to="/history" className="home-guide-card"><span className="home-guide-card__number">03</span><div><strong>예매내역/취소</strong><p>예매번호로 관람 일정 확인 및 취소 접수</p></div><em>조회</em></Link>
+              <Link to="/movies" className="home-guide-card">
+                <span className="home-guide-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 28 28" fill="none">
+                    <path d="M6.5 8.5h15A2.5 2.5 0 0 1 24 11v11a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 4 22V11a2.5 2.5 0 0 1 2.5-2.5Z" />
+                    <path d="M5 13h18" />
+                    <path d="M8.5 8.5 11.5 4M14 8.5 17 4M19.5 8.5 22.5 4" />
+                    <path d="M10 17.5h5M10 21h8" />
+                  </svg>
+                </span>
+                <div><strong>영화 목록/상세</strong><p>원하는 작품과 상영 정보를 빠르게 확인</p></div>
+                <em>보기</em>
+              </Link>
+              <Link to="/booking" className="home-guide-card">
+                <span className="home-guide-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 28 28" fill="none">
+                    <path d="M8 12.5V8a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v4.5" />
+                    <path d="M7 12h14a3 3 0 0 1 3 3v5.5a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 4 20.5V15a3 3 0 0 1 3-3Z" />
+                    <path d="M8 23v2M20 23v2M9 17h10" />
+                    <path d="M8 12v5M20 12v5" />
+                  </svg>
+                </span>
+                <div><strong>빠른예매/좌석 선택</strong><p>영화, 극장, 시간, 인원, 좌석을 차례로 선택</p></div>
+                <em>시작</em>
+              </Link>
+              <Link to="/history" className="home-guide-card">
+                <span className="home-guide-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 28 28" fill="none">
+                    <path d="M9 5.5H7.5A2.5 2.5 0 0 0 5 8v14.5A2.5 2.5 0 0 0 7.5 25H14" />
+                    <path d="M19 14V8a2.5 2.5 0 0 0-2.5-2.5H15" />
+                    <path d="M9 5.5A2.5 2.5 0 0 1 11.5 3h1A2.5 2.5 0 0 1 15 5.5v1H9v-1Z" />
+                    <path d="M9 11h6M9 15h5" />
+                    <path d="M18.5 25a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z" />
+                    <path d="M18.5 17v2.6l1.8 1.2" />
+                  </svg>
+                </span>
+                <div><strong>예매내역/취소</strong><p>예매번호로 관람 일정 확인 및 취소 접수</p></div>
+                <em>조회</em>
+              </Link>
             </div>
           </div>
         </div>
