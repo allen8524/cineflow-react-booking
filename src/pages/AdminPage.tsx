@@ -7,11 +7,44 @@ import { bookingStatusLabel, formatCurrency, formatDateTime } from '../utils/for
 
 const ADMIN_MOVIES_PER_PAGE = 12;
 
+const parseSeatNames = (seatNames: string): string[] =>
+  seatNames
+    .split(',')
+    .map((seatName) => seatName.trim())
+    .filter(Boolean);
+
 const AdminPage = () => {
   const { bookings, movies, cancelBooking } = useBooking();
   const [tab, setTab] = useState<'dashboard' | 'movies' | 'schedules' | 'bookings'>('dashboard');
   const [moviePage, setMoviePage] = useState(1);
   const [adminCancelReasons, setAdminCancelReasons] = useState<Record<string, string>>({});
+
+  const getBookedSeatCount = (scheduleId: number) => {
+    const schedule = schedules.find((item) => item.id === scheduleId);
+
+    return bookings
+      .filter((booking) => {
+        if (booking.status !== 'BOOKED') {
+          return false;
+        }
+
+        if (booking.scheduleId) {
+          return booking.scheduleId === scheduleId;
+        }
+
+        return schedule ? booking.startTime === schedule.startTime && booking.endTime === schedule.endTime : false;
+      })
+      .reduce((sum, booking) => sum + parseSeatNames(booking.seatNames).length, 0);
+  };
+
+  const getRemainingSeats = (scheduleId: number) => {
+    const schedule = schedules.find((item) => item.id === scheduleId);
+    if (!schedule) {
+      return 0;
+    }
+
+    return Math.max(0, schedule.availableSeats - getBookedSeatCount(scheduleId));
+  };
 
   const metrics = useMemo(() => {
     const booked = bookings.filter((booking) => booking.status === 'BOOKED');
@@ -133,6 +166,7 @@ const AdminPage = () => {
                       <th>극장</th>
                       <th>상영관</th>
                       <th>시작 시간</th>
+                      <th>예매석</th>
                       <th>잔여석</th>
                       <th>가격</th>
                     </tr>
@@ -142,6 +176,8 @@ const AdminPage = () => {
                       const movie = movies.find((item) => item.id === schedule.movieId);
                       const screen = screens.find((item) => item.id === schedule.screenId);
                       const theater = theaters.find((item) => item.id === screen?.theaterId);
+                      const bookedSeatCount = getBookedSeatCount(schedule.id);
+                      const remainingSeats = getRemainingSeats(schedule.id);
 
                       return (
                         <tr key={schedule.id}>
@@ -149,7 +185,8 @@ const AdminPage = () => {
                           <td>{theater?.name}</td>
                           <td>{screen?.name} {screen?.screenType}</td>
                           <td>{formatDateTime(schedule.startTime)}</td>
-                          <td>{schedule.availableSeats}</td>
+                          <td>{bookedSeatCount}석</td>
+                          <td>{remainingSeats}석</td>
                           <td>{formatCurrency(schedule.price)}</td>
                         </tr>
                       );
