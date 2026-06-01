@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import BookingSummary from '../components/BookingSummary';
 import PageHero from '../components/PageHero';
@@ -14,6 +14,13 @@ const PaymentPage = () => {
   const [name, setName] = useState(draft.customerName);
   const [phone, setPhone] = useState(draft.customerPhone);
   const [error, setError] = useState('');
+  const canEnterPayment = totalPeople > 0 && draft.selectedSeats.length === totalPeople;
+
+  useEffect(() => {
+    if (!canEnterPayment) {
+      navigate('/booking', { replace: true });
+    }
+  }, [canEnterPayment, navigate]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -21,7 +28,7 @@ const PaymentPage = () => {
       setError('예매자 이름과 연락처를 입력해 주세요.');
       return;
     }
-    if (totalPeople <= 0 || draft.selectedSeats.length !== totalPeople) {
+    if (!canEnterPayment) {
       setError('선택한 인원 수와 좌석 수가 일치해야 합니다.');
       return;
     }
@@ -36,6 +43,10 @@ const PaymentPage = () => {
     resetDraft();
     navigate(`/complete?code=${booking.bookingCode}`);
   };
+
+  if (!canEnterPayment) {
+    return null;
+  }
 
   return (
     <main className="booking-page cinema-page">
