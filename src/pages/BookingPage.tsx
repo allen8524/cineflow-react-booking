@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import BookingSummary from '../components/BookingSummary';
 import PageHero from '../components/PageHero';
@@ -11,14 +11,25 @@ import { schedules } from '../data/movies';
 const BookingPage = () => {
   const [searchParams] = useSearchParams();
   const { draft, movies, setMovie, setSchedule, setPeopleCount, clearSeats, selectedMovie } = useBooking();
+  const requestedMovieId = Number(searchParams.get('movieId'));
+  const appliedMovieIdRef = useRef<number | null>(null);
   const movieSchedules = schedules.filter((schedule) => schedule.movieId === draft.movieId);
 
   useEffect(() => {
-    const movieId = Number(searchParams.get('movieId'));
-    if (movieId && movies.some((movie) => movie.id === movieId)) {
-      setMovie(movieId);
+    if (!requestedMovieId || appliedMovieIdRef.current === requestedMovieId) {
+      return;
     }
-  }, []);
+
+    if (draft.movieId === requestedMovieId) {
+      appliedMovieIdRef.current = requestedMovieId;
+      return;
+    }
+
+    if (movies.some((movie) => movie.id === requestedMovieId)) {
+      setMovie(requestedMovieId);
+      appliedMovieIdRef.current = requestedMovieId;
+    }
+  }, [draft.movieId, movies, requestedMovieId, setMovie]);
 
   return (
     <main className="booking-page cinema-page">
