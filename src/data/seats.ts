@@ -16,6 +16,8 @@ const reservedSeatMap: Record<number, string[]> = {
   12: ['A1', 'A2', 'A3']
 };
 
+export const getInitialReservedSeatCodes = (scheduleId: number): string[] => reservedSeatMap[scheduleId] ?? [];
+
 export const resolveSeatType = (row: string, number: number): SeatType => {
   if (row === 'A' && number >= 5 && number <= 8) {
     return 'PREMIUM';
@@ -40,10 +42,10 @@ export const resolveSeatPrice = (schedulePrice: number, seatType: SeatType): num
   return schedulePrice;
 };
 
-export const createSeatsForSchedule = (scheduleId: number): Seat[] => {
+export const createSeatsForSchedule = (scheduleId: number, reservedSeatCodes: string[] = []): Seat[] => {
   const schedule = schedules.find((item) => item.id === scheduleId);
   const price = schedule?.price ?? 15000;
-  const reservedCodes = new Set(reservedSeatMap[scheduleId] ?? []);
+  const reservedCodes = new Set([...getInitialReservedSeatCodes(scheduleId), ...reservedSeatCodes]);
   const rows = Array.from({ length: 10 }, (_, index) => String.fromCharCode(65 + index));
 
   return rows.flatMap((row) =>
