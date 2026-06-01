@@ -42,9 +42,9 @@ export const resolveSeatPrice = (schedulePrice: number, seatType: SeatType): num
   return schedulePrice;
 };
 
-export const createSeatsForSchedule = (scheduleId: number, reservedSeatCodes: string[] = []): Seat[] => {
+export const createSeatsForSchedule = (scheduleId: number, reservedSeatCodes: string[] = [], schedulePrice?: number): Seat[] => {
   const schedule = schedules.find((item) => item.id === scheduleId);
-  const price = schedule?.price ?? 15000;
+  const price = schedulePrice ?? schedule?.price ?? 15000;
   const reservedCodes = new Set([...getInitialReservedSeatCodes(scheduleId), ...reservedSeatCodes]);
   const rows = Array.from({ length: 10 }, (_, index) => String.fromCharCode(65 + index));
 
