@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react';
 import { createSeatsForSchedule } from '../data/seats';
-import { schedules } from '../data/movies';
 import { useBooking } from '../context/BookingContext';
 import { formatCurrency } from '../utils/format';
 
@@ -29,14 +28,13 @@ const SeatMap = () => {
           return booking.scheduleId === selectedSchedule.id;
         }
 
-        const schedule = schedules.find((item) => item.id === selectedSchedule.id);
-        return schedule ? booking.startTime === schedule.startTime && booking.endTime === schedule.endTime : false;
+        return booking.startTime === selectedSchedule.startTime && booking.endTime === selectedSchedule.endTime;
       })
       .flatMap((booking) => parseSeatNames(booking.seatNames));
   }, [bookings, selectedSchedule]);
 
   const seats = useMemo(
-    () => (selectedSchedule ? createSeatsForSchedule(selectedSchedule.id, bookedSeatCodes) : []),
+    () => (selectedSchedule ? createSeatsForSchedule(selectedSchedule.id, bookedSeatCodes, selectedSchedule.price) : []),
     [bookedSeatCodes, selectedSchedule]
   );
 
