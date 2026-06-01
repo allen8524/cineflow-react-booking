@@ -1,5 +1,5 @@
 import { movies as fallbackMovies } from '../data/movies';
-import type { Movie } from '../types/cineflow';
+import type { Movie, MovieStatus } from '../types/cineflow';
 
 const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 const TMDB_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p';
@@ -20,7 +20,7 @@ interface TmdbReleaseDateRegion {
   release_dates: TmdbReleaseDate[];
 }
 
-interface TmdbMovieDetail {
+interface TmdbMovieSummary {
   id: number;
   title: string;
   original_title: string;
@@ -28,14 +28,27 @@ interface TmdbMovieDetail {
   poster_path: string | null;
   backdrop_path: string | null;
   release_date: string;
-  genres?: TmdbGenre[];
-  runtime: number | null;
   vote_average: number;
   popularity: number;
+}
+
+interface TmdbMovieListResponse {
+  results: TmdbMovieSummary[];
+}
+
+interface TmdbMovieDetail extends TmdbMovieSummary {
+  genres?: TmdbGenre[];
+  runtime: number | null;
   release_dates?: {
     results: TmdbReleaseDateRegion[];
   };
 }
+
+const POSTER_PLACEHOLDER =
+  'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="500" height="750" viewBox="0 0 500 750"%3E%3Crect width="500" height="750" fill="%231f2937"/%3E%3Ctext x="250" y="375" fill="%23f9fafb" font-family="Arial, sans-serif" font-size="36" text-anchor="middle"%3ENo Poster%3C/text%3E%3C/svg%3E';
+
+const BACKDROP_PLACEHOLDER =
+  'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720"%3E%3Crect width="1280" height="720" fill="%23111827"/%3E%3Ctext x="640" y="360" fill="%23f9fafb" font-family="Arial, sans-serif" font-size="52" text-anchor="middle"%3ENo Backdrop%3C/text%3E%3C/svg%3E';
 
 const hasTmdbCredentials = Boolean(TMDB_ACCESS_TOKEN || TMDB_API_KEY);
 
@@ -65,17 +78,11 @@ const requestTmdb = async <T>(path: string, params?: Record<string, string>): Pr
   });
 
   if (!response.ok) {
-    throw new Error(`TMDB API 요청 실패: ${response.status}`);
+    throw new Error(`TMDB API request failed: ${response.status}`);
   }
 
   return response.json() as Promise<T>;
 };
-
-const POSTER_PLACEHOLDER =
-  'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="500" height="750" viewBox="0 0 500 750"%3E%3Crect width="500" height="750" fill="%231f2937"/%3E%3Ctext x="250" y="375" fill="%23f9fafb" font-family="Arial, sans-serif" font-size="36" text-anchor="middle"%3ENo Poster%3C/text%3E%3C/svg%3E';
-
-const BACKDROP_PLACEHOLDER =
-  'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720"%3E%3Crect width="1280" height="720" fill="%23111827"/%3E%3Ctext x="640" y="360" fill="%23f9fafb" font-family="Arial, sans-serif" font-size="52" text-anchor="middle"%3ENo Backdrop%3C/text%3E%3C/svg%3E';
 
 const createImageUrl = (path: string | null, size: 'w500' | 'original', fallbackUrl: string) => {
   if (!path) {
@@ -86,8 +93,23 @@ const createImageUrl = (path: string | null, size: 'w500' | 'original', fallback
 };
 
 const createShortDescription = (overview: string, title: string) => {
-  const text = overview || `${title} 영화 정보입니다.`;
+  const text = overview || `${title} information is not available.`;
   return text.length > 70 ? `${text.slice(0, 70)}...` : text;
+};
+
+const createAgeRating = (detail: TmdbMovieDetail | null) => {
+  const krReleaseDates = detail?.release_dates?.results.find((region) => region.iso_3166_1 === 'KR')?.release_dates;
+  const certification = krReleaseDates?.map((releaseDate) => releaseDate.certification.trim()).find(Boolean);
+
+  if (!certification) {
+    return 'ALL';
+  }
+
+  return certification.toLowerCase() === 'all' ? 'ALL' : certification;
+};
+
+const createGenreLabel = (detail: TmdbMovieDetail | null) => {
+  return detail?.genres?.map((genre) => genre.name).filter(Boolean).join(' · ') || 'Genre unavailable';
 };
 
 const fetchTmdbMovieDetail = async (movieId: number) => {
@@ -98,46 +120,51 @@ const fetchTmdbMovieDetail = async (movieId: number) => {
   }
 };
 
-const createAgeRating = (detail: TmdbMovieDetail | null, fallbackAgeRating: string) => {
-  const krReleaseDates = detail?.release_dates?.results.find((region) => region.iso_3166_1 === 'KR')?.release_dates;
-  const certification = krReleaseDates?.map((releaseDate) => releaseDate.certification.trim()).find(Boolean);
-
-  if (!certification) {
-    return fallbackAgeRating;
-  }
-
-  return certification.toLowerCase() === 'all' ? 'ALL' : certification;
-};
-
-const createGenreLabel = (detail: TmdbMovieDetail | null, fallbackGenre: string) => {
-  const genreLabel = detail?.genres?.map((genre) => genre.name).filter(Boolean).join(' · ');
-  return genreLabel || fallbackGenre;
-};
-
-const mapTmdbMovie = (fallbackMovie: Movie, detail: TmdbMovieDetail | null): Movie => {
-  if (!detail) {
-    return fallbackMovie;
-  }
-
-  const title = detail.title || detail.original_title || fallbackMovie.title;
-  const description = detail.overview || fallbackMovie.description;
+const mapTmdbMovie = (
+  summary: TmdbMovieSummary,
+  detail: TmdbMovieDetail | null,
+  id: number,
+  status: MovieStatus
+): Movie => {
+  const source = detail ?? summary;
+  const title = source.title || source.original_title || 'Untitled';
+  const description = source.overview || '';
+  const popularity = source.popularity ?? 0;
 
   return {
-    ...fallbackMovie,
-    tmdbId: detail.id,
+    id,
+    tmdbId: source.id,
     title,
     shortDescription: createShortDescription(description, title),
-    description,
-    genre: createGenreLabel(detail, fallbackMovie.genre),
-    ageRating: createAgeRating(detail, fallbackMovie.ageRating),
-    runningTime: detail.runtime ?? fallbackMovie.runningTime,
-    posterUrl: createImageUrl(detail.poster_path, 'w500', fallbackMovie.posterUrl || POSTER_PLACEHOLDER),
-    backdropUrl: createImageUrl(detail.backdrop_path, 'original', fallbackMovie.backdropUrl ?? BACKDROP_PLACEHOLDER),
-    bookingRate: detail.popularity ?? fallbackMovie.bookingRate,
-    popularity: detail.popularity ?? fallbackMovie.popularity ?? fallbackMovie.bookingRate,
-    score: detail.vote_average ?? fallbackMovie.score,
-    releaseDate: detail.release_date || fallbackMovie.releaseDate
+    description: description || `${title} information is not available.`,
+    genre: createGenreLabel(detail),
+    ageRating: createAgeRating(detail),
+    runningTime: detail?.runtime ?? 0,
+    posterUrl: createImageUrl(source.poster_path, 'w500', POSTER_PLACEHOLDER),
+    backdropUrl: createImageUrl(source.backdrop_path, 'original', BACKDROP_PLACEHOLDER),
+    bookingRate: popularity,
+    popularity,
+    score: source.vote_average ?? 0,
+    releaseDate: source.release_date || '',
+    status,
+    bookingOpen: status === 'NOW_SHOWING'
   };
+};
+
+const fetchMovieGroup = async (path: string, status: MovieStatus, limit: number) => {
+  const response = await requestTmdb<TmdbMovieListResponse>(path, {
+    page: '1',
+    region: 'KR',
+    watch_region: 'KR'
+  });
+  const summaries = response.results.filter((movie) => movie.poster_path || movie.backdrop_path).slice(0, limit);
+  const details = await Promise.all(summaries.map((movie) => fetchTmdbMovieDetail(movie.id)));
+
+  return summaries.map((summary, index) => ({
+    summary,
+    detail: details[index],
+    status
+  }));
 };
 
 export const fetchMoviesFromTmdb = async (): Promise<Movie[] | null> => {
@@ -145,11 +172,26 @@ export const fetchMoviesFromTmdb = async (): Promise<Movie[] | null> => {
     return null;
   }
 
-  const movieDetails = await Promise.all(fallbackMovies.map((movie) => fetchTmdbMovieDetail(movie.tmdbId)));
+  const [nowShowing, upcoming] = await Promise.all([
+    fetchMovieGroup('/movie/now_playing', 'NOW_SHOWING', 12),
+    fetchMovieGroup('/movie/upcoming', 'COMING_SOON', 8)
+  ]);
 
-  if (!movieDetails.some(Boolean)) {
+  const seenTmdbIds = new Set<number>();
+  const apiMovies = [...nowShowing, ...upcoming].filter((movie) => {
+    if (seenTmdbIds.has(movie.summary.id)) {
+      return false;
+    }
+
+    seenTmdbIds.add(movie.summary.id);
+    return true;
+  });
+
+  if (apiMovies.length === 0) {
     return null;
   }
 
-  return fallbackMovies.map((movie, index) => mapTmdbMovie(movie, movieDetails[index]));
+  return apiMovies.map((movie, index) => mapTmdbMovie(movie.summary, movie.detail, index + 1, movie.status));
 };
+
+export const getFallbackMovies = () => fallbackMovies;
