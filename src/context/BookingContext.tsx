@@ -72,6 +72,12 @@ const defaultAccounts: UserAccount[] = [
 
 const BookingContext = createContext<BookingContextValue | null>(null);
 
+const parseSeatNames = (seatNames: string): string[] =>
+  seatNames
+    .split(',')
+    .map((seatName) => seatName.trim())
+    .filter(Boolean);
+
 const readBookingsFromStorage = (): Booking[] => {
   const stored = window.localStorage.getItem('cineflow-bookings');
   if (!stored) {
@@ -147,17 +153,35 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
     [selectedScreen]
   );
 
+  const getBookedSeatCodesForSchedule = (scheduleId: number): string[] => {
+    const schedule = schedules.find((item) => item.id === scheduleId);
+
+    return bookings
+      .filter((booking) => {
+        if (booking.status !== 'BOOKED') {
+          return false;
+        }
+
+        if (booking.scheduleId) {
+          return booking.scheduleId === scheduleId;
+        }
+
+        return schedule ? booking.startTime === schedule.startTime && booking.endTime === schedule.endTime : false;
+      })
+      .flatMap((booking) => parseSeatNames(booking.seatNames));
+  };
+
   const selectedSeatsTotal = useMemo(() => {
     if (!selectedSchedule) {
       return 0;
     }
 
-    const seats = createSeatsForSchedule(selectedSchedule.id);
+    const seats = createSeatsForSchedule(selectedSchedule.id, getBookedSeatCodesForSchedule(selectedSchedule.id));
     return draft.selectedSeats.reduce((sum, seatCode) => {
       const seat = seats.find((item) => item.code === seatCode);
       return sum + (seat?.price ?? selectedSchedule.price);
     }, 0);
-  }, [draft.selectedSeats, selectedSchedule]);
+  }, [bookings, draft.selectedSeats, selectedSchedule]);
 
   useEffect(() => {
     let isMounted = true;
@@ -261,10 +285,11 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
       return { ok: false, message: '상영 시간을 먼저 선택해 주세요.' };
     }
 
-    const seats = createSeatsForSchedule(selectedSchedule.id);
+    const bookedSeatCodes = getBookedSeatCodesForSchedule(selectedSchedule.id);
+    const seats = createSeatsForSchedule(selectedSchedule.id, bookedSeatCodes);
     const seat = seats.find((item) => item.code === seatCode);
     if (!seat || seat.reserved) {
-      return { ok: false, message: '선택할 수 없는 좌석입니다.' };
+      return { ok: false, message: '이미 예매되었거나 선택할 수 없는 좌석입니다.' };
     }
 
     if (draft.selectedSeats.includes(seatCode)) {
@@ -311,9 +336,15 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
       return null;
     }
 
+    const bookedSeatCodes = new Set(getBookedSeatCodesForSchedule(selectedSchedule.id));
+    if (draft.selectedSeats.some((seatCode) => bookedSeatCodes.has(seatCode))) {
+      return null;
+    }
+
     const booking: Booking = {
       id: Date.now(),
       bookingCode: createBookingCode(selectedSchedule.startTime),
+      scheduleId: selectedSchedule.id,
       customerName: customerOverride?.name ?? currentUser.name,
       customerPhone: customerOverride?.phone ?? currentUser.phone,
       movieTitle: selectedMovie.title,
