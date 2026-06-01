@@ -10,7 +10,7 @@ const paymentMethods: PaymentMethod[] = ['CARD', 'KAKAO_PAY', 'NAVER_PAY', 'TOSS
 
 const PaymentPage = () => {
   const navigate = useNavigate();
-  const { draft, totalPeople, selectedSeatsTotal, setCustomer, setPaymentMethod, createBooking } = useBooking();
+  const { draft, totalPeople, selectedSeatsTotal, setCustomer, setPaymentMethod, createBooking, resetDraft } = useBooking();
   const [name, setName] = useState(draft.customerName);
   const [phone, setPhone] = useState(draft.customerPhone);
   const [error, setError] = useState('');
@@ -33,6 +33,7 @@ const PaymentPage = () => {
       return;
     }
 
+    resetDraft();
     navigate(`/complete?code=${booking.bookingCode}`);
   };
 
