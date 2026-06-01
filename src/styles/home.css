@@ -9,6 +9,117 @@
   height: 100%;
 }
 
+.home-guide-panel {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.home-guide-panel::before,
+.home-guide-panel::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  border-radius: 999px;
+  pointer-events: none;
+  filter: blur(18px);
+}
+
+.home-guide-panel::before {
+  width: 270px;
+  height: 270px;
+  left: 27%;
+  bottom: 6%;
+  background:
+    radial-gradient(circle, rgba(199, 184, 255, 0.34) 0%, rgba(238, 231, 255, 0.2) 34%, transparent 72%);
+}
+
+.home-guide-panel::after {
+  width: 210px;
+  height: 210px;
+  right: 21%;
+  top: 22%;
+  background:
+    radial-gradient(circle, rgba(255, 214, 229, 0.36) 0%, rgba(255, 237, 245, 0.22) 38%, transparent 74%);
+}
+
+.home-guide-intro,
+.home-guide-list {
+  position: relative;
+  z-index: 1;
+}
+
+.home-guide-intro::before,
+.home-guide-intro::after,
+.home-guide-list::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 999px;
+  pointer-events: none;
+  filter: blur(10px);
+}
+
+.home-guide-intro::before {
+  width: 118px;
+  height: 118px;
+  left: 5%;
+  top: -46px;
+  background: rgba(255, 237, 245, 0.48);
+}
+
+.home-guide-intro::after {
+  width: 44px;
+  height: 44px;
+  left: 41%;
+  top: 13%;
+  background: rgba(199, 184, 255, 0.38);
+}
+
+.home-guide-list::before {
+  width: 64px;
+  height: 64px;
+  left: -54px;
+  bottom: 12%;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.home-guide-card__icon {
+  align-self: center;
+  width: 64px;
+  height: 64px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 64px;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 72% 18%, rgba(255, 255, 255, 0.76), transparent 30%),
+    linear-gradient(135deg, rgba(238, 231, 255, 0.96), rgba(255, 226, 237, 0.92));
+  color: #6f58b8;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.72),
+    0 12px 24px rgba(199, 184, 255, 0.18);
+}
+
+.home-guide-card__icon svg {
+  width: 32px;
+  height: 32px;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.home-guide-card:hover .home-guide-card__icon,
+.home-guide-card:focus-visible .home-guide-card__icon {
+  color: #5b4a91;
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.82),
+    0 16px 28px rgba(199, 184, 255, 0.25);
+}
+
 @media (max-width: 1180px) {
   .home-movie-grid-four {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -18,5 +129,17 @@
 @media (max-width: 640px) {
   .home-movie-grid-four {
     grid-template-columns: 1fr;
+  }
+
+  .home-guide-card__icon {
+    width: 56px;
+    height: 56px;
+    flex-basis: 56px;
+    border-radius: 19px;
+  }
+
+  .home-guide-card__icon svg {
+    width: 28px;
+    height: 28px;
   }
 }
