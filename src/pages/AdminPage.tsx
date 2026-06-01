@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { FormEvent, useMemo, useState } from 'react';
 import PageHero from '../components/PageHero';
 import StatusBadge from '../components/StatusBadge';
 import { useBooking } from '../context/BookingContext';
@@ -8,9 +8,10 @@ import { bookingStatusLabel, formatCurrency, formatDateTime } from '../utils/for
 const ADMIN_MOVIES_PER_PAGE = 12;
 
 const AdminPage = () => {
-  const { bookings, movies } = useBooking();
+  const { bookings, movies, cancelBooking } = useBooking();
   const [tab, setTab] = useState<'dashboard' | 'movies' | 'schedules' | 'bookings'>('dashboard');
   const [moviePage, setMoviePage] = useState(1);
+  const [adminCancelReasons, setAdminCancelReasons] = useState<Record<string, string>>({});
 
   const metrics = useMemo(() => {
     const booked = bookings.filter((booking) => booking.status === 'BOOKED');
@@ -29,6 +30,16 @@ const AdminPage = () => {
     (currentMoviePage - 1) * ADMIN_MOVIES_PER_PAGE,
     currentMoviePage * ADMIN_MOVIES_PER_PAGE
   );
+
+  const handleAdminCancelReasonChange = (bookingCode: string, reason: string) => {
+    setAdminCancelReasons((prev) => ({ ...prev, [bookingCode]: reason }));
+  };
+
+  const handleAdminCancel = (event: FormEvent<HTMLFormElement>, bookingCode: string) => {
+    event.preventDefault();
+    cancelBooking(bookingCode, adminCancelReasons[bookingCode] || '관리자 취소');
+    setAdminCancelReasons((prev) => ({ ...prev, [bookingCode]: '' }));
+  };
 
   return (
     <main className="admin-page cinema-page">
@@ -162,6 +173,7 @@ const AdminPage = () => {
                       <th>좌석</th>
                       <th>금액</th>
                       <th>상태</th>
+                      <th>관리</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -175,6 +187,20 @@ const AdminPage = () => {
                         <td>
                           <StatusBadge status={booking.status} />
                           <span className="sr-only">{bookingStatusLabel(booking.status)}</span>
+                        </td>
+                        <td>
+                          {booking.status === 'BOOKED' ? (
+                            <form className="admin-booking-cancel-form" onSubmit={(event) => handleAdminCancel(event, booking.bookingCode)}>
+                              <input
+                                value={adminCancelReasons[booking.bookingCode] ?? ''}
+                                onChange={(event) => handleAdminCancelReasonChange(booking.bookingCode, event.target.value)}
+                                placeholder="취소 사유"
+                              />
+                              <button type="submit" className="hero-btn secondary">취소</button>
+                            </form>
+                          ) : (
+                            <span className="panel-description">{booking.cancelReason ?? bookingStatusLabel(booking.status)}</span>
+                          )}
                         </td>
                       </tr>
                     ))}
