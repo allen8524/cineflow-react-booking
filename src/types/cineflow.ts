@@ -79,6 +79,7 @@ export interface BookingDraft {
 export interface Booking {
   id: number;
   bookingCode: string;
+  scheduleId?: number;
   customerName: string;
   customerPhone: string;
   movieTitle: string;
