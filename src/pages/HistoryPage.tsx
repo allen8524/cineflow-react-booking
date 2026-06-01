@@ -4,22 +4,38 @@ import StatusBadge from '../components/StatusBadge';
 import { useBooking } from '../context/BookingContext';
 import { bookingStatusLabel, formatCurrency, formatDateTime, paymentMethodLabel } from '../utils/format';
 
+const normalizeSearchText = (text: string) => text.trim().toLowerCase();
+
 const HistoryPage = () => {
   const { bookings, cancelBooking } = useBooking();
   const [keyword, setKeyword] = useState('');
   const [status, setStatus] = useState<'ALL' | 'BOOKED' | 'USED' | 'CANCELED'>('ALL');
-  const [cancelReason, setCancelReason] = useState('일정 변경');
+  const [cancelReasons, setCancelReasons] = useState<Record<string, string>>({});
 
   const filteredBookings = useMemo(() => {
+    const normalizedKeyword = normalizeSearchText(keyword);
+
     return bookings
       .filter((booking) => status === 'ALL' || booking.status === status)
-      .filter((booking) => `${booking.bookingCode} ${booking.movieTitle} ${booking.customerName} ${booking.customerPhone}`.includes(keyword))
+      .filter((booking) => {
+        if (!normalizedKeyword) {
+          return true;
+        }
+
+        return normalizeSearchText(`${booking.bookingCode} ${booking.movieTitle} ${booking.customerName} ${booking.customerPhone} ${booking.seatNames}`)
+          .includes(normalizedKeyword);
+      })
       .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }, [bookings, keyword, status]);
 
+  const handleCancelReasonChange = (bookingCode: string, reason: string) => {
+    setCancelReasons((prev) => ({ ...prev, [bookingCode]: reason }));
+  };
+
   const handleCancel = (event: FormEvent<HTMLFormElement>, bookingCode: string) => {
     event.preventDefault();
-    cancelBooking(bookingCode, cancelReason);
+    cancelBooking(bookingCode, cancelReasons[bookingCode] || '일정 변경');
+    setCancelReasons((prev) => ({ ...prev, [bookingCode]: '' }));
   };
 
   return (
@@ -66,8 +82,8 @@ const HistoryPage = () => {
                           <label className="history-cancel-reason-field">
                             <span>취소 사유</span>
                             <input
-                              value={cancelReason}
-                              onChange={(event) => setCancelReason(event.target.value)}
+                              value={cancelReasons[booking.bookingCode] ?? ''}
+                              onChange={(event) => handleCancelReasonChange(booking.bookingCode, event.target.value)}
                               placeholder="예: 일정 변경"
                             />
                           </label>
@@ -83,6 +99,7 @@ const HistoryPage = () => {
               </article>
             ))}
           </div>
+          {filteredBookings.length === 0 ? <p className="booking-feedback-banner">조회 조건에 맞는 예매내역이 없습니다.</p> : null}
         </div>
       </section>
     </main>
