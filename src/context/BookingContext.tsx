@@ -1,15 +1,17 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { initialBookings } from '../data/bookings';
-import { movies as fallbackMovies, schedules, screens, theaters } from '../data/movies';
+import { movies as fallbackMovies, screens, theaters } from '../data/movies';
 import { createSeatsForSchedule } from '../data/seats';
 import { fetchMoviesFromTmdb } from '../services/tmdb';
-import type { Booking, BookingDraft, Movie, PaymentMethod, PersonCounts, UserAccount } from '../types/cineflow';
+import type { Booking, BookingDraft, Movie, PaymentMethod, PersonCounts, Schedule, UserAccount } from '../types/cineflow';
 import { createBookingCode } from '../utils/format';
+import { createSchedulesForMovies } from '../utils/scheduleFactory';
 
 interface BookingContextValue {
   draft: BookingDraft;
   bookings: Booking[];
   movies: Movie[];
+  schedules: Schedule[];
   isMovieApiLoading: boolean;
   movieApiError: string | null;
   isLoggedIn: boolean;
@@ -18,7 +20,7 @@ interface BookingContextValue {
   currentUser: UserAccount | null;
   totalPeople: number;
   selectedMovie: Movie | undefined;
-  selectedSchedule: (typeof schedules)[number] | undefined;
+  selectedSchedule: Schedule | undefined;
   selectedScreen: (typeof screens)[number] | undefined;
   selectedTheater: (typeof theaters)[number] | undefined;
   selectedSeatsTotal: number;
@@ -133,6 +135,7 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
   const [isMovieApiLoading, setIsMovieApiLoading] = useState(true);
   const [movieApiError, setMovieApiError] = useState<string | null>(null);
 
+  const schedules = useMemo(() => createSchedulesForMovies(movies), [movies]);
   const isLoggedIn = Boolean(currentUser);
   const isAdmin = currentUser?.role === 'ADMIN';
   const loginUserName = currentUser?.name ?? '';
@@ -143,7 +146,7 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const selectedMovie = useMemo(() => movies.find((movie) => movie.id === draft.movieId), [draft.movieId, movies]);
-  const selectedSchedule = useMemo(() => schedules.find((schedule) => schedule.id === draft.scheduleId), [draft.scheduleId]);
+  const selectedSchedule = useMemo(() => schedules.find((schedule) => schedule.id === draft.scheduleId), [draft.scheduleId, schedules]);
   const selectedScreen = useMemo(
     () => screens.find((screen) => screen.id === selectedSchedule?.screenId),
     [selectedSchedule]
@@ -169,14 +172,18 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
         return schedule ? booking.startTime === schedule.startTime && booking.endTime === schedule.endTime : false;
       })
       .flatMap((booking) => parseSeatNames(booking.seatNames));
-  }, [bookings]);
+  }, [bookings, schedules]);
 
   const selectedSeatsTotal = useMemo(() => {
     if (!selectedSchedule) {
       return 0;
     }
 
-    const seats = createSeatsForSchedule(selectedSchedule.id, getBookedSeatCodesForSchedule(selectedSchedule.id));
+    const seats = createSeatsForSchedule(
+      selectedSchedule.id,
+      getBookedSeatCodesForSchedule(selectedSchedule.id),
+      selectedSchedule.price
+    );
     return draft.selectedSeats.reduce((sum, seatCode) => {
       const seat = seats.find((item) => item.code === seatCode);
       return sum + (seat?.price ?? selectedSchedule.price);
@@ -219,6 +226,31 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
       isMounted = false;
     };
   }, []);
+
+  useEffect(() => {
+    if (!draft.movieId || movies.some((movie) => movie.id === draft.movieId)) {
+      return;
+    }
+
+    const firstMovie = movies.find((movie) => movie.bookingOpen) ?? movies[0];
+    if (firstMovie) {
+      setDraft((prev) => ({ ...prev, movieId: firstMovie.id, scheduleId: null, selectedSeats: [] }));
+    }
+  }, [draft.movieId, movies]);
+
+  useEffect(() => {
+    if (!draft.movieId) {
+      return;
+    }
+
+    const hasSelectedSchedule = draft.scheduleId ? schedules.some((schedule) => schedule.id === draft.scheduleId && schedule.movieId === draft.movieId) : false;
+    if (hasSelectedSchedule) {
+      return;
+    }
+
+    const firstSchedule = schedules.find((schedule) => schedule.movieId === draft.movieId);
+    setDraft((prev) => ({ ...prev, scheduleId: firstSchedule?.id ?? null, selectedSeats: [] }));
+  }, [draft.movieId, draft.scheduleId, schedules]);
 
   useEffect(() => {
     window.localStorage.setItem('cineflow-draft', JSON.stringify(draft));
@@ -286,7 +318,7 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
     }
 
     const bookedSeatCodes = getBookedSeatCodesForSchedule(selectedSchedule.id);
-    const seats = createSeatsForSchedule(selectedSchedule.id, bookedSeatCodes);
+    const seats = createSeatsForSchedule(selectedSchedule.id, bookedSeatCodes, selectedSchedule.price);
     const seat = seats.find((item) => item.code === seatCode);
     if (!seat || seat.reserved) {
       return { ok: false, message: '이미 예매되었거나 선택할 수 없는 좌석입니다.' };
@@ -425,6 +457,7 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
     draft,
     bookings,
     movies,
+    schedules,
     isMovieApiLoading,
     movieApiError,
     isLoggedIn,
