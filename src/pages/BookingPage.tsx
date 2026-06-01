@@ -6,11 +6,10 @@ import PersonCounter from '../components/PersonCounter';
 import ScheduleCard from '../components/ScheduleCard';
 import SeatMap from '../components/SeatMap';
 import { useBooking } from '../context/BookingContext';
-import { schedules } from '../data/movies';
 
 const BookingPage = () => {
   const [searchParams] = useSearchParams();
-  const { draft, movies, setMovie, setSchedule, setPeopleCount, clearSeats, selectedMovie } = useBooking();
+  const { draft, movies, schedules, setMovie, setSchedule, setPeopleCount, clearSeats, selectedMovie } = useBooking();
   const requestedMovieId = Number(searchParams.get('movieId'));
   const appliedMovieIdRef = useRef<number | null>(null);
   const movieSchedules = schedules.filter((schedule) => schedule.movieId === draft.movieId);
@@ -70,11 +69,15 @@ const BookingPage = () => {
                 <div className="panel-head">
                   <h2>2. 상영 시간 선택</h2>
                 </div>
-                <ul className="timeslot-list">
-                  {movieSchedules.map((schedule) => (
-                    <ScheduleCard schedule={schedule} selected={draft.scheduleId === schedule.id} onSelect={setSchedule} key={schedule.id} />
-                  ))}
-                </ul>
+                {movieSchedules.length > 0 ? (
+                  <ul className="timeslot-list">
+                    {movieSchedules.map((schedule) => (
+                      <ScheduleCard schedule={schedule} selected={draft.scheduleId === schedule.id} onSelect={setSchedule} key={schedule.id} />
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="booking-feedback-banner">선택한 영화는 현재 등록된 상영 시간이 없습니다.</p>
+                )}
                 {selectedMovie && !selectedMovie.bookingOpen ? <p className="booking-feedback-banner">상영예정 영화는 예매 흐름 확인용으로만 제공됩니다.</p> : null}
               </section>
 
