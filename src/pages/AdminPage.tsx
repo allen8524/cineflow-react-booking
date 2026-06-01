@@ -2,7 +2,7 @@ import { FormEvent, useMemo, useState } from 'react';
 import PageHero from '../components/PageHero';
 import StatusBadge from '../components/StatusBadge';
 import { useBooking } from '../context/BookingContext';
-import { schedules, screens, theaters } from '../data/movies';
+import { screens, theaters } from '../data/movies';
 import { bookingStatusLabel, formatCurrency, formatDateTime } from '../utils/format';
 
 const ADMIN_MOVIES_PER_PAGE = 12;
@@ -14,7 +14,7 @@ const parseSeatNames = (seatNames: string): string[] =>
     .filter(Boolean);
 
 const AdminPage = () => {
-  const { bookings, movies, cancelBooking } = useBooking();
+  const { bookings, movies, schedules, cancelBooking } = useBooking();
   const [tab, setTab] = useState<'dashboard' | 'movies' | 'schedules' | 'bookings'>('dashboard');
   const [moviePage, setMoviePage] = useState(1);
   const [adminCancelReasons, setAdminCancelReasons] = useState<Record<string, string>>({});
@@ -51,11 +51,11 @@ const AdminPage = () => {
     const revenue = booked.reduce((sum, booking) => sum + booking.totalPrice, 0);
     return [
       { label: '전체 영화', value: `${movies.length}개`, description: '상영중/상영예정 포함' },
-      { label: '상영 시간표', value: `${schedules.length}개`, description: '활성 시간표 기준' },
+      { label: '상영 시간표', value: `${schedules.length}개`, description: '동적 생성 시간표 기준' },
       { label: '예매 완료', value: `${booked.length}건`, description: '취소 제외 예매 건수' },
       { label: '예상 매출', value: formatCurrency(revenue), description: '취소 제외 예매 금액 기준' }
     ];
-  }, [bookings, movies.length]);
+  }, [bookings, movies.length, schedules.length]);
 
   const movieTotalPages = Math.max(1, Math.ceil(movies.length / ADMIN_MOVIES_PER_PAGE));
   const currentMoviePage = Math.min(moviePage, movieTotalPages);
@@ -108,7 +108,7 @@ const AdminPage = () => {
               <div className="panel-head admin-section-head">
                 <div>
                   <h2>영화 관리</h2>
-                  <p>긴 제목과 장르는 줄임 처리하고, 한 페이지에 12개씩 표시합니다.</p>
+                  <p>TMDB API에서 가져온 영화 데이터를 기준으로 표시합니다.</p>
                 </div>
                 <span>{movies.length}개 중 {(currentMoviePage - 1) * ADMIN_MOVIES_PER_PAGE + 1}-{Math.min(currentMoviePage * ADMIN_MOVIES_PER_PAGE, movies.length)}개</span>
               </div>
