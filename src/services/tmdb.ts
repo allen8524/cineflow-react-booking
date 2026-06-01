@@ -44,11 +44,17 @@ interface TmdbMovieDetail extends TmdbMovieSummary {
   };
 }
 
-const POSTER_PLACEHOLDER =
-  'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="500" height="750" viewBox="0 0 500 750"%3E%3Crect width="500" height="750" fill="%231f2937"/%3E%3Ctext x="250" y="375" fill="%23f9fafb" font-family="Arial, sans-serif" font-size="36" text-anchor="middle"%3ENo Poster%3C/text%3E%3C/svg%3E';
+const createSvgPlaceholder = (width: number, height: number, background: string, fontSize: number, text: string) => {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><rect width="${width}" height="${height}" fill="${background}"/><text x="${width / 2}" y="${height / 2}" fill="#f9fafb" font-family="Arial, sans-serif" font-size="${fontSize}" text-anchor="middle" dominant-baseline="middle">${text}</text></svg>`;
 
-const BACKDROP_PLACEHOLDER =
-  'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720"%3E%3Crect width="1280" height="720" fill="%23111827"/%3E%3Ctext x="640" y="360" fill="%23f9fafb" font-family="Arial, sans-serif" font-size="52" text-anchor="middle"%3ENo Backdrop%3C/text%3E%3C/svg%3E';
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+};
+
+const POSTER_PLACEHOLDER = createSvgPlaceholder(500, 750, '#1f2937', 34, '포스터 없음');
+const BACKDROP_PLACEHOLDER = createSvgPlaceholder(1280, 720, '#111827', 52, '배경 이미지 없음');
+const DEFAULT_MOVIE_TITLE = '제목 미정';
+const DEFAULT_MOVIE_DESCRIPTION = '영화 정보가 아직 제공되지 않았습니다.';
+const DEFAULT_GENRE_LABEL = '장르 정보 없음';
 
 const hasTmdbCredentials = Boolean(TMDB_ACCESS_TOKEN || TMDB_API_KEY);
 
@@ -78,7 +84,7 @@ const requestTmdb = async <T>(path: string, params?: Record<string, string>): Pr
   });
 
   if (!response.ok) {
-    throw new Error(`TMDB API request failed: ${response.status}`);
+    throw new Error(`TMDB API 요청 실패: ${response.status}`);
   }
 
   return response.json() as Promise<T>;
@@ -93,7 +99,7 @@ const createImageUrl = (path: string | null, size: 'w500' | 'original', fallback
 };
 
 const createShortDescription = (overview: string, title: string) => {
-  const text = overview || `${title} information is not available.`;
+  const text = overview || `${title}의 ${DEFAULT_MOVIE_DESCRIPTION}`;
   return text.length > 70 ? `${text.slice(0, 70)}...` : text;
 };
 
@@ -109,7 +115,7 @@ const createAgeRating = (detail: TmdbMovieDetail | null) => {
 };
 
 const createGenreLabel = (detail: TmdbMovieDetail | null) => {
-  return detail?.genres?.map((genre) => genre.name).filter(Boolean).join(' · ') || 'Genre unavailable';
+  return detail?.genres?.map((genre) => genre.name).filter(Boolean).join(' · ') || DEFAULT_GENRE_LABEL;
 };
 
 const fetchTmdbMovieDetail = async (movieId: number) => {
@@ -127,7 +133,7 @@ const mapTmdbMovie = (
   status: MovieStatus
 ): Movie => {
   const source = detail ?? summary;
-  const title = source.title || source.original_title || 'Untitled';
+  const title = source.title || source.original_title || DEFAULT_MOVIE_TITLE;
   const description = source.overview || '';
   const popularity = source.popularity ?? 0;
 
@@ -136,7 +142,7 @@ const mapTmdbMovie = (
     tmdbId: source.id,
     title,
     shortDescription: createShortDescription(description, title),
-    description: description || `${title} information is not available.`,
+    description: description || `${title}의 ${DEFAULT_MOVIE_DESCRIPTION}`,
     genre: createGenreLabel(detail),
     ageRating: createAgeRating(detail),
     runningTime: detail?.runtime ?? 0,
