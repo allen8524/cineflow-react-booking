@@ -13,6 +13,15 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  background:
+    radial-gradient(circle at 7% 10%, rgba(255, 237, 245, 0.82) 0 1.5%, transparent 11%),
+    radial-gradient(circle at 10% 17%, rgba(255, 220, 232, 0.46) 0 4%, transparent 15%),
+    radial-gradient(circle at 30% 27%, rgba(199, 184, 255, 0.42) 0 2%, transparent 7%),
+    radial-gradient(circle at 42% 100%, rgba(199, 184, 255, 0.3) 0 8%, transparent 22%),
+    radial-gradient(circle at 67% 45%, rgba(255, 214, 229, 0.34) 0 7%, transparent 18%),
+    radial-gradient(circle at 75% 70%, rgba(255, 214, 229, 0.24) 0 6%, transparent 17%),
+    radial-gradient(circle at 66% 69%, rgba(255, 255, 255, 0.74) 0 1.2%, transparent 5%),
+    rgba(255, 255, 255, 0.84) !important;
 }
 
 .home-guide-panel::before,
@@ -22,25 +31,24 @@
   z-index: 0;
   border-radius: 999px;
   pointer-events: none;
-  filter: blur(18px);
 }
 
 .home-guide-panel::before {
-  width: 270px;
-  height: 270px;
-  left: 27%;
-  bottom: 6%;
-  background:
-    radial-gradient(circle, rgba(199, 184, 255, 0.34) 0%, rgba(238, 231, 255, 0.2) 34%, transparent 72%);
+  width: 330px;
+  height: 330px;
+  left: 28%;
+  bottom: -110px;
+  background: rgba(199, 184, 255, 0.24);
+  filter: blur(30px);
 }
 
 .home-guide-panel::after {
-  width: 210px;
-  height: 210px;
-  right: 21%;
+  width: 250px;
+  height: 250px;
+  right: 18%;
   top: 22%;
-  background:
-    radial-gradient(circle, rgba(255, 214, 229, 0.36) 0%, rgba(255, 237, 245, 0.22) 38%, transparent 74%);
+  background: rgba(255, 214, 229, 0.3);
+  filter: blur(34px);
 }
 
 .home-guide-intro,
@@ -57,56 +65,66 @@
   z-index: -1;
   border-radius: 999px;
   pointer-events: none;
-  filter: blur(10px);
 }
 
 .home-guide-intro::before {
-  width: 118px;
-  height: 118px;
+  width: 135px;
+  height: 135px;
   left: 5%;
-  top: -46px;
-  background: rgba(255, 237, 245, 0.48);
+  top: -55px;
+  background: rgba(255, 237, 245, 0.58);
+  filter: blur(28px);
 }
 
 .home-guide-intro::after {
-  width: 44px;
-  height: 44px;
+  width: 58px;
+  height: 58px;
   left: 41%;
-  top: 13%;
-  background: rgba(199, 184, 255, 0.38);
+  top: 14%;
+  background: rgba(199, 184, 255, 0.44);
+  filter: blur(15px);
 }
 
 .home-guide-list::before {
-  width: 64px;
-  height: 64px;
-  left: -54px;
+  width: 78px;
+  height: 78px;
+  left: -62px;
   bottom: 12%;
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.78);
+  filter: blur(16px);
+}
+
+.home-guide-card {
+  grid-template-columns: 76px minmax(0, 1fr) auto !important;
+  min-height: 142px !important;
+  padding: 24px 26px !important;
+  gap: 22px !important;
+  border-radius: 26px !important;
 }
 
 .home-guide-card__icon {
   align-self: center;
-  width: 64px;
-  height: 64px;
+  width: 76px;
+  height: 76px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  flex: 0 0 64px;
-  border-radius: 22px;
+  flex: 0 0 76px;
+  border-radius: 26px;
   background:
-    radial-gradient(circle at 72% 18%, rgba(255, 255, 255, 0.76), transparent 30%),
-    linear-gradient(135deg, rgba(238, 231, 255, 0.96), rgba(255, 226, 237, 0.92));
+    radial-gradient(circle at 72% 18%, rgba(255, 255, 255, 0.78), transparent 30%),
+    linear-gradient(135deg, rgba(238, 231, 255, 0.98), rgba(255, 226, 237, 0.95));
   color: #6f58b8;
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.72),
-    0 12px 24px rgba(199, 184, 255, 0.18);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.75),
+    0 14px 28px rgba(199, 184, 255, 0.2);
 }
 
 .home-guide-card__icon svg {
-  width: 32px;
-  height: 32px;
+  width: 38px;
+  height: 38px;
   stroke: currentColor;
-  stroke-width: 2.2;
+  stroke-width: 2.25;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -116,8 +134,8 @@
   color: #5b4a91;
   transform: translateY(-1px);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.82),
-    0 16px 28px rgba(199, 184, 255, 0.25);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.84),
+    0 18px 34px rgba(199, 184, 255, 0.28);
 }
 
 @media (max-width: 1180px) {
@@ -131,15 +149,22 @@
     grid-template-columns: 1fr;
   }
 
+  .home-guide-card {
+    grid-template-columns: 58px minmax(0, 1fr) auto !important;
+    min-height: 0 !important;
+    padding: 18px !important;
+    gap: 12px !important;
+  }
+
   .home-guide-card__icon {
-    width: 56px;
-    height: 56px;
-    flex-basis: 56px;
-    border-radius: 19px;
+    width: 58px;
+    height: 58px;
+    flex-basis: 58px;
+    border-radius: 20px;
   }
 
   .home-guide-card__icon svg {
-    width: 28px;
-    height: 28px;
+    width: 29px;
+    height: 29px;
   }
 }
