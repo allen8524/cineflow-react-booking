@@ -1,7 +1,6 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import ScheduleCard from '../components/ScheduleCard';
 import { useBooking } from '../context/BookingContext';
-import { schedules } from '../data/movies';
 import { formatCurrency, formatDate } from '../utils/format';
 
 const formatAgeRatingLabel = (ageRating: string) => {
@@ -19,7 +18,7 @@ const formatAgeRatingLabel = (ageRating: string) => {
 const MovieDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { draft, movies, setMovie, setSchedule } = useBooking();
+  const { draft, movies, schedules, setMovie, setSchedule } = useBooking();
   const movie = movies.find((item) => item.id === Number(id));
 
   if (!movie) {
@@ -75,8 +74,8 @@ const MovieDetailPage = () => {
                 <li>개봉 {formatDate(movie.releaseDate)}</li>
               </ul>
               <div className="hero-actions detail-actions detail-actions--inline">
-                <button type="button" className="hero-btn primary" disabled={!movie.bookingOpen} onClick={handleBooking}>
-                  {movie.bookingOpen ? '예매하기' : '상영예정'}
+                <button type="button" className="hero-btn primary" disabled={!movie.bookingOpen || movieSchedules.length === 0} onClick={handleBooking}>
+                  {movie.bookingOpen && movieSchedules.length > 0 ? '예매하기' : '상영예정'}
                 </button>
                 <Link to="/movies" className="hero-btn secondary">다른 영화 보기</Link>
               </div>
