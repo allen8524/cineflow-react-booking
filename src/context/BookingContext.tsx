@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { initialBookings } from '../data/bookings';
 import { movies as fallbackMovies, schedules, screens, theaters } from '../data/movies';
 import { createSeatsForSchedule } from '../data/seats';
@@ -153,7 +153,7 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
     [selectedScreen]
   );
 
-  const getBookedSeatCodesForSchedule = (scheduleId: number): string[] => {
+  const getBookedSeatCodesForSchedule = useCallback((scheduleId: number): string[] => {
     const schedule = schedules.find((item) => item.id === scheduleId);
 
     return bookings
@@ -169,7 +169,7 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
         return schedule ? booking.startTime === schedule.startTime && booking.endTime === schedule.endTime : false;
       })
       .flatMap((booking) => parseSeatNames(booking.seatNames));
-  };
+  }, [bookings]);
 
   const selectedSeatsTotal = useMemo(() => {
     if (!selectedSchedule) {
@@ -181,7 +181,7 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
       const seat = seats.find((item) => item.code === seatCode);
       return sum + (seat?.price ?? selectedSchedule.price);
     }, 0);
-  }, [bookings, draft.selectedSeats, selectedSchedule]);
+  }, [draft.selectedSeats, getBookedSeatCodesForSchedule, selectedSchedule]);
 
   useEffect(() => {
     let isMounted = true;
