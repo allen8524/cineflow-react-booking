@@ -148,8 +148,15 @@
 }
 
 @media (max-width: 640px) {
+  .complete-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
   .complete-actions .hero-btn {
     width: 100%;
+    min-width: 0;
   }
 
   .complete-ticket-frame {

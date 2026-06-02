@@ -5,6 +5,7 @@ import './styles.css';
 import './styles/layout.css';
 import './styles/movie-detail.css';
 import './styles/booking.css';
+import './styles/payment.css';
 import './styles/history.css';
 import './styles/complete.css';
 import './styles/home.css';

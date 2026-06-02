@@ -187,10 +187,8 @@ button:disabled { background: #edf0f7 !important; border-color: rgba(104, 114, 1
 }
 
 @media (max-width: 640px) {
-  .hero-actions,
-  .complete-actions { display: grid; grid-template-columns: 1fr; width: 100%; }
-  .hero-actions .hero-btn,
-  .complete-actions .hero-btn { width: 100%; min-width: 0; }
+  .hero-actions { display: grid; grid-template-columns: 1fr; width: 100%; }
+  .hero-actions .hero-btn { width: 100%; min-width: 0; }
 }
 
 /* Text contrast */
