@@ -1,3 +1,13 @@
+.storefront-account-nav button,
+.auth-inline-button {
+  border: 0;
+  background: transparent;
+}
+
+.storefront-account-nav .auth-inline-button {
+  white-space: nowrap;
+}
+
 .storefront-footer {
   margin-top: 0;
   padding: 28px 0 20px;

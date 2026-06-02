@@ -10,15 +10,6 @@ a { text-decoration: none; }
 img { max-width: 100%; }
 
 #root { min-height: 100vh; }
-.storefront-account-nav button,
-.auth-inline-button {
-  border: 0;
-  background: transparent;
-}
-.storefront-account-nav .auth-inline-button {
-  white-space: nowrap;
-}
-
 .ticket-frame {
   display: grid;
   grid-template-columns: 180px minmax(0, 1fr);
@@ -48,24 +39,6 @@ img { max-width: 100%; }
 .admin-table-wrap { overflow-x: auto; }
 .admin-table { width: 100%; border-collapse: collapse; }
 .admin-table th, .admin-table td { white-space: nowrap; }
-
-.auth-page-container { max-width: 560px; }
-.auth-submit { width: 100%; }
-.demo-account-note {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px 12px;
-  margin-bottom: 16px;
-  padding: 12px 14px;
-  border: 1px solid rgba(199, 184, 255, 0.24);
-  border-radius: 14px;
-  background: rgba(248, 245, 255, 0.72);
-  color: #64748b;
-  font-size: 13px;
-}
-.demo-account-note strong { color: #4b5563; font-weight: 850; }
 
 /* Design tokens and shared UI */
 :root {
@@ -167,8 +140,7 @@ body { color: var(--cf-text-body); }
 
 .complete-success-hero,
 .admin-stat-card,
-.admin-section,
-.auth-form {
+.admin-section {
   border-radius: var(--cf-radius-card);
   border-color: var(--cf-line);
   background: var(--cf-card);
@@ -264,8 +236,7 @@ button:disabled,
 
 .complete-success-hero,
 .admin-stat-card,
-.admin-section,
-.auth-form { color: #374151; }
+.admin-section { color: #374151; }
 
 .complete-success-hero h2,
 .admin-stat-card strong,

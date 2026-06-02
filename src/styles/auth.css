@@ -1,6 +1,39 @@
 .auth-page-container {
+  max-width: 560px;
   display: grid;
   gap: 14px;
+}
+
+.auth-form {
+  border-radius: var(--cf-radius-card);
+  border-color: var(--cf-line);
+  background: var(--cf-card);
+  color: #374151;
+  box-shadow: var(--cf-shadow-card);
+}
+
+.auth-submit {
+  width: 100%;
+}
+
+.demo-account-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  border: 1px solid rgba(199, 184, 255, 0.24);
+  border-radius: 14px;
+  background: rgba(248, 245, 255, 0.72);
+  color: #64748b;
+  font-size: 13px;
+}
+
+.demo-account-note strong {
+  color: #4b5563;
+  font-weight: 850;
 }
 
 .auth-mode-tabs {
