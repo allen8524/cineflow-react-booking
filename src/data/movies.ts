@@ -1,4 +1,4 @@
-import type { Movie, Schedule, Screen, Theater } from '../types/cineflow';
+import type { Movie, Screen, Theater } from '../types/cineflow';
 
 export const movies: Movie[] = [
   {
@@ -135,19 +135,4 @@ export const screens: Screen[] = [
   { id: 4, theaterId: 2, name: '5관', screenType: '2D', totalSeats: 120 },
   { id: 5, theaterId: 3, name: '6관', screenType: '4DX', totalSeats: 120 },
   { id: 6, theaterId: 3, name: '8관', screenType: 'DOLBY ATMOS', totalSeats: 120 }
-];
-
-export const schedules: Schedule[] = [
-  { id: 1, movieId: 1, screenId: 1, startTime: '2026-04-03T10:20:00', endTime: '2026-04-03T12:27:00', price: 22000, availableSeats: 58, active: true },
-  { id: 2, movieId: 1, screenId: 3, startTime: '2026-04-04T14:05:00', endTime: '2026-04-04T16:12:00', price: 18000, availableSeats: 73, active: true },
-  { id: 3, movieId: 1, screenId: 6, startTime: '2026-04-05T19:40:00', endTime: '2026-04-05T21:47:00', price: 19000, availableSeats: 44, active: true },
-  { id: 4, movieId: 2, screenId: 4, startTime: '2026-04-03T12:45:00', endTime: '2026-04-03T15:40:00', price: 15000, availableSeats: 81, active: true },
-  { id: 5, movieId: 2, screenId: 2, startTime: '2026-04-04T19:40:00', endTime: '2026-04-04T22:35:00', price: 15000, availableSeats: 67, active: true },
-  { id: 6, movieId: 2, screenId: 6, startTime: '2026-04-06T17:20:00', endTime: '2026-04-06T20:15:00', price: 19000, availableSeats: 35, active: true },
-  { id: 7, movieId: 3, screenId: 5, startTime: '2026-04-03T15:30:00', endTime: '2026-04-03T17:45:00', price: 23000, availableSeats: 29, active: true },
-  { id: 8, movieId: 3, screenId: 3, startTime: '2026-04-05T20:10:00', endTime: '2026-04-05T22:25:00', price: 18000, availableSeats: 51, active: true },
-  { id: 9, movieId: 4, screenId: 2, startTime: '2026-04-04T09:30:00', endTime: '2026-04-04T11:53:00', price: 15000, availableSeats: 92, active: true },
-  { id: 10, movieId: 4, screenId: 4, startTime: '2026-04-06T13:05:00', endTime: '2026-04-06T15:28:00', price: 15000, availableSeats: 63, active: true },
-  { id: 11, movieId: 5, screenId: 6, startTime: '2026-04-18T18:30:00', endTime: '2026-04-18T21:19:00', price: 19000, availableSeats: 120, active: true },
-  { id: 12, movieId: 5, screenId: 1, startTime: '2026-04-19T11:00:00', endTime: '2026-04-19T13:49:00', price: 22000, availableSeats: 101, active: true }
 ];

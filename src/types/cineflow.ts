@@ -107,9 +107,3 @@ export interface UserAccount {
   role: UserRole;
   createdAt: string;
 }
-
-export interface AdminMetric {
-  label: string;
-  value: string;
-  description: string;
-}

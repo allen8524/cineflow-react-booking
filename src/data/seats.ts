@@ -1,5 +1,4 @@
 import type { Seat, SeatType } from '../types/cineflow';
-import { schedules } from './movies';
 
 const reservedSeatMap: Record<number, string[]> = {
   1: ['A1', 'A2', 'A3', 'A4', 'A5', 'E7', 'E8', 'F6', 'G7', 'G8'],
@@ -16,9 +15,11 @@ const reservedSeatMap: Record<number, string[]> = {
   12: ['A1', 'A2', 'A3']
 };
 
-export const getInitialReservedSeatCodes = (scheduleId: number): string[] => reservedSeatMap[scheduleId] ?? [];
+const DEFAULT_SEAT_PRICE = 15000;
 
-export const resolveSeatType = (row: string, number: number): SeatType => {
+const getInitialReservedSeatCodes = (scheduleId: number): string[] => reservedSeatMap[scheduleId] ?? [];
+
+const resolveSeatType = (row: string, number: number): SeatType => {
   if (row === 'A' && number >= 5 && number <= 8) {
     return 'PREMIUM';
   }
@@ -30,7 +31,7 @@ export const resolveSeatType = (row: string, number: number): SeatType => {
   return 'STANDARD';
 };
 
-export const resolveSeatPrice = (schedulePrice: number, seatType: SeatType): number => {
+const resolveSeatPrice = (schedulePrice: number, seatType: SeatType): number => {
   if (seatType === 'PREMIUM') {
     return schedulePrice + 3000;
   }
@@ -43,8 +44,7 @@ export const resolveSeatPrice = (schedulePrice: number, seatType: SeatType): num
 };
 
 export const createSeatsForSchedule = (scheduleId: number, reservedSeatCodes: string[] = [], schedulePrice?: number): Seat[] => {
-  const schedule = schedules.find((item) => item.id === scheduleId);
-  const price = schedulePrice ?? schedule?.price ?? 15000;
+  const price = schedulePrice ?? DEFAULT_SEAT_PRICE;
   const reservedCodes = new Set([...getInitialReservedSeatCodes(scheduleId), ...reservedSeatCodes]);
   const rows = Array.from({ length: 10 }, (_, index) => String.fromCharCode(65 + index));
 

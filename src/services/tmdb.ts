@@ -1,4 +1,3 @@
-import { movies as fallbackMovies } from '../data/movies';
 import type { Movie, MovieStatus } from '../types/cineflow';
 
 const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
@@ -200,4 +199,3 @@ export const fetchMoviesFromTmdb = async (): Promise<Movie[] | null> => {
   return apiMovies.map((movie, index) => mapTmdbMovie(movie.summary, movie.detail, index + 1, movie.status));
 };
 
-export const getFallbackMovies = () => fallbackMovies;

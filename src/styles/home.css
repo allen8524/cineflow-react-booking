@@ -14,41 +14,17 @@
   overflow: hidden;
   isolation: isolate;
   background:
-    radial-gradient(circle at 7% 10%, rgba(255, 237, 245, 0.82) 0 1.5%, transparent 11%),
-    radial-gradient(circle at 10% 17%, rgba(255, 220, 232, 0.46) 0 4%, transparent 15%),
-    radial-gradient(circle at 30% 27%, rgba(199, 184, 255, 0.42) 0 2%, transparent 7%),
-    radial-gradient(circle at 42% 100%, rgba(199, 184, 255, 0.3) 0 8%, transparent 22%),
-    radial-gradient(circle at 67% 45%, rgba(255, 214, 229, 0.34) 0 7%, transparent 18%),
-    radial-gradient(circle at 75% 70%, rgba(255, 214, 229, 0.24) 0 6%, transparent 17%),
-    radial-gradient(circle at 66% 69%, rgba(255, 255, 255, 0.74) 0 1.2%, transparent 5%),
-    rgba(255, 255, 255, 0.84) !important;
+    radial-gradient(circle at 12% 10%, rgba(255, 237, 245, 0.62), transparent 30%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 245, 255, 0.86));
 }
 
 .home-guide-panel::before,
-.home-guide-panel::after {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  border-radius: 999px;
-  pointer-events: none;
-}
-
-.home-guide-panel::before {
-  width: 330px;
-  height: 330px;
-  left: 28%;
-  bottom: -110px;
-  background: rgba(199, 184, 255, 0.24);
-  filter: blur(30px);
-}
-
-.home-guide-panel::after {
-  width: 250px;
-  height: 250px;
-  right: 18%;
-  top: 22%;
-  background: rgba(255, 214, 229, 0.3);
-  filter: blur(34px);
+.home-guide-panel::after,
+.home-guide-intro::before,
+.home-guide-intro::after,
+.home-guide-list::before {
+  display: none;
+  content: none;
 }
 
 .home-guide-intro,
@@ -57,49 +33,12 @@
   z-index: 1;
 }
 
-.home-guide-intro::before,
-.home-guide-intro::after,
-.home-guide-list::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  border-radius: 999px;
-  pointer-events: none;
-}
-
-.home-guide-intro::before {
-  width: 135px;
-  height: 135px;
-  left: 5%;
-  top: -55px;
-  background: rgba(255, 237, 245, 0.58);
-  filter: blur(28px);
-}
-
-.home-guide-intro::after {
-  width: 58px;
-  height: 58px;
-  left: 41%;
-  top: 14%;
-  background: rgba(199, 184, 255, 0.44);
-  filter: blur(15px);
-}
-
-.home-guide-list::before {
-  width: 78px;
-  height: 78px;
-  left: -62px;
-  bottom: 12%;
-  background: rgba(255, 255, 255, 0.78);
-  filter: blur(16px);
-}
-
 .home-guide-card {
-  grid-template-columns: 76px minmax(0, 1fr) auto !important;
-  min-height: 142px !important;
-  padding: 24px 26px !important;
-  gap: 22px !important;
-  border-radius: 26px !important;
+  grid-template-columns: 76px minmax(0, 1fr) auto;
+  min-height: 142px;
+  padding: 24px 26px;
+  gap: 22px;
+  border-radius: 24px;
 }
 
 .home-guide-card__icon {
@@ -150,10 +89,10 @@
   }
 
   .home-guide-card {
-    grid-template-columns: 58px minmax(0, 1fr) auto !important;
-    min-height: 0 !important;
-    padding: 18px !important;
-    gap: 12px !important;
+    grid-template-columns: 58px minmax(0, 1fr) auto;
+    min-height: 0;
+    padding: 18px;
+    gap: 12px;
   }
 
   .home-guide-card__icon {

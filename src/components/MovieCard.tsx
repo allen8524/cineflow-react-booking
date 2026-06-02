@@ -42,20 +42,23 @@ const getAgeClass = (ageRating: string) => {
 const MovieCard = ({ movie, rank, variant = 'catalog' }: MovieCardProps) => {
   const isComingSoon = movie.status === 'COMING_SOON';
   const isCatalog = variant === 'catalog';
+  const isUpcoming = variant === 'upcoming';
   const stateLabel = isComingSoon ? '상영예정' : '상영중';
   const ageClass = getAgeClass(movie.ageRating);
   const statusClass = isComingSoon ? 'status-upcoming upcoming' : 'status-now';
   const popularityText = (movie.popularity ?? movie.bookingRate).toFixed(1);
   const scoreText = isComingSoon ? '-' : movie.score > 0 ? `${movie.score.toFixed(1)}/10` : '미정';
 
-  const cardClass = isCatalog ? 'catalog-card cinema-movie-card' : 'home-showcase-card';
-  const posterClass = isCatalog ? 'catalog-card__poster poster-wrap' : 'home-showcase-card__poster';
-  const bodyClass = isCatalog ? 'catalog-card__body movie-card-body' : 'home-showcase-card__body';
-  const headClass = isCatalog ? 'catalog-card__head movie-card-head' : 'home-showcase-card__head movie-card-head';
+  const cardClass = isCatalog ? 'catalog-card cinema-movie-card' : isUpcoming ? 'home-upcoming-card' : 'home-showcase-card';
+  const posterClass = isCatalog ? 'catalog-card__poster poster-wrap' : isUpcoming ? 'home-upcoming-card__poster' : 'home-showcase-card__poster';
+  const bodyClass = isCatalog ? 'catalog-card__body movie-card-body' : isUpcoming ? 'home-upcoming-card__body' : 'home-showcase-card__body';
+  const headClass = isCatalog ? 'catalog-card__head movie-card-head' : isUpcoming ? 'home-upcoming-card__head movie-card-head' : 'home-showcase-card__head movie-card-head';
   const metaClass = isCatalog
     ? 'catalog-card__meta movie-meta-mini movie-meta-list movie-meta-panel'
-    : 'home-showcase-card__meta movie-meta-list movie-meta-panel';
-  const actionsClass = isCatalog ? 'catalog-card__actions movie-card-actions' : 'home-showcase-card__actions';
+    : isUpcoming
+      ? 'home-upcoming-card__meta movie-meta-list movie-meta-panel'
+      : 'home-showcase-card__meta movie-meta-list movie-meta-panel';
+  const actionsClass = isCatalog ? 'catalog-card__actions movie-card-actions' : isUpcoming ? 'home-upcoming-card__actions' : 'home-showcase-card__actions';
 
   return (
     <article className={cardClass}>

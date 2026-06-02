@@ -187,9 +187,6 @@ img { max-width: 100%; }
   border: 1px solid rgba(104, 114, 156, 0.16);
 }
 .ticket-frame > img { border-radius: 14px; aspect-ratio: 2 / 3; object-fit: cover; width: 100%; }
-.ticket-code { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
-.ticket-code span { color: #65728d; }
-.ticket-code strong { font-size: 22px; }
 .history-state-chip {
   display: inline-flex;
   align-items: center;
@@ -211,8 +208,6 @@ img { max-width: 100%; }
   align-items: end;
   margin-bottom: 18px;
 }
-.history-lookup-copy strong { display: block; color: #202a43; font-size: 20px; margin-bottom: 6px; }
-.history-lookup-copy p { margin: 0; }
 .history-lookup-form {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -944,8 +939,7 @@ img { max-width: 100%; }
   list-style: none;
 }
 
-.movie-meta-list li,
-.movie-meta-chip {
+.movie-meta-list li {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -959,101 +953,6 @@ img { max-width: 100%; }
   font-weight: 750;
   line-height: 1;
   white-space: nowrap;
-}
-
-.home-rank-board {
-  position: relative;
-  overflow: hidden;
-  align-self: start;
-  display: grid;
-  align-content: start;
-  gap: 12px;
-  height: fit-content;
-  min-height: 0;
-  padding: 18px;
-  border-radius: 24px;
-  background:
-    radial-gradient(circle at 100% 0%, rgba(199, 184, 255, 0.26), transparent 34%),
-    linear-gradient(145deg, rgba(243, 248, 255, 0.92), rgba(247, 243, 255, 0.9));
-  border: 1px solid rgba(104, 114, 156, 0.14);
-  box-shadow: 0 18px 36px rgba(125, 134, 179, 0.16);
-}
-
-.home-rank-board__head {
-  display: grid;
-  gap: 5px;
-  margin-bottom: 4px;
-}
-
-.home-rank-board__head h3 {
-  font-size: 23px;
-  line-height: 1.25;
-}
-
-.home-rank-board__head span {
-  font-size: 13px;
-  line-height: 1.45;
-  white-space: normal;
-}
-
-.home-rank-board__list {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.home-rank-board__list li {
-  min-width: 0;
-}
-
-.home-rank-board__list li a {
-  min-height: 108px;
-  display: grid;
-  grid-template-columns: 1fr;
-  align-content: space-between;
-  gap: 8px;
-  padding: 14px;
-  border-radius: 18px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.68));
-  border: 1px solid rgba(255, 255, 255, 0.78);
-  box-shadow: 0 12px 26px rgba(125, 134, 179, 0.11);
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-}
-
-.home-rank-board__list li a:hover,
-.home-rank-board__list li a:focus {
-  transform: translateY(-2px);
-  border-color: rgba(199, 184, 255, 0.42);
-  box-shadow: 0 16px 30px rgba(125, 134, 179, 0.15);
-  text-decoration: none;
-}
-
-.home-rank-board__list strong {
-  min-width: 0;
-  color: #6655a8 !important;
-  font-size: 34px;
-  line-height: 0.95;
-}
-
-.home-rank-board__list span {
-  display: block;
-  color: #25304a;
-  font-size: 14px;
-  font-weight: 800;
-  line-height: 1.3;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.home-rank-board__list em {
-  margin-top: 0;
-  color: #68738c;
-  font-size: 12px;
-  line-height: 1.45;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .home-guide-panel {
@@ -1116,11 +1015,6 @@ img { max-width: 100%; }
   min-width: 0;
 }
 
-.home-guide-card__number {
-  align-self: center;
-  line-height: 1;
-}
-
 .home-guide-card strong {
   margin: 0;
   font-size: 18px;
@@ -1145,25 +1039,9 @@ img { max-width: 100%; }
 }
 
 @media (min-width: 1024px) {
-  .home-showcase-layout {
-    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.38fr);
-    gap: 22px;
-    align-items: start;
-  }
-
   .home-showcase-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: stretch;
-  }
-}
-
-@media (max-width: 1023px) {
-  .home-rank-board__list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .home-rank-board__list li a {
-    min-height: 116px;
   }
 }
 
@@ -1186,37 +1064,6 @@ img { max-width: 100%; }
   .home-upcoming-card__actions,
   .catalog-card__actions {
     grid-template-columns: 1fr;
-  }
-
-  .home-rank-board {
-    padding: 18px;
-    border-radius: 20px;
-  }
-
-  .home-rank-board__head h3 {
-    font-size: 22px;
-  }
-
-  .home-rank-board__list {
-    grid-template-columns: 1fr;
-  }
-
-  .home-rank-board__list li:nth-child(n + 5) {
-    display: block;
-  }
-
-  .home-rank-board__list li a {
-    min-height: 104px;
-    padding: 16px;
-  }
-
-  .home-rank-board__list strong {
-    font-size: 32px;
-  }
-
-  .home-rank-board__list span,
-  .home-rank-board__list em {
-    white-space: normal;
   }
 
   .home-guide-card {
@@ -1253,13 +1100,8 @@ img { max-width: 100%; }
 @media (max-width: 992px) {
   .booking-seat-layout,
   .booking-layout,
-  .home-booking-dock__grid,
-  .home-showcase-layout,
   .history-lookup-panel,
   .ticket-frame { grid-template-columns: 1fr; }
-  .home-booking-actions {
-    width: 100%;
-  }
   .home-showcase-grid,
   .home-upcoming-grid,
   .cinema-movie-grid,
@@ -1270,8 +1112,6 @@ img { max-width: 100%; }
   .payment-method-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
-  .storefront-shortcut-grid,
-  .home-booking-actions,
   .home-showcase-grid,
   .home-upcoming-grid,
   .cinema-movie-grid,
@@ -1327,8 +1167,7 @@ body {
 
 .cinema-page-body,
 .detail-body,
-.admin-body,
-.complete-body {
+.admin-body {
   padding-top: 34px;
   padding-bottom: 64px;
 }
@@ -1425,7 +1264,6 @@ body {
 .booking-hero h1,
 .detail-copy-panel h1,
 .home-section__header h2,
-.home-booking-feature__head h2,
 .panel-head h2,
 .section-headline h2,
 .screening-summary-title h2,
@@ -1439,16 +1277,12 @@ body {
 .support-hero p,
 .booking-hero p,
 .home-section__header p,
-.home-booking-feature__head p,
 .panel-description,
 .section-headline p,
 .seat-panel-meta {
   color: var(--cf-text-body);
 }
 
-.home-booking-feature,
-.home-quick-card,
-.home-rank-board,
 .home-showcase-card,
 .home-upcoming-card,
 .home-guide-panel,
@@ -1465,7 +1299,6 @@ body {
 .support-section-card,
 .support-faq-item,
 .history-booking-card,
-.history-empty-card,
 .history-lookup-panel,
 .complete-success-hero,
 .admin-stat-card,
@@ -1477,65 +1310,6 @@ body {
   box-shadow: var(--cf-shadow-card);
 }
 
-.home-booking-feature {
-  gap: 16px;
-  padding: 22px 24px;
-}
-
-.home-booking-feature__head h2 {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-.home-booking-feature__content {
-  align-items: center;
-  gap: 18px;
-}
-
-.home-booking-feature__copy {
-  gap: 10px;
-}
-
-.home-booking-feature__copy h3 {
-  margin-top: 0;
-}
-
-.home-booking-feature__meta {
-  margin-top: 4px;
-}
-
-.home-booking-feature__action-panel {
-  align-self: center;
-  min-height: 0;
-  padding: 16px;
-}
-
-.home-booking-feature__actions {
-  margin-top: 0;
-}
-
-.home-booking-actions {
-  grid-template-columns: 1fr;
-  align-self: center;
-  justify-self: start;
-  align-content: start;
-  width: min(100%, 320px);
-}
-
-.home-booking-actions .home-quick-card {
-  min-height: 118px;
-  align-content: center;
-  gap: 12px;
-  padding: 18px;
-}
-
-@media (max-width: 992px) {
-  .home-booking-actions {
-    width: 100%;
-  }
-}
-
-.home-quick-card,
 .home-showcase-card,
 .home-upcoming-card,
 .home-guide-card,
@@ -1546,7 +1320,6 @@ body {
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
 }
 
-.home-quick-card:hover,
 .home-showcase-card:hover,
 .home-upcoming-card:hover,
 .home-guide-card:hover,
@@ -1612,9 +1385,48 @@ button:disabled {
   transform: none !important;
 }
 
-.history-state-chip,
-.faq-chip,
-.notice-chip {
+.movie-pagination,
+.admin-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.movie-pagination button,
+.admin-pagination button {
+  min-width: 40px;
+  min-height: 40px;
+  padding: 0 13px;
+  border: 1px solid rgba(104, 114, 156, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  color: #34405c;
+  font-weight: 800;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.movie-pagination button:not(:disabled):hover,
+.admin-pagination button:not(:disabled):hover {
+  transform: translateY(-1px);
+  border-color: rgba(199, 184, 255, 0.42);
+  box-shadow: 0 12px 22px rgba(125, 134, 179, 0.14);
+}
+
+.movie-pagination button.is-active,
+.admin-pagination button.is-active {
+  border-color: transparent;
+  background: linear-gradient(135deg, #f85f8f, #c7b8ff);
+  color: #fff;
+}
+
+.movie-pagination button:disabled,
+.admin-pagination button:disabled {
+  opacity: 0.45;
+  box-shadow: none;
+}
+
+.history-state-chip {
   border-radius: 999px;
   background: rgba(238, 231, 255, 0.74);
   border: 1px solid rgba(199, 184, 255, 0.32);
@@ -1977,8 +1789,7 @@ button:disabled {
 
   .cinema-page-body,
   .detail-body,
-  .admin-body,
-  .complete-body {
+  .admin-body {
     padding-top: 28px;
     padding-bottom: 52px;
   }
@@ -2049,8 +1860,6 @@ button:disabled {
 
   .booking-page .booking-panel,
   .booking-page .booking-summary,
-  .home-booking-feature,
-  .home-rank-board,
   .home-guide-panel,
   .movie-toolbar,
   .support-section-card {
@@ -2115,9 +1924,6 @@ button:disabled,
   color: #374151;
 }
 
-.home-booking-feature,
-.home-quick-card,
-.home-rank-board,
 .home-showcase-card,
 .home-upcoming-card,
 .home-guide-panel,
@@ -2134,7 +1940,6 @@ button:disabled,
 .support-faq-item,
 .history-lookup-panel,
 .history-booking-card,
-.history-empty-card,
 .complete-success-hero,
 .admin-stat-card,
 .admin-section,
@@ -2147,12 +1952,6 @@ button:disabled,
   color: #374151;
 }
 
-.home-booking-feature h2,
-.home-booking-feature h3,
-.home-quick-card strong,
-.home-rank-board h3,
-.home-rank-board__list strong,
-.home-rank-board__list span,
 .home-guide-card strong,
 .home-showcase-card h3,
 .home-upcoming-card h3,
@@ -2166,22 +1965,18 @@ button:disabled,
 .support-quick-card strong,
 .support-section-card h2,
 .support-faq-item h3,
-.history-lookup-copy strong,
 .history-card-top h3,
 .history-info-grid strong,
 .complete-success-hero h2,
 .admin-stat-card strong,
 .admin-stat-card .stat-value,
 .admin-section h2,
-.ticket-code strong,
 .summary-total strong,
 .amount-total strong {
   color: #1f2a44 !important;
 }
 
-.home-booking-feature p,
 .home-section__header p,
-.home-quick-card span,
 .home-upcoming-card p,
 .home-showcase-card p,
 .home-guide-card p,
@@ -2198,7 +1993,6 @@ button:disabled,
 .support-section-card p,
 .support-link-list span,
 .support-faq-item p,
-.history-lookup-copy p,
 .history-card-top span,
 .history-info-grid span,
 .complete-success-hero p,
@@ -2214,17 +2008,13 @@ button:disabled,
   color: #4b5563 !important;
 }
 
-.home-booking-feature__meta li span,
 .movie-meta-list li,
-.movie-meta-chip,
 .schedule-card__meta,
 .schedule-card__theater,
 .people-type span,
 .people-picker-note,
 .seat-panel-meta,
 .legend-item strong,
-.ticket-time,
-.meta-line,
 .admin-table th,
 .admin-stat-card .stat-label,
 .section-headline p,
@@ -2232,12 +2022,6 @@ button:disabled,
   color: #64748b !important;
 }
 
-.faq-chip,
-.notice-chip,
-.history-mode-chip,
-.success-state-badge,
-.home-booking-feature__label,
-.home-booking-feature__status,
 .status-badge,
 .history-state-chip,
 .movie-filter-button.is-active,
@@ -2246,15 +2030,12 @@ button:disabled,
 }
 
 .status-badge,
-.home-booking-feature__status,
-.history-state-chip.booked,
-.success-state-badge {
+.history-state-chip.booked {
   color: #8d3153 !important;
 }
 
 .history-state-chip.canceled,
-.booking-feedback-banner,
-.field-error {
+.booking-feedback-banner {
   color: #8d3153 !important;
 }
 
@@ -2383,19 +2164,16 @@ button:disabled {
   text-decoration: underline;
 }
 
-.admin-page .admin-table th,
-.admin-page .admin-dashboard-table th {
+.admin-page .admin-table th {
   color: #374151 !important;
 }
 
-.admin-page .admin-table td,
-.admin-page .admin-dashboard-table td {
+.admin-page .admin-table td {
   color: #1f2a44 !important;
 }
 
 .detail-section-header .detail-link,
-.admin-page .admin-table a,
-.admin-page .admin-dashboard-table a {
+.admin-page .admin-table a {
   color: #5b4a91 !important;
 }
 
@@ -3109,18 +2887,9 @@ button:disabled {
   }
 }
 
-.catalog-summary-strip > div,
-.booking-progress-glance > div,
-.support-contact-strip > div,
 .score-item,
-.detail-body .info-table-grid div,
-.detail-body .theater-link-card,
-.detail-body .detail-schedule-group,
 .ticket-frame,
-.payment-input-card,
 .method-card,
-.payment-summary-card,
-.complete-amount-breakdown .payment-meta-list li,
 .admin-page .admin-subnav button,
 .admin-page .admin-subnav a {
   background: var(--cf-card) !important;
@@ -3135,7 +2904,6 @@ button:disabled {
 }
 
 .payment-block h3,
-.amount-breakdown h3,
 .payment-form .panel-head h2 {
   color: var(--cf-text-strong) !important;
 }
@@ -3175,8 +2943,7 @@ button:disabled {
   box-shadow: 0 12px 22px rgba(125, 134, 179, 0.12);
 }
 
-.method-card.is-active,
-.method-card-option input:checked + .method-card {
+.method-card.is-active {
   background:
     linear-gradient(135deg, rgba(255, 237, 245, 0.96), rgba(238, 231, 255, 0.94)) !important;
   border-color: rgba(248, 95, 143, 0.36) !important;
@@ -3184,15 +2951,12 @@ button:disabled {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.72), 0 12px 24px rgba(248, 95, 143, 0.12);
 }
 
-.method-card.is-active span,
-.method-card-option input:checked + .method-card span {
+.method-card.is-active span {
   color: #5b4a91 !important;
 }
 
 .admin-page .admin-subnav button.is-active,
-.admin-page .admin-subnav a.is-active,
-.history-tab.is-active,
-.faq-category-chip.is-active {
+.admin-page .admin-subnav a.is-active {
   background: rgba(238, 231, 255, 0.86) !important;
   border-color: rgba(199, 184, 255, 0.42) !important;
   color: #5b4a91 !important;
@@ -3230,23 +2994,10 @@ button:disabled {
 .timeslot-list a,
 .selection-list button,
 .selection-list a,
-.history-tab,
-.faq-category-chip,
 .admin-subnav button {
   background: rgba(255, 255, 255, 0.86) !important;
   border-color: var(--cf-line) !important;
   color: var(--cf-text-strong) !important;
-}
-
-.booking-mode-chip,
-.format-tags em,
-.time-tags em,
-.summary-format em,
-.history-card-tags em,
-.booking-history-page .history-card-tags em {
-  background: var(--cf-lavender) !important;
-  border-color: rgba(234, 223, 248, 0.82) !important;
-  color: #5b4a91 !important;
 }
 
 input,
@@ -3255,13 +3006,7 @@ textarea,
 .inline-field input,
 .inline-field select,
 .history-lookup-form input,
-.history-lookup-form select,
-.support-search-wrap input,
-.admin-page .admin-filter-form input,
-.admin-page .admin-filter-form select,
-.admin-page .admin-form-field input,
-.admin-page .admin-form-field select,
-.admin-page .admin-form-field textarea {
+.history-lookup-form select {
   background: rgba(255, 255, 255, 0.88) !important;
   border-color: var(--cf-line) !important;
   color: var(--cf-text-strong) !important;
@@ -3273,8 +3018,7 @@ textarea:focus,
 .inline-field input:focus,
 .inline-field select:focus,
 .history-lookup-form input:focus,
-.history-lookup-form select:focus,
-.support-search-wrap input:focus {
+.history-lookup-form select:focus {
   border-color: rgba(248, 95, 143, 0.42) !important;
   box-shadow: 0 0 0 4px rgba(248, 95, 143, 0.12);
   outline: none;
@@ -3282,7 +3026,6 @@ textarea:focus,
 
 .amount-total,
 .summary-total,
-.payment-summary-panel,
 .seat-summary-panel,
 .booking-summary {
   background: rgba(255, 255, 255, 0.86) !important;
@@ -3292,23 +3035,6 @@ textarea:focus,
 .amount-total strong,
 .summary-total strong {
   color: #8d3153 !important;
-}
-
-.notice-panel,
-.cs-panel,
-.cs-card,
-.notice-card,
-.complete-support-section,
-.complete-recommend-section,
-.complete-summary-card,
-.recommend-action-card,
-.history-preview-panel,
-.history-quick-actions,
-.booking-history-page .history-action-grid a,
-.support-operating-grid div {
-  background: var(--cf-card) !important;
-  border-color: var(--cf-line) !important;
-  color: var(--cf-text-body) !important;
 }
 
 .seat,
@@ -3329,43 +3055,6 @@ textarea:focus,
 .seat-sample.disabled-seat {
   background: #e9ecf4 !important;
   color: var(--cf-text-soft) !important;
-}
-
-/* Support page polish */
-.support-contact-strip {
-  width: min(520px, 100%);
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-  padding: 8px;
-  border: 1px solid rgba(199, 184, 255, 0.34);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.82);
-  box-shadow: 0 14px 26px rgba(125, 134, 179, 0.12);
-}
-
-.support-contact-strip > div {
-  display: grid;
-  align-content: center;
-  gap: 4px;
-  min-height: 58px;
-  padding: 11px 14px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, rgba(255, 250, 252, 0.92), rgba(246, 243, 255, 0.9)) !important;
-  border: 1px solid #eadff8 !important;
-}
-
-.support-contact-strip span {
-  color: #6b628d !important;
-  font-size: 12px;
-  font-weight: 850;
-}
-
-.support-contact-strip strong {
-  color: #8d3153;
-  font-size: 19px;
-  line-height: 1.2;
-  letter-spacing: 0;
 }
 
 .support-page .cinema-page-body {
@@ -3555,11 +3244,6 @@ textarea:focus,
 }
 
 @media (max-width: 992px) {
-  .support-contact-strip {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    width: 100%;
-  }
-
   .support-faq-list,
   .support-faq-list--best {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3567,16 +3251,6 @@ textarea:focus,
 }
 
 @media (max-width: 640px) {
-  .support-contact-strip {
-    width: 100%;
-    grid-template-columns: 1fr;
-    padding: 10px;
-  }
-
-  .support-contact-strip > div {
-    min-height: 58px;
-  }
-
   .support-quick-card {
     min-height: 0;
     padding: 20px;
@@ -4217,28 +3891,6 @@ textarea:focus,
   content: none;
 }
 
-.booking-history-page .history-lookup-copy,
-.booking-history-page .history-lookup-note {
-  display: none;
-}
-
-.booking-history-page .history-lookup-copy strong {
-  display: inline-flex;
-  margin: 0 12px 0 0;
-  color: #1f2a44;
-  font-size: 18px;
-  line-height: 1.3;
-}
-
-.booking-history-page .history-lookup-copy p {
-  display: inline;
-  max-width: none;
-  margin: 0;
-  color: #64748b;
-  font-size: 13px;
-  line-height: 1.55;
-}
-
 .booking-history-page .history-lookup-form {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 170px;
@@ -4525,10 +4177,6 @@ textarea:focus,
 @media (max-width: 900px) {
   .booking-history-page .history-booking-card {
     grid-template-columns: 1fr;
-  }
-
-  .booking-history-page .history-lookup-copy p {
-    max-width: none;
   }
 
   .booking-history-page .history-lookup-form {

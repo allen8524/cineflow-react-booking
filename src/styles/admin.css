@@ -65,32 +65,11 @@
 }
 
 .admin-pagination {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
   margin-top: 22px;
 }
 
 .admin-pagination button {
-  min-width: 40px;
   min-height: 38px;
-  padding: 0 13px;
-  border-radius: 999px;
-  border: 1px solid rgba(104, 114, 156, 0.18);
-  background: rgba(255, 255, 255, 0.82);
-  color: #34405c;
-  font-weight: 800;
-}
-
-.admin-pagination button.is-active {
-  border-color: transparent;
-  background: linear-gradient(135deg, #f85f8f, #c7b8ff);
-  color: #fff;
-}
-
-.admin-pagination button:disabled {
-  opacity: 0.45;
 }
 
 @media (max-width: 720px) {
