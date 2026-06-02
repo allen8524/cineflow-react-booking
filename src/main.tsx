@@ -4,6 +4,7 @@ import App from './App';
 import './styles.css';
 import './styles/complete.css';
 import './styles/home.css';
+import './styles/support.css';
 import './styles/movie-list.css';
 import './styles/admin.css';
 import './styles/auth.css';
