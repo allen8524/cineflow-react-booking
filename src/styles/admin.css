@@ -78,3 +78,11 @@
     flex-direction: column;
   }
 }
+
+.admin-page .admin-subnav button.is-active,
+.admin-page .admin-subnav a.is-active {
+  background: rgba(238, 231, 255, 0.86) !important;
+  border-color: rgba(199, 184, 255, 0.42) !important;
+  color: #5b4a91 !important;
+  box-shadow: 0 10px 20px rgba(125, 134, 179, 0.12);
+}

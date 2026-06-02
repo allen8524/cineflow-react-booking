@@ -38,7 +38,7 @@
   font-size: 10px;
   font-weight: 850;
   line-height: 1.1;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   white-space: nowrap;
 }
 
@@ -72,4 +72,210 @@
     grid-template-columns: 0.85fr 0.75fr 1.4fr;
     width: 100%;
   }
+}
+
+.book-btn.disabled { display: inline-flex; opacity: .55; }
+
+.movie-card-summary { min-height: 72px; }
+
+.movie-meta-list,
+.home-upcoming-card__meta.movie-meta-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.movie-meta-list li {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 29px;
+  padding: 0 11px;
+  border: 1px solid rgba(104, 114, 156, 0.14);
+  border-radius: 999px;
+  background: rgba(239, 247, 255, 0.82);
+  color: #4c5973;
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.home-showcase-card__body,
+.home-upcoming-card__body,
+.catalog-card__body {
+  padding: 18px;
+}
+
+.home-showcase-card__head h3,
+.home-upcoming-card__head h3,
+.catalog-card__head h3,
+.movie-card-head h3 {
+  color: var(--cf-text-strong);
+  line-height: 1.28;
+}
+
+.movie-card-summary,
+.home-showcase-card__body p,
+.home-upcoming-card__body p,
+.catalog-card__body p {
+  color: var(--cf-text-body);
+}
+
+.home-upcoming-card__body p {
+  margin: 0;
+}
+
+.home-showcase-card__actions,
+.home-upcoming-card__actions,
+.catalog-card__actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(94px, 0.72fr);
+  gap: 10px;
+  min-height: 44px;
+  align-items: stretch;
+  margin-top: auto;
+}
+
+.home-showcase-card__actions .book-btn,
+.home-upcoming-card__actions .book-btn,
+.catalog-card__actions .book-btn,
+.home-showcase-card__actions .detail-link,
+.home-upcoming-card__actions .detail-link,
+.catalog-card__actions .detail-link {
+  min-width: 0;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 0 12px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+@media (max-width: 640px) {
+  .home-showcase-card__actions,
+  .home-upcoming-card__actions,
+  .catalog-card__actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+.poster-wrap .rank-badge,
+.home-showcase-card__poster .rank-badge,
+.home-upcoming-card__poster .rank-badge,
+.poster-wrap .status-badge,
+.home-showcase-card__poster .status-badge,
+.home-upcoming-card__poster .status-badge,
+.catalog-card__poster .status-badge {
+  top: 12px;
+}
+
+.poster-wrap .rank-badge,
+.home-showcase-card__poster .rank-badge,
+.home-upcoming-card__poster .rank-badge {
+  left: 12px;
+}
+
+.poster-wrap .status-badge,
+.home-showcase-card__poster .status-badge,
+.home-upcoming-card__poster .status-badge,
+.catalog-card__poster .status-badge {
+  right: 12px;
+}
+
+.status-badge {
+  background: rgba(255, 237, 245, 0.92);
+  color: #9c385d;
+  border: 1px solid rgba(248, 95, 143, 0.18);
+}
+
+.status-badge.upcoming {
+  background: rgba(238, 231, 255, 0.92);
+  color: #5b4a91;
+  border-color: rgba(199, 184, 255, 0.28);
+}
+
+/* Movie badge color refinement */
+.movie-card-head .age-badge,
+.home-showcase-card .age-badge,
+.home-upcoming-card .age-badge,
+.catalog-card .age-badge {
+  border: 1px solid transparent;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+}
+
+.movie-card-head .age-badge.age-all,
+.home-showcase-card .age-badge.age-all,
+.home-upcoming-card .age-badge.age-all,
+.catalog-card .age-badge.age-all,
+.movie-card-head .age-badge.all,
+.home-showcase-card .age-badge.all,
+.home-upcoming-card .age-badge.all,
+.catalog-card .age-badge.all {
+  background: #22c55e;
+  border-color: rgba(34, 197, 94, 0.32);
+  color: #ffffff !important;
+}
+
+.movie-card-head .age-badge.age-12,
+.home-showcase-card .age-badge.age-12,
+.home-upcoming-card .age-badge.age-12,
+.catalog-card .age-badge.age-12 {
+  background: #facc15;
+  border-color: rgba(250, 204, 21, 0.42);
+  color: #3f2f00 !important;
+}
+
+.movie-card-head .age-badge.age-15,
+.home-showcase-card .age-badge.age-15,
+.home-upcoming-card .age-badge.age-15,
+.catalog-card .age-badge.age-15 {
+  background: #f97316;
+  border-color: rgba(249, 115, 22, 0.36);
+  color: #ffffff !important;
+}
+
+.movie-card-head .age-badge.age-19,
+.home-showcase-card .age-badge.age-19,
+.home-upcoming-card .age-badge.age-19,
+.catalog-card .age-badge.age-19 {
+  background: #ef4444;
+  border-color: rgba(239, 68, 68, 0.38);
+  color: #ffffff !important;
+}
+
+.home-showcase-card .status-badge,
+.home-upcoming-card .status-badge,
+.catalog-card .status-badge,
+.poster-wrap .status-badge {
+  border: 1px solid transparent;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.14);
+}
+
+.home-showcase-card .status-badge.status-now,
+.home-upcoming-card .status-badge.status-now,
+.catalog-card .status-badge.status-now,
+.poster-wrap .status-badge.status-now {
+  background: #dcfce7;
+  border-color: rgba(34, 197, 94, 0.34);
+  color: #15803d !important;
+}
+
+.home-showcase-card .status-badge.status-upcoming,
+.home-upcoming-card .status-badge.status-upcoming,
+.catalog-card .status-badge.status-upcoming,
+.poster-wrap .status-badge.status-upcoming,
+.home-showcase-card .status-badge.upcoming,
+.home-upcoming-card .status-badge.upcoming,
+.catalog-card .status-badge.upcoming,
+.poster-wrap .status-badge.upcoming {
+  background: #ede9fe;
+  border-color: rgba(124, 58, 237, 0.28);
+  color: #6d28d9 !important;
 }
