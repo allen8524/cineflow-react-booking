@@ -100,8 +100,7 @@
 }
 .inline-field { display: grid; gap: 7px; margin-bottom: 14px; }
 .inline-field input,
-.inline-field select,
-.history-lookup-form select {
+.inline-field select {
   min-height: 46px;
   padding: 0 13px;
   border-radius: 12px;
@@ -564,9 +563,7 @@ input,
 select,
 textarea,
 .inline-field input,
-.inline-field select,
-.history-lookup-form input,
-.history-lookup-form select {
+.inline-field select {
   background: rgba(255, 255, 255, 0.88) !important;
   border-color: var(--cf-line) !important;
   color: var(--cf-text-strong) !important;
@@ -576,9 +573,7 @@ input:focus,
 select:focus,
 textarea:focus,
 .inline-field input:focus,
-.inline-field select:focus,
-.history-lookup-form input:focus,
-.history-lookup-form select:focus {
+.inline-field select:focus {
   border-color: rgba(248, 95, 143, 0.42) !important;
   box-shadow: 0 0 0 4px rgba(248, 95, 143, 0.12);
   outline: none;
