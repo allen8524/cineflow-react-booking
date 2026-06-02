@@ -23,23 +23,6 @@ img { max-width: 100%; }
 }
 .ticket-frame > img { width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 14px; }
 
-
-
-.admin-subnav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
-.admin-subnav button {
-  padding: 10px 15px;
-  border: 1px solid rgba(104, 114, 156, 0.18);
-  border-radius: 999px;
-  background: rgba(255,255,255,.72);
-  color: #384462;
-  font-weight: 700;
-}
-.admin-subnav button.is-active,
-.admin-subnav button:hover { background: rgba(199,184,255,.22); border-color: #c7b8ff; color: #6655a8; }
-.admin-table-wrap { overflow-x: auto; }
-.admin-table { width: 100%; border-collapse: collapse; }
-.admin-table th, .admin-table td { white-space: nowrap; }
-
 /* Design tokens and shared UI */
 :root {
   --cf-page-max: 1180px;
@@ -66,17 +49,14 @@ body { color: var(--cf-text-body); }
 .storefront-catalog-page .container,
 .storefront-detail-page .container,
 .booking-page .container,
-.support-page .container,
-.admin-page .container {
+.support-page .container {
   width: min(calc(100% - 40px), var(--cf-page-max));
   max-width: var(--cf-page-max);
   margin-inline: auto;
   padding-left: 0;
   padding-right: 0;
 }
-
-.cinema-page-body,
-.admin-body {
+.cinema-page-body {
   padding-top: 34px;
   padding-bottom: 64px;
 }
@@ -138,9 +118,7 @@ body { color: var(--cf-text-body); }
 .panel-description,
 .section-headline p { color: var(--cf-text-body); }
 
-.complete-success-hero,
-.admin-stat-card,
-.admin-section {
+.complete-success-hero {
   border-radius: var(--cf-radius-card);
   border-color: var(--cf-line);
   background: var(--cf-card);
@@ -171,10 +149,8 @@ a.detail-link:hover { transform: translateY(-1px); border-color: rgba(199, 184, 
 .book-btn.disabled,
 button:disabled { background: #edf0f7 !important; border-color: rgba(104, 114, 156, 0.12) !important; color: #9aa3b2 !important; box-shadow: none !important; transform: none !important; }
 
-.movie-pagination,
-.admin-pagination { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-.movie-pagination button,
-.admin-pagination button {
+.movie-pagination { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.movie-pagination button {
   min-width: 40px;
   min-height: 40px;
   padding: 0 13px;
@@ -185,14 +161,9 @@ button:disabled { background: #edf0f7 !important; border-color: rgba(104, 114, 1
   font-weight: 800;
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
 }
-.movie-pagination button:not(:disabled):hover,
-.admin-pagination button:not(:disabled):hover { transform: translateY(-1px); border-color: rgba(199, 184, 255, 0.42); box-shadow: 0 12px 22px rgba(125, 134, 179, 0.14); }
-.movie-pagination button.is-active,
-.admin-pagination button.is-active { border-color: transparent; background: linear-gradient(135deg, #f85f8f, #c7b8ff); color: #fff; }
-.movie-pagination button:disabled,
-.admin-pagination button:disabled { opacity: 0.45; box-shadow: none; }
-
-.admin-stat-grid { gap: 20px; }
+.movie-pagination button:not(:disabled):hover { transform: translateY(-1px); border-color: rgba(199, 184, 255, 0.42); box-shadow: 0 12px 22px rgba(125, 134, 179, 0.14); }
+.movie-pagination button.is-active { border-color: transparent; background: linear-gradient(135deg, #f85f8f, #c7b8ff); color: #fff; }
+.movie-pagination button:disabled { opacity: 0.45; box-shadow: none; }
 
 @media (max-width: 992px) {
   .container,
@@ -200,11 +171,9 @@ button:disabled { background: #edf0f7 !important; border-color: rgba(104, 114, 1
   .storefront-catalog-page .container,
   .storefront-detail-page .container,
   .booking-page .container,
-  .support-page .container,
-  .admin-page .container { width: min(calc(100% - 32px), var(--cf-page-max)); }
+  .support-page .container { width: min(calc(100% - 32px), var(--cf-page-max)); }
 
-  .cinema-page-body,
-  .admin-body { padding-top: 28px; padding-bottom: 52px; }
+  .cinema-page-body { padding-top: 28px; padding-bottom: 52px; }
 
   .ticket-frame { grid-template-columns: 1fr; }
 }
@@ -231,25 +200,15 @@ button:disabled,
 .cinema-page,
 .storefront-home,
 .storefront-catalog-page,
-.support-page,
-.admin-page { color: #374151; }
+.support-page { color: #374151; }
 
-.complete-success-hero,
-.admin-stat-card,
-.admin-section { color: #374151; }
+.complete-success-hero { color: #374151; }
 
-.complete-success-hero h2,
-.admin-stat-card strong,
-.admin-stat-card .stat-value,
-.admin-section h2 { color: #1f2a44 !important; }
+.complete-success-hero h2 { color: #1f2a44 !important; }
 
 .panel-description,
-.complete-success-hero p,
-.admin-stat-card .stat-caption,
-.admin-table td { color: #4b5563 !important; }
+.complete-success-hero p { color: #4b5563 !important; }
 
-.admin-table th,
-.admin-stat-card .stat-label,
 .section-headline p,
 .screening-summary-title span { color: #64748b !important; }
 
@@ -264,6 +223,3 @@ button:disabled,
 .hero-btn.disabled,
 .book-btn.disabled,
 button:disabled { color: #6b7280 !important; }
-.admin-page .admin-table th { color: #374151 !important; }
-.admin-page .admin-table td { color: #1f2a44 !important; }
-.admin-page .admin-table a { color: #5b4a91 !important; }
