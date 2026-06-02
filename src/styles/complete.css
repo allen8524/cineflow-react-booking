@@ -3,6 +3,38 @@
   gap: 22px;
   max-width: 1120px;
   margin: 0 auto;
+  border-radius: var(--cf-radius-card);
+  border-color: var(--cf-line);
+  background: var(--cf-card);
+  color: #374151;
+  box-shadow: var(--cf-shadow-card);
+}
+
+.complete-success-hero h2 {
+  color: #1f2a44 !important;
+}
+
+.complete-success-hero p {
+  color: #4b5563 !important;
+}
+
+.ticket-frame {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+  padding: 20px;
+  border: 1px solid rgba(104, 114, 156, 0.16);
+  border-radius: 22px;
+  background: var(--cf-card);
+  color: var(--cf-text-strong);
+}
+
+.ticket-frame > img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 14px;
 }
 
 .complete-success-head {
@@ -144,6 +176,12 @@
 
   .complete-ticket-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 992px) {
+  .ticket-frame {
+    grid-template-columns: 1fr;
   }
 }
 

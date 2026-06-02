@@ -76,6 +76,27 @@
 
 .book-btn.disabled { display: inline-flex; opacity: .55; }
 
+.rank-badge {
+  color: #fff !important;
+}
+
+.detail-link,
+a.detail-link {
+  border: 1px solid var(--cf-line);
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--cf-text-strong) !important;
+  box-shadow: none;
+}
+
+.detail-link:hover,
+a.detail-link:hover {
+  transform: translateY(-1px);
+  border-color: rgba(199, 184, 255, 0.46);
+  background: rgba(238, 231, 255, 0.66);
+  color: #5b4a91 !important;
+  text-decoration: none;
+}
+
 .movie-card-summary { min-height: 72px; }
 
 .movie-meta-list,
