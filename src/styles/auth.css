@@ -1,12 +1,12 @@
 /* Login and signup page specific styles. */
 
-.auth-page-container {
+.auth-page .auth-page-container {
   max-width: 560px;
   display: grid;
   gap: 14px;
 }
 
-.auth-form {
+.auth-page .auth-form {
   border-radius: var(--cf-radius-card);
   border-color: var(--cf-line);
   background: var(--cf-card);
@@ -14,11 +14,11 @@
   box-shadow: var(--cf-shadow-card);
 }
 
-.auth-submit {
+.auth-page .auth-submit {
   width: 100%;
 }
 
-.demo-account-note {
+.auth-page .demo-account-note {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -33,12 +33,12 @@
   font-size: 13px;
 }
 
-.demo-account-note strong {
+.auth-page .demo-account-note strong {
   color: #4b5563;
   font-weight: 850;
 }
 
-.auth-mode-tabs {
+.auth-page .auth-mode-tabs {
   width: fit-content;
   display: inline-flex;
   align-items: center;
@@ -50,7 +50,7 @@
   box-shadow: 0 14px 28px rgba(125, 134, 179, 0.12);
 }
 
-.auth-mode-tabs button {
+.auth-page .auth-mode-tabs button {
   min-width: 104px;
   min-height: 42px;
   padding: 0 18px;
@@ -62,24 +62,24 @@
   transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
 }
 
-.auth-mode-tabs button.is-active {
+.auth-page .auth-mode-tabs button.is-active {
   background: linear-gradient(135deg, #f85f8f, #c7b8ff);
   color: #fff;
   box-shadow: 0 12px 22px rgba(248, 95, 143, 0.2);
 }
 
-.auth-mode-tabs button:not(.is-active):hover,
-.auth-mode-tabs button:not(.is-active):focus {
+.auth-page .auth-mode-tabs button:not(.is-active):hover,
+.auth-page .auth-mode-tabs button:not(.is-active):focus {
   background: rgba(248, 245, 255, 0.9);
   color: #6655a8;
 }
 
 @media (max-width: 520px) {
-  .auth-mode-tabs {
+  .auth-page .auth-mode-tabs {
     width: 100%;
   }
 
-  .auth-mode-tabs button {
+  .auth-page .auth-mode-tabs button {
     flex: 1;
     min-width: 0;
   }
