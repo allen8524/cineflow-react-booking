@@ -1,29 +1,29 @@
 /* Quick booking page specific styles. */
 /* Keep booking-only rules scoped under .booking-page where possible. */
 
-.movie-selection-list button strong,
-.selection-list button strong { display: block; color: #202a43; margin-bottom: 4px; }
-.movie-selection-list button span,
-.selection-list button span { display: block; color: #65728d; font-size: 13px; }
-.timeslot-list button { display: grid; gap: 6px; }
-.schedule-card__datetime,
-.schedule-card__theater,
-.schedule-card__meta {
+.booking-page .movie-selection-list button strong,
+.booking-page .selection-list button strong { display: block; color: #202a43; margin-bottom: 4px; }
+.booking-page .movie-selection-list button span,
+.booking-page .selection-list button span { display: block; color: #65728d; font-size: 13px; }
+.booking-page .timeslot-list button { display: grid; gap: 6px; }
+.booking-page .schedule-card__datetime,
+.booking-page .schedule-card__theater,
+.booking-page .schedule-card__meta {
   min-width: 0;
 }
-.schedule-card__datetime,
-.schedule-card__theater {
+.booking-page .schedule-card__datetime,
+.booking-page .schedule-card__theater {
   grid-column: 1;
 }
-.schedule-card__datetime strong {
+.booking-page .schedule-card__datetime strong {
   display: block;
 }
-.schedule-card__theater,
-.schedule-card__meta {
+.booking-page .schedule-card__theater,
+.booking-page .schedule-card__meta {
   color: #65728d;
   font-size: 13px;
 }
-.schedule-card__selected {
+.booking-page .schedule-card__selected {
   grid-column: 2;
   grid-row: 1 / span 2;
   justify-self: end;
@@ -37,11 +37,11 @@
   font-weight: 850;
   line-height: 1;
 }
-.schedule-card__meta {
+.booking-page .schedule-card__meta {
   grid-column: 1 / -1;
 }
 
-.booking-stepper {
+.booking-page .booking-stepper {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
@@ -49,7 +49,7 @@
   margin: 0 0 20px;
   padding: 0;
 }
-.booking-stepper li {
+.booking-page .booking-stepper li {
   display: flex;
   align-items: center;
   gap: 9px;
@@ -60,21 +60,21 @@
   background: rgba(255, 255, 255, 0.72);
 }
 
-.summary-poster-row {
+.booking-page .summary-poster-row {
   display: grid;
   grid-template-columns: 68px minmax(0, 1fr);
   align-items: center;
   gap: 12px;
   margin-bottom: 12px;
 }
-.summary-poster-row img {
+.booking-page .summary-poster-row img {
   width: 68px;
   aspect-ratio: 2 / 3;
   object-fit: cover;
   border-radius: 10px;
 }
-.summary-grid-compact { grid-template-columns: 1fr; }
-.summary-total {
+.booking-page .summary-grid-compact { grid-template-columns: 1fr; }
+.booking-page .summary-total {
   margin-top: 12px;
   padding-top: 14px;
   border-top: 1px solid rgba(104, 114, 156, 0.16);
@@ -82,11 +82,11 @@
   justify-content: space-between;
   align-items: center;
 }
-.summary-submit { width: 100%; margin-top: 12px; }
+.booking-page .summary-submit { width: 100%; margin-top: 12px; }
 
-.seat-row .seat { min-height: 32px; }
-.seat.couple { border-radius: 12px; }
-.booking-feedback-banner {
+.booking-page .seat-row .seat { min-height: 32px; }
+.booking-page .seat.couple { border-radius: 12px; }
+.booking-page .booking-feedback-banner {
   margin: 12px 0 0;
   padding: 12px 14px;
   border-radius: 12px;
@@ -417,7 +417,7 @@
   }
 }
 
-.booking-stepper li.is-active {
+.booking-page .booking-stepper li.is-active {
   background:
     linear-gradient(135deg, rgba(255, 237, 245, 0.96), rgba(238, 231, 255, 0.94)) !important;
   border-color: rgba(248, 95, 143, 0.36) !important;
@@ -425,7 +425,7 @@
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.72), 0 12px 24px rgba(248, 95, 143, 0.12);
 }
 
-.booking-stepper li.is-complete {
+.booking-page .booking-stepper li.is-complete {
   background:
     linear-gradient(135deg, rgba(236, 253, 245, 0.94), rgba(238, 245, 255, 0.9)) !important;
   border-color: rgba(95, 178, 143, 0.34) !important;
@@ -433,10 +433,10 @@
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.68), 0 10px 20px rgba(95, 178, 143, 0.1);
 }
 
-.timeslot-list li.is-selected button,
-.timeslot-list li.is-selected a,
-.selection-list li.is-selected button,
-.selection-list li.is-selected a {
+.booking-page .timeslot-list li.is-selected button,
+.booking-page .timeslot-list li.is-selected a,
+.booking-page .selection-list li.is-selected button,
+.booking-page .selection-list li.is-selected a {
   background:
     linear-gradient(135deg, rgba(255, 237, 245, 0.96), rgba(238, 231, 255, 0.94)) !important;
   border-color: rgba(248, 95, 143, 0.36) !important;
@@ -444,58 +444,58 @@
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.72), 0 12px 24px rgba(248, 95, 143, 0.12);
 }
 
-.timeslot-list button,
-.timeslot-list a,
-.selection-list button,
-.selection-list a {
+.booking-page .timeslot-list button,
+.booking-page .timeslot-list a,
+.booking-page .selection-list button,
+.booking-page .selection-list a {
   background: rgba(255, 255, 255, 0.86) !important;
   border-color: var(--cf-line) !important;
   color: var(--cf-text-strong) !important;
 }
 
-input,
-select,
-textarea {
+.booking-page input,
+.booking-page select,
+.booking-page textarea {
   background: rgba(255, 255, 255, 0.88) !important;
   border-color: var(--cf-line) !important;
   color: var(--cf-text-strong) !important;
 }
 
-input:focus,
-select:focus,
-textarea:focus {
+.booking-page input:focus,
+.booking-page select:focus,
+.booking-page textarea:focus {
   border-color: rgba(248, 95, 143, 0.42) !important;
   box-shadow: 0 0 0 4px rgba(248, 95, 143, 0.12);
   outline: none;
 }
 
-.summary-total,
-.seat-summary-panel,
-.booking-summary {
+.booking-page .summary-total,
+.booking-page .seat-summary-panel,
+.booking-page .booking-summary {
   background: rgba(255, 255, 255, 0.86) !important;
   border-color: var(--cf-line) !important;
 }
 
-.summary-total strong {
+.booking-page .summary-total strong {
   color: #8d3153 !important;
 }
 
-.seat,
-.seat-sample.available {
+.booking-page .seat,
+.booking-page .seat-sample.available {
   background: #eaf3ff !important;
   color: var(--cf-text-strong) !important;
 }
 
-.seat.selected,
-.seat-sample.selected {
+.booking-page .seat.selected,
+.booking-page .seat-sample.selected {
   background: linear-gradient(135deg, var(--cf-pink), #a78bfa) !important;
   color: #fff !important;
 }
 
-.seat.reserved,
-.seat-sample.reserved,
-.seat.disabled-seat,
-.seat-sample.disabled-seat {
+.booking-page .seat.reserved,
+.booking-page .seat-sample.reserved,
+.booking-page .seat.disabled-seat,
+.booking-page .seat-sample.disabled-seat {
   background: #e9ecf4 !important;
   color: var(--cf-text-soft) !important;
 }
