@@ -1,3 +1,6 @@
+/* Quick booking page specific styles. */
+/* Keep booking-only rules scoped under .booking-page where possible. */
+
 .movie-selection-list button strong,
 .selection-list button strong { display: block; color: #202a43; margin-bottom: 4px; }
 .movie-selection-list button span,

@@ -1,3 +1,6 @@
+/* Movie detail page specific styles. */
+/* Keep detail-only rules scoped under .storefront-detail-page. */
+
 .storefront-detail-page .container {
   --cf-page-max: 1160px;
 }

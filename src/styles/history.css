@@ -1,3 +1,6 @@
+/* Booking history page specific styles. */
+/* Keep history-only rules scoped under .booking-history-page where possible. */
+
 .history-state-chip {
   min-height: 28px;
   display: inline-flex;

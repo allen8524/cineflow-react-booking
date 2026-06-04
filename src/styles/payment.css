@@ -1,3 +1,6 @@
+/* Payment page specific styles. */
+/* Keep payment form rules scoped to booking/payment surfaces where possible. */
+
 .inline-field-grid,
 .form-grid {
   display: grid;

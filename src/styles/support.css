@@ -1,3 +1,6 @@
+/* Support page specific styles. */
+/* Keep support-only rules scoped under .support-page. */
+
 .support-hero .page-hero__aside {
   width: 520px;
   max-width: calc(100vw - 40px);

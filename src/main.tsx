@@ -3,17 +3,17 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './styles.css';
 import './styles/layout.css';
+import './styles/movie-card.css';
+import './styles/home.css';
+import './styles/movie-list.css';
 import './styles/movie-detail.css';
 import './styles/booking.css';
 import './styles/payment.css';
-import './styles/history.css';
 import './styles/complete.css';
-import './styles/home.css';
+import './styles/history.css';
 import './styles/support.css';
-import './styles/movie-list.css';
 import './styles/admin.css';
 import './styles/auth.css';
-import './styles/movie-card.css';
 import './styles/legacy-overrides.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

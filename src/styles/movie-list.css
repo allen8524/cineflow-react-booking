@@ -1,3 +1,6 @@
+/* Movie list page specific styles. */
+/* Keep catalog-only rules scoped under .storefront-catalog-page. */
+
 .storefront-catalog-page .movie-toolbar {
   display: grid;
   grid-template-columns: minmax(0, auto) minmax(320px, 1fr);

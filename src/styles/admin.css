@@ -1,3 +1,6 @@
+/* Admin page specific styles. */
+/* Keep admin-only rules scoped under .admin-page. */
+
 .admin-page {
   color: #374151;
 }

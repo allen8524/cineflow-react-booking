@@ -1,3 +1,5 @@
+/* Shared MovieCard styles used by home and catalog cards. */
+
 .movie-meta-panel {
   display: grid;
   grid-template-columns: 0.85fr 0.75fr 1.4fr;
