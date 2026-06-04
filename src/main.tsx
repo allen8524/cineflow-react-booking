@@ -14,6 +14,7 @@ import './styles/movie-list.css';
 import './styles/admin.css';
 import './styles/auth.css';
 import './styles/movie-card.css';
+import './styles/legacy-overrides.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

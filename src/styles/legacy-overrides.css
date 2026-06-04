@@ -1,0 +1,177 @@
+/*
+ * Narrow compatibility layer for legacy public/css/*.css.
+ * Keep this file last in main.tsx so React page CSS wins without removing
+ * the legacy stylesheets that still support shared layout.
+ */
+
+.storefront-home .container,
+.storefront-catalog-page .container,
+.storefront-detail-page .container,
+.booking-page .container,
+.support-page .container {
+  width: min(100% - 40px, 1180px);
+  max-width: 1180px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.home-showcase-card,
+.home-upcoming-card,
+.storefront-catalog-page .catalog-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 22px;
+}
+
+.home-showcase-card__body,
+.home-upcoming-card__body,
+.storefront-catalog-page .catalog-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.poster-wrap .status-badge,
+.home-showcase-card__poster .status-badge,
+.home-upcoming-card__poster .status-badge,
+.storefront-catalog-page .catalog-card__poster .status-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  left: auto;
+  width: auto;
+  max-width: calc(100% - 24px);
+  min-height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.support-page .support-quick-card,
+.support-page .support-quick-card.is-primary {
+  min-height: 142px;
+  padding: 22px;
+  border: 1px solid #e6e9f5;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(252, 249, 255, 0.88));
+  color: #374151;
+  box-shadow: 0 14px 28px rgba(125, 134, 179, 0.11);
+}
+
+.support-page .support-quick-card::after,
+.support-page .support-quick-card.is-primary::after {
+  content: none;
+}
+
+.support-page .support-quick-card:hover,
+.support-page .support-quick-card.is-primary:hover {
+  transform: translateY(-2px);
+  border-color: rgba(248, 95, 143, 0.24);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 247, 251, 0.94));
+  box-shadow: 0 18px 34px rgba(125, 134, 179, 0.16);
+}
+
+.booking-page .booking-panel,
+.booking-page .booking-summary,
+.booking-page .summary-info-block {
+  border-color: rgba(104, 114, 156, 0.14);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 18px 34px rgba(125, 134, 179, 0.12);
+}
+
+.booking-page .booking-stepper {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0 0 18px;
+}
+
+.booking-page .booking-stepper li {
+  min-height: 50px;
+  padding: 10px 13px;
+  border-radius: 16px;
+  border-color: rgba(104, 114, 156, 0.16);
+  background: rgba(255, 255, 255, 0.72);
+  color: #4b5563;
+}
+
+.booking-page .booking-stepper li span {
+  width: 30px;
+  height: 30px;
+}
+
+.booking-page .summary-info-block strong {
+  color: #1f2a44;
+}
+
+.booking-page .summary-info-block span {
+  color: #6b7280;
+}
+
+.booking-page .payment-method-grid .method-card,
+.booking-page .method-card {
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px;
+  border-radius: 16px;
+}
+
+.booking-history-page .history-booking-card {
+  display: grid;
+  grid-template-columns: 136px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.booking-history-page .history-booking-card > img {
+  width: 136px;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+}
+
+.storefront-account-nav .auth-inline-button,
+.booking-page .auth-inline-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .booking-history-page .history-booking-card {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-history-page .history-booking-card > img {
+    width: min(150px, 42vw);
+  }
+}
+
+@media (max-width: 640px) {
+  .storefront-home .container,
+  .storefront-catalog-page .container,
+  .storefront-detail-page .container,
+  .booking-page .container,
+  .support-page .container {
+    width: min(100% - 28px, 1180px);
+  }
+
+  .support-page .support-quick-card,
+  .support-page .support-quick-card.is-primary {
+    min-height: 0;
+    padding: 20px;
+  }
+
+  .booking-page .booking-stepper {
+    gap: 8px;
+  }
+
+  .booking-page .booking-stepper li {
+    min-height: 46px;
+    padding: 9px 10px;
+  }
+}
