@@ -54,6 +54,7 @@ All React CSS is still imported globally from `src/main.tsx`. This keeps the cur
 - Put page-only rules in that page's CSS file.
 - Put shared component rules in the component-specific CSS file.
 - Scope page rules under the page root class where possible.
+- Page CSS files should scope page-specific rules with their page root class, for example `.payment-page`.
 - Prefer page-specific root classes over broad compatibility classes such as `booking-page`.
 - Use `legacy-overrides.css` only to correct conflicts from public legacy CSS.
 - Do not add new product design work to `legacy-overrides.css`.

@@ -32,26 +32,25 @@
   outline: none;
 }
 
-.payment-form,
-.payment-block,
-.booking-page .payment-form {
+.payment-page .payment-form,
+.payment-page .payment-block {
   color: var(--cf-text-body);
 }
 
-.payment-block h3,
-.payment-form .panel-head h2 {
+.payment-page .payment-block h3,
+.payment-page .payment-form .panel-head h2 {
   color: var(--cf-text-strong) !important;
 }
 
-.method-grid,
-.payment-method-grid {
+.payment-page .method-grid,
+.payment-page .payment-method-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
 
-.method-card,
-.payment-method-grid .method-card {
+.payment-page .method-card,
+.payment-page .payment-method-grid .method-card {
   min-height: 54px;
   display: flex;
   align-items: center;
@@ -65,25 +64,25 @@
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
 }
 
-.method-card span,
-.method-card strong,
-.payment-method-grid .method-card span {
+.payment-page .method-card span,
+.payment-page .method-card strong,
+.payment-page .payment-method-grid .method-card span {
   color: var(--cf-text-strong) !important;
 }
 
-.method-card input {
+.payment-page .method-card input {
   accent-color: var(--cf-pink);
 }
 
-.method-card:hover,
-.method-card:focus-within {
+.payment-page .method-card:hover,
+.payment-page .method-card:focus-within {
   transform: translateY(-1px);
   border-color: rgba(248, 95, 143, 0.3) !important;
   background: rgba(255, 247, 251, 0.94) !important;
   box-shadow: 0 12px 22px rgba(125, 134, 179, 0.12);
 }
 
-.method-card.is-active {
+.payment-page .method-card.is-active {
   background:
     linear-gradient(135deg, rgba(255, 237, 245, 0.96), rgba(238, 231, 255, 0.94)) !important;
   border-color: rgba(248, 95, 143, 0.36) !important;
@@ -91,10 +90,11 @@
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.72), 0 12px 24px rgba(248, 95, 143, 0.12);
 }
 
-.method-card.is-active span {
+.payment-page .method-card.is-active span {
   color: #5b4a91 !important;
 }
 
+.payment-page .amount-total,
 .amount-total {
   display: flex;
   justify-content: space-between;
@@ -107,11 +107,12 @@
   background: rgba(255, 255, 255, 0.86) !important;
 }
 
+.payment-page .amount-total strong,
 .amount-total strong {
   color: #8d3153 !important;
   font-size: 24px;
 }
 
-.payment-actions {
+.payment-page .payment-actions {
   margin-top: 18px;
 }
