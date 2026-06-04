@@ -15,8 +15,8 @@
   padding-right: 0;
 }
 
-.home-showcase-card,
-.home-upcoming-card,
+.storefront-home .home-showcase-card,
+.storefront-home .home-upcoming-card,
 .storefront-catalog-page .catalog-card {
   display: flex;
   flex-direction: column;
@@ -24,17 +24,53 @@
   border-radius: 22px;
 }
 
-.home-showcase-card__body,
-.home-upcoming-card__body,
+.storefront-home .home-upcoming-card__poster {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.storefront-home .home-upcoming-card__poster img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+}
+
+.storefront-home .home-showcase-card__body,
+.storefront-home .home-upcoming-card__body,
 .storefront-catalog-page .catalog-card__body {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
+.storefront-home .home-showcase-card__meta.movie-meta-panel,
+.storefront-home .home-upcoming-card__meta.movie-meta-panel {
+  grid-template-columns: 0.85fr 0.75fr 1.4fr;
+  gap: 0;
+}
+
+.storefront-home .home-showcase-card__meta.movie-meta-panel .movie-meta-item,
+.storefront-home .home-upcoming-card__meta.movie-meta-panel .movie-meta-item {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.storefront-home .home-showcase-card__meta.movie-meta-panel .movie-meta-item span,
+.storefront-home .home-upcoming-card__meta.movie-meta-panel .movie-meta-item span,
+.storefront-home .home-showcase-card__meta.movie-meta-panel .movie-meta-item strong,
+.storefront-home .home-upcoming-card__meta.movie-meta-panel .movie-meta-item strong {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
 .poster-wrap .status-badge,
-.home-showcase-card__poster .status-badge,
-.home-upcoming-card__poster .status-badge,
+.storefront-home .home-showcase-card__poster .status-badge,
+.storefront-home .home-upcoming-card__poster .status-badge,
 .storefront-catalog-page .catalog-card__poster .status-badge {
   position: absolute;
   top: 12px;

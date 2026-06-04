@@ -101,8 +101,7 @@ a.detail-link:hover {
 
 .movie-card-summary { min-height: 72px; }
 
-.movie-meta-list,
-.home-upcoming-card__meta.movie-meta-list {
+.movie-meta-list {
   display: flex;
   flex-wrap: wrap;
   gap: 7px;
