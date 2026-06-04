@@ -19,7 +19,7 @@ const SupportPage = () => {
       <section className="cinema-page-body">
         <div className="container">
           <div className="support-quick-grid">
-            <Link to="/booking" className="support-quick-card is-primary">
+            <Link to="/booking" className="support-quick-card">
               <strong>영화 선택부터 결제 완료까지</strong>
               <span>원하는 상영 시간과 좌석을 고르고 바로 예매할 수 있습니다.</span>
               <em>빠른예매 이동</em>
