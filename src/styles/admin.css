@@ -13,19 +13,19 @@
   padding-right: 0;
 }
 
-.admin-body {
+.admin-page .admin-body {
   padding-top: 34px;
   padding-bottom: 64px;
 }
 
-.admin-subnav {
+.admin-page .admin-subnav {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 18px;
 }
 
-.admin-subnav button {
+.admin-page .admin-subnav button {
   padding: 10px 15px;
   border: 1px solid rgba(104, 114, 156, 0.18);
   border-radius: 999px;
@@ -34,19 +34,19 @@
   font-weight: 700;
 }
 
-.admin-subnav button.is-active,
-.admin-subnav button:hover {
+.admin-page .admin-subnav button.is-active,
+.admin-page .admin-subnav button:hover {
   background: rgba(199, 184, 255, 0.22);
   border-color: #c7b8ff;
   color: #6655a8;
 }
 
-.admin-stat-grid {
+.admin-page .admin-stat-grid {
   gap: 20px;
 }
 
-.admin-stat-card,
-.admin-section {
+.admin-page .admin-stat-card,
+.admin-page .admin-section {
   border-radius: var(--cf-radius-card);
   border-color: var(--cf-line);
   background: var(--cf-card);
@@ -54,33 +54,33 @@
   color: #374151;
 }
 
-.admin-stat-card strong,
-.admin-stat-card .stat-value,
-.admin-section h2 {
+.admin-page .admin-stat-card strong,
+.admin-page .admin-stat-card .stat-value,
+.admin-page .admin-section h2 {
   color: #1f2a44 !important;
 }
 
-.admin-stat-card .stat-caption,
-.admin-table td {
+.admin-page .admin-stat-card .stat-caption,
+.admin-page .admin-table td {
   color: #4b5563 !important;
 }
 
-.admin-table th,
-.admin-stat-card .stat-label {
+.admin-page .admin-table th,
+.admin-page .admin-stat-card .stat-label {
   color: #64748b !important;
 }
 
-.admin-table-wrap {
+.admin-page .admin-table-wrap {
   overflow-x: auto;
 }
 
-.admin-table {
+.admin-page .admin-table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.admin-table th,
-.admin-table td {
+.admin-page .admin-table th,
+.admin-page .admin-table td {
   white-space: nowrap;
 }
 
@@ -96,65 +96,65 @@
   color: #5b4a91 !important;
 }
 
-.admin-section-head {
+.admin-page .admin-section-head {
   align-items: flex-end;
   justify-content: space-between;
   gap: 16px;
 }
 
-.admin-section-head p {
+.admin-page .admin-section-head p {
   margin: 6px 0 0;
   color: #64748b;
   font-size: 13px;
 }
 
-.admin-section-head > span {
+.admin-page .admin-section-head > span {
   flex: 0 0 auto;
   color: #64748b;
   font-size: 13px;
   font-weight: 800;
 }
 
-.admin-table-wrap--compact {
+.admin-page .admin-table-wrap--compact {
   overflow-x: auto;
 }
 
-.admin-table--compact {
+.admin-page .admin-table--compact {
   table-layout: fixed;
   min-width: 760px;
 }
 
-.admin-table--compact th,
-.admin-table--compact td {
+.admin-page .admin-table--compact th,
+.admin-page .admin-table--compact td {
   vertical-align: middle;
 }
 
-.admin-table--compact th:nth-child(1),
-.admin-table--compact td:nth-child(1) {
+.admin-page .admin-table--compact th:nth-child(1),
+.admin-page .admin-table--compact td:nth-child(1) {
   width: 28%;
 }
 
-.admin-table--compact th:nth-child(2),
-.admin-table--compact td:nth-child(2) {
+.admin-page .admin-table--compact th:nth-child(2),
+.admin-page .admin-table--compact td:nth-child(2) {
   width: 28%;
 }
 
-.admin-table--compact th:nth-child(3),
-.admin-table--compact td:nth-child(3) {
+.admin-page .admin-table--compact th:nth-child(3),
+.admin-page .admin-table--compact td:nth-child(3) {
   width: 12%;
 }
 
-.admin-table--compact th:nth-child(4),
-.admin-table--compact td:nth-child(4) {
+.admin-page .admin-table--compact th:nth-child(4),
+.admin-page .admin-table--compact td:nth-child(4) {
   width: 16%;
 }
 
-.admin-table--compact th:nth-child(5),
-.admin-table--compact td:nth-child(5) {
+.admin-page .admin-table--compact th:nth-child(5),
+.admin-page .admin-table--compact td:nth-child(5) {
   width: 16%;
 }
 
-.admin-table-ellipsis {
+.admin-page .admin-table-ellipsis {
   display: block;
   max-width: 100%;
   overflow: hidden;
@@ -162,11 +162,11 @@
   white-space: nowrap;
 }
 
-.admin-pagination {
+.admin-page .admin-pagination {
   margin-top: 22px;
 }
 
-.admin-pagination button {
+.admin-page .admin-pagination button {
   min-height: 38px;
 }
 
@@ -175,14 +175,14 @@
     width: min(calc(100% - 32px), var(--cf-page-max));
   }
 
-  .admin-body {
+  .admin-page .admin-body {
     padding-top: 28px;
     padding-bottom: 52px;
   }
 }
 
 @media (max-width: 720px) {
-  .admin-section-head {
+  .admin-page .admin-section-head {
     align-items: flex-start;
     flex-direction: column;
   }
