@@ -1,18 +1,18 @@
 /* Home page specific styles. */
 /* Keep page-only rules scoped under .storefront-home where possible. */
 
-.home-movie-grid-four {
+.storefront-home .home-movie-grid-four {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 20px;
   align-items: stretch;
 }
 
-.home-movie-grid-four > article {
+.storefront-home .home-movie-grid-four > article {
   height: 100%;
 }
 
-.home-guide-panel {
+.storefront-home .home-guide-panel {
   grid-template-columns: minmax(0, 1.25fr) minmax(360px, 0.65fr);
   gap: 28px;
   align-items: center;
@@ -27,26 +27,26 @@
   box-shadow: var(--cf-shadow-card);
 }
 
-.home-guide-panel::before,
-.home-guide-panel::after,
-.home-guide-intro::before,
-.home-guide-intro::after,
-.home-guide-list::before {
+.storefront-home .home-guide-panel::before,
+.storefront-home .home-guide-panel::after,
+.storefront-home .home-guide-intro::before,
+.storefront-home .home-guide-intro::after,
+.storefront-home .home-guide-list::before {
   display: none;
   content: none;
 }
 
-.home-guide-intro,
-.home-guide-list {
+.storefront-home .home-guide-intro,
+.storefront-home .home-guide-list {
   position: relative;
   z-index: 1;
 }
 
-.home-guide-intro {
+.storefront-home .home-guide-intro {
   min-width: 0;
 }
 
-.home-guide-intro h2 {
+.storefront-home .home-guide-intro h2 {
   max-width: 560px;
   color: var(--cf-text-strong);
   line-height: 1.18;
@@ -54,7 +54,7 @@
   overflow-wrap: normal;
 }
 
-.home-guide-intro p {
+.storefront-home .home-guide-intro p {
   max-width: 760px;
   color: var(--cf-text-body);
   line-height: 1.65;
@@ -62,14 +62,14 @@
   overflow-wrap: normal;
 }
 
-.home-guide-list {
+.storefront-home .home-guide-list {
   width: 100%;
   max-width: 590px;
   justify-self: end;
   gap: 14px;
 }
 
-.home-guide-card {
+.storefront-home .home-guide-card {
   grid-template-columns: 76px minmax(0, 1fr) 54px;
   min-height: 148px;
   padding: 26px 28px;
@@ -85,13 +85,13 @@
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
 }
 
-.home-guide-card:hover {
+.storefront-home .home-guide-card:hover {
   transform: translateY(-3px);
   border-color: rgba(199, 184, 255, 0.36);
   box-shadow: var(--cf-shadow-hover);
 }
 
-.home-guide-card__icon {
+.storefront-home .home-guide-card__icon {
   align-self: center;
   width: 76px;
   height: 76px;
@@ -110,7 +110,7 @@
   transition: color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
 }
 
-.home-guide-card__icon svg {
+.storefront-home .home-guide-card__icon svg {
   width: 38px;
   height: 38px;
   stroke: currentColor;
@@ -119,8 +119,8 @@
   stroke-linejoin: round;
 }
 
-.home-guide-card:hover .home-guide-card__icon,
-.home-guide-card:focus-visible .home-guide-card__icon {
+.storefront-home .home-guide-card:hover .home-guide-card__icon,
+.storefront-home .home-guide-card:focus-visible .home-guide-card__icon {
   color: #5b4a91;
   transform: translateY(-1px);
   box-shadow:
@@ -128,7 +128,7 @@
     0 18px 34px rgba(199, 184, 255, 0.28);
 }
 
-.home-guide-card > div {
+.storefront-home .home-guide-card > div {
   min-width: 0;
   align-self: center;
   display: flex;
@@ -137,7 +137,7 @@
   gap: 8px;
 }
 
-.home-guide-card strong {
+.storefront-home .home-guide-card strong {
   margin: 0;
   color: #1f2a44;
   font-size: 18px;
@@ -146,7 +146,7 @@
   overflow-wrap: normal;
 }
 
-.home-guide-card p {
+.storefront-home .home-guide-card p {
   margin: 0;
   color: #4b5563;
   line-height: 1.65;
@@ -154,7 +154,7 @@
   overflow-wrap: normal;
 }
 
-.home-guide-card em {
+.storefront-home .home-guide-card em {
   justify-self: end;
   align-self: center;
   min-width: 48px;
@@ -167,23 +167,23 @@
 }
 
 @media (min-width: 1100px) {
-  .home-guide-intro p {
+  .storefront-home .home-guide-intro p {
     white-space: nowrap;
   }
 }
 
 @media (max-width: 1180px) {
-  .home-movie-grid-four {
+  .storefront-home .home-movie-grid-four {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 640px) {
-  .home-movie-grid-four {
+  .storefront-home .home-movie-grid-four {
     grid-template-columns: 1fr;
   }
 
-  .home-guide-card {
+  .storefront-home .home-guide-card {
     grid-template-columns: 58px minmax(0, 1fr);
     min-height: 0;
     padding: 18px;
@@ -193,49 +193,49 @@
     border-radius: 20px;
   }
 
-  .home-guide-card em {
+  .storefront-home .home-guide-card em {
     grid-column: 2;
     justify-self: start;
     align-self: start;
   }
 
-  .home-guide-card__icon {
+  .storefront-home .home-guide-card__icon {
     width: 58px;
     height: 58px;
     flex-basis: 58px;
     border-radius: 20px;
   }
 
-  .home-guide-card__icon svg {
+  .storefront-home .home-guide-card__icon svg {
     width: 29px;
     height: 29px;
   }
 }
 
 @media (max-width: 1099px) {
-  .home-guide-panel {
+  .storefront-home .home-guide-panel {
     grid-template-columns: 1fr;
     align-items: stretch;
   }
 
-  .home-guide-intro h2,
-  .home-guide-intro p {
+  .storefront-home .home-guide-intro h2,
+  .storefront-home .home-guide-intro p {
     max-width: none;
   }
 
-  .home-guide-list {
+  .storefront-home .home-guide-list {
     max-width: none;
     justify-self: stretch;
   }
 }
 
 /* Home page polish */
-.storefront-hero-card {
+.storefront-home .storefront-hero-card {
   position: relative;
   background: #f4f2ff;
 }
 
-.storefront-hero-card__backdrop {
+.storefront-home .storefront-hero-card__backdrop {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -243,50 +243,50 @@
   object-fit: cover;
 }
 
-.home-section__header {
+.storefront-home .home-section__header {
   align-items: flex-end;
 }
 
-.home-section__header > div {
+.storefront-home .home-section__header > div {
   min-width: 0;
 }
 
-.home-section__header h2 {
+.storefront-home .home-section__header h2 {
   margin-top: 0;
   margin-bottom: 10px;
 }
 
-.home-showcase-card,
-.home-upcoming-card {
+.storefront-home .home-showcase-card,
+.storefront-home .home-upcoming-card {
   display: flex;
   flex-direction: column;
   overflow: hidden;
   border-radius: 22px;
 }
 
-.home-upcoming-grid {
+.storefront-home .home-upcoming-grid {
   align-items: stretch;
 }
 
-.home-upcoming-card {
+.storefront-home .home-upcoming-card {
   align-self: stretch;
   height: 100%;
 }
 
-.home-showcase-card__body,
-.home-upcoming-card__body {
+.storefront-home .home-showcase-card__body,
+.storefront-home .home-upcoming-card__body {
   flex: 1;
   display: flex;
   flex-direction: column;
   min-height: 208px;
 }
 
-.home-upcoming-card__body {
+.storefront-home .home-upcoming-card__body {
   gap: 12px;
 }
 
-.home-showcase-card__head,
-.home-upcoming-card__head {
+.storefront-home .home-showcase-card__head,
+.storefront-home .home-upcoming-card__head {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -294,17 +294,17 @@
   min-width: 0;
 }
 
-.home-upcoming-card__head h3 {
+.storefront-home .home-upcoming-card__head h3 {
   min-height: 0;
   margin: 0;
   line-height: 1.28;
 }
 
-.home-section {
+.storefront-home .home-section {
   padding: 48px 0 0;
 }
 
-.home-promo-section {
+.storefront-home .home-promo-section {
   padding-top: 54px;
 }
 
