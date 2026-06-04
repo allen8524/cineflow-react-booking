@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const ErrorPage = () => {
   return (
-    <main className="cinema-page booking-page">
+    <main className="error-page booking-page cinema-page">
       <section className="cinema-page-hero booking-hero">
         <div className="container">
           <h1>접속할 수 없는 URL입니다.</h1>

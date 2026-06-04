@@ -49,7 +49,7 @@ const PaymentPage = () => {
   }
 
   return (
-    <main className="booking-page cinema-page">
+    <main className="payment-page booking-page cinema-page">
       <PageHero
         className="booking-hero payment-hero"
         title="결제 정보 입력"

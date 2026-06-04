@@ -42,11 +42,19 @@ All React CSS is still imported globally from `src/main.tsx`. This keeps the cur
 - `auth.css`: login and signup page styles.
 - `legacy-overrides.css`: conflict fixes only for public legacy CSS. This file must be imported last.
 
+## Page Root Classes
+
+- `booking-page` remains in place for quick booking styles and compatibility styles shared by the booking flow.
+- `payment-page`, `complete-page`, `booking-history-page`, `auth-page`, and `error-page` are page-specific root scopes.
+- Prefer the page-specific root class over `booking-page` when adding new styles for those pages.
+- Removing `booking-page` from non-booking pages is a separate step that should be done gradually after visual checks.
+
 ## Rules For Future CSS Changes
 
 - Put page-only rules in that page's CSS file.
 - Put shared component rules in the component-specific CSS file.
 - Scope page rules under the page root class where possible.
+- Prefer page-specific root classes over broad compatibility classes such as `booking-page`.
 - Use `legacy-overrides.css` only to correct conflicts from public legacy CSS.
 - Do not add new product design work to `legacy-overrides.css`.
 - Use `!important` only when it is needed to beat existing legacy CSS, and keep it minimal.

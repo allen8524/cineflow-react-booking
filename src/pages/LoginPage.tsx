@@ -43,7 +43,7 @@ const LoginPage = () => {
   };
 
   return (
-    <main className="cinema-page booking-page">
+    <main className="auth-page booking-page cinema-page">
       <PageHero
         className="booking-hero login-hero"
         title={mode === 'login' ? '로그인' : '회원가입'}

@@ -11,7 +11,7 @@ const CompletePage = () => {
 
   if (!booking) {
     return (
-      <main className="booking-page cinema-page">
+      <main className="complete-page booking-page cinema-page">
         <PageHero
           className="booking-hero complete-hero"
           title="완료된 예매가 없습니다."
@@ -22,7 +22,7 @@ const CompletePage = () => {
   }
 
   return (
-    <main className="booking-page cinema-page">
+    <main className="complete-page booking-page cinema-page">
       <PageHero
         className="booking-hero complete-hero"
         title="예매가 완료되었습니다."

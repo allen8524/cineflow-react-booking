@@ -39,7 +39,7 @@ const HistoryPage = () => {
   };
 
   return (
-    <main className="booking-page booking-history-page cinema-page">
+    <main className="booking-history-page booking-page cinema-page">
       <PageHero
         className="booking-hero booking-hero--primary history-hero"
         title="예매내역 조회"
