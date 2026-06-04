@@ -1,7 +1,7 @@
 /* Booking history page specific styles. */
 /* Keep history-only rules scoped under .booking-history-page where possible. */
 
-.history-state-chip {
+.booking-history-page .history-state-chip {
   min-height: 28px;
   display: inline-flex;
   align-items: center;
@@ -12,28 +12,28 @@
   font-size: 12px;
   font-weight: 800;
 }
-.history-state-chip.canceled { background: #ffe9ef; color: #93405d; }
-.history-state-chip.used { background: #e7f7ee; color: #2d7a54; }
+.booking-history-page .history-state-chip.canceled { background: #ffe9ef; color: #93405d; }
+.booking-history-page .history-state-chip.used { background: #e7f7ee; color: #2d7a54; }
 
-.history-lookup-panel {
+.booking-history-page .history-lookup-panel {
   display: grid;
   grid-template-columns: 260px minmax(0, 1fr);
   gap: 18px;
   align-items: end;
   margin-bottom: 18px;
 }
-.history-lookup-form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-.history-lookup-form label { display: grid; gap: 7px; }
-.history-card-list { display: grid; gap: 14px; }
-.history-booking-card { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 18px; padding: 16px; }
-.history-booking-card > img { width: 110px; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 12px; }
-.history-card-top { display: flex; justify-content: space-between; gap: 12px; align-items: start; margin-bottom: 12px; }
-.history-card-top span { display: block; color: #65728d; margin-bottom: 4px; }
-.history-info-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; list-style: none; padding: 0; margin: 0; }
-.history-info-grid li { padding: 11px; border: 1px solid rgba(104,114,156,.14); border-radius: 12px; background: rgba(255,255,255,.62); }
-.history-info-grid li span { display: block; margin-bottom: 4px; font-size: 12px; }
-.history-info-grid li strong { color: #202a43; font-size: 13px; }
-.history-card-actions { margin-top: 14px; }
+.booking-history-page .history-lookup-form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.booking-history-page .history-lookup-form label { display: grid; gap: 7px; }
+.booking-history-page .history-card-list { display: grid; gap: 14px; }
+.booking-history-page .history-booking-card { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 18px; padding: 16px; }
+.booking-history-page .history-booking-card > img { width: 110px; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 12px; }
+.booking-history-page .history-card-top { display: flex; justify-content: space-between; gap: 12px; align-items: start; margin-bottom: 12px; }
+.booking-history-page .history-card-top span { display: block; color: #65728d; margin-bottom: 4px; }
+.booking-history-page .history-info-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; list-style: none; padding: 0; margin: 0; }
+.booking-history-page .history-info-grid li { padding: 11px; border: 1px solid rgba(104,114,156,.14); border-radius: 12px; background: rgba(255,255,255,.62); }
+.booking-history-page .history-info-grid li span { display: block; margin-bottom: 4px; font-size: 12px; }
+.booking-history-page .history-info-grid li strong { color: #202a43; font-size: 13px; }
+.booking-history-page .history-card-actions { margin-top: 14px; }
 
 .booking-history-page { color: #374151; }
 
@@ -41,26 +41,26 @@
   border-bottom-color: var(--cf-line);
 }
 
-.history-lookup-panel,
-.history-booking-card,
-.history-info-grid li {
+.booking-history-page .history-lookup-panel,
+.booking-history-page .history-booking-card,
+.booking-history-page .history-info-grid li {
   color: #374151;
 }
 
-.history-card-top h3,
-.history-info-grid strong {
+.booking-history-page .history-card-top h3,
+.booking-history-page .history-info-grid strong {
   color: #1f2a44 !important;
 }
 
-.history-card-top span,
-.history-info-grid span {
+.booking-history-page .history-card-top span,
+.booking-history-page .history-info-grid span {
   color: #4b5563 !important;
 }
 
-.history-state-chip { color: #5b4a91 !important; }
-.history-state-chip.booked { color: #8d3153 !important; }
-.history-state-chip.canceled { color: #8d3153 !important; }
-.history-state-chip.used { color: #256348 !important; }
+.booking-history-page .history-state-chip { color: #5b4a91 !important; }
+.booking-history-page .history-state-chip.booked { color: #8d3153 !important; }
+.booking-history-page .history-state-chip.canceled { color: #8d3153 !important; }
+.booking-history-page .history-state-chip.used { color: #256348 !important; }
 
 /* Booking history page refinement */
 .booking-history-page {
