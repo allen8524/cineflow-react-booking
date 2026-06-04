@@ -201,7 +201,7 @@ const AdminPage = () => {
             <section className="admin-section">
               <div className="panel-head"><h2>예매 관리</h2></div>
               <div className="admin-table-wrap">
-                <table className="admin-table">
+                <table className="admin-table admin-table--bookings">
                   <thead>
                     <tr>
                       <th>예매번호</th>
