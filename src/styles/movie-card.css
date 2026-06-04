@@ -208,6 +208,11 @@ a.detail-link:hover {
 .home-upcoming-card__poster .status-badge,
 .catalog-card__poster .status-badge {
   right: 12px;
+  left: auto;
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .status-badge {
