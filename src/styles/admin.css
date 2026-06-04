@@ -97,7 +97,13 @@
 }
 
 .admin-page .admin-table--bookings {
+  table-layout: fixed;
   min-width: 1120px;
+}
+
+.admin-page .admin-table--bookings th:first-child,
+.admin-page .admin-table--bookings td:first-child {
+  width: 176px;
 }
 
 .admin-page .admin-table--bookings th:last-child,

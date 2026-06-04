@@ -216,7 +216,7 @@ const AdminPage = () => {
                   <tbody>
                     {bookings.map((booking) => (
                       <tr key={booking.id}>
-                        <td>{booking.bookingCode}</td>
+                        <td><span className="admin-table-ellipsis" title={booking.bookingCode}>{booking.bookingCode}</span></td>
                         <td>{booking.movieTitle}</td>
                         <td>{booking.customerName}</td>
                         <td>{booking.seatNames}</td>
